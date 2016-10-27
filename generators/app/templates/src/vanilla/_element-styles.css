@@ -1,0 +1,9 @@
+h1 {
+  color: grey;
+}
+
+:host {
+  position: relative;
+  display: block;
+  background-color: purple;
+}

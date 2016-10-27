@@ -1,0 +1,31 @@
+{
+  "name": "<%=elementName%>",
+  "author":"<%= authorName %>",
+  "version": "1.0.0",
+  "description": "<%= elementDescription %>",
+  "repository": {
+    "type": "git",
+    "url": "https://<%=gitDomain%>.com/<%=orgName%>/<%=elementName%>.git"
+  },
+  "bugs": {
+    "url": "https://<%=gitDomain%>.com/<%=orgName%>/<%=elementName%>/issues"
+  },
+  "license": "https://<%=gitDomain%>.com/<%=orgName%>/<%=elementName%>/LICENSE.txt",
+  "scripts": {<% if (elementType === 'implementation') { %>
+    "postinstall":"ls | grep -v <%=elementName%> | xargs rm -rf"<% } else { %>
+    "clean": "rm -rf bower_components/<%=elementName%>",
+    "test" : "npm run clean && gulp build && wct",
+    "start":"npm run clean && gulp default",
+    "pages":"npm run clean && gulp pages-deployment"<% } %>
+  },
+  "engines": {
+    "node": ">=6.0"
+  },<% if (elementType === 'bower') { %>
+  "devDependencies": {
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-gh-pages": "^0.5.4",
+    "web-component-tester": "^4.3.4",
+    "browser-sync": "^2.15.0"
+  },<% } %>
+  "private": true
+}

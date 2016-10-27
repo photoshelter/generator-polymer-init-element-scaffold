@@ -1,0 +1,24 @@
+language: node_js
+node_js: stable
+dist: trusty
+sudo: required
+cache:
+  directories:
+    - node_modules
+    - bower_components
+addons:
+  firefox: latest<% if (sauceLabs === true) { %>
+  sauce_connect: true<%}%>
+  apt:
+    sources:
+    - google-chrome
+    packages:
+    - google-chrome-stable
+before_script:
+- npm install -g bower polylint web-component-tester
+- bower install
+- gulp build
+script:
+- xvfb-run wct <% if (sauceLabs === true) { %>
+- if [ ${TRAVIS_PULL_REQUEST} != false ]; then wct -s 'default'; fi
+<% }%>

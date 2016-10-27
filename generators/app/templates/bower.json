@@ -1,0 +1,54 @@
+{
+  "name": "<%= elementName %>",
+  "author":"<%= authorName %>",
+  "version": "1.0.0",
+  "description": "<%= elementDescription %>",
+  "private": true,
+  "license": "https://<%=gitDomain%>.com/<%=orgName%>/<%=elementName%>/LICENSE",
+  "homepage": "https://<%=gitDomain%>.com/<%=orgName%>/<%=elementName%>",
+  "repository": {
+    "type": "git",
+    "url": "git://<%=gitDomain%>.com/<%=orgName%>/<%=elementName%>.git"
+  },
+  "keywords": [<% if (polyVers === '2.0' || polyVers === '1.x' || polyVers === 'behavior' ) { %>
+    "polymer",
+    <% }%>
+    "web-components",
+    "web-component"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "demo",
+    "implementation",
+    ".travis.yml",
+    "wtc.conf.json",
+    "gulpfile.js"
+
+  ],
+  "dependencies": {
+    <% if (polyVers === '2.0' || polyVers === 'behavior') { %>
+    "polymer": "Polymer/polymer#2.0-preview"
+    <% } else if (polyVers === '1.x') { %>
+    "polymer": "Polymer/polymer#^1.7.0"
+    <% }%>
+  },
+  "devDependencies": {
+    <% if (polyVers === 'vanilla') { %>
+    "custom-elements": "^1.0.3",
+    "webcomponentsjs": "^0.7.22",
+    <% } %>
+    <% if (polyVers === '1.x' || polyVers === '2.0' || polyVers === 'behavior') { %>
+    "iron-component-page": "PolymerElements/iron-component-page#^1.1.7",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.2.5",
+    <% }%>
+    "web-component-tester": "*"
+  }<% if (polyVers === '2.0' || polyVers === 'behavior') { %>,
+  "resolutions": {
+    "polymer": "2.0-preview",
+    "webcomponentsjs": "v1"
+  }
+  <% }%>
+}

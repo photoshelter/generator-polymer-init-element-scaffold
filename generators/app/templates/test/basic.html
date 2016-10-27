@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../bower_components/web-component-tester/browser.js"></script>
+    <script src="../bower_components/test-fixture/test-fixture-mocha.js"></script>
+
+    <!-- Step 1: import the element to test -->
+    <link rel="import" href="../bower_components/<%= elementName %>/<%= elementName %>.html">
+    <link rel="import" href="../bower_components/test-fixture/test-fixture.html">
+</head>
+<body>
+
+  <!-- You can use the document as a place to set up your fixtures. -->
+  <test-fixture id="<%= elementName %>">
+      <template>
+          <<%= elementName %>></<%= elementName %>>
+      </template>
+  </test-fixture>
+
+  <script>
+    var elem;
+
+    beforeEach(function() {
+      elem = fixture('<%= elementName %>');
+    });
+
+    describe('<<%= elementName %>>', function() {
+
+      a11ySuite('<%= elementName %>');
+
+      it('An Obviously passing test', function() {
+          expect(true).to.be.equal(true);
+      });
+
+      it('A hopefully passing foo test', function() {
+          expect(elem.foo()).to.be.equal(true);
+      });
+
+      it('An Obviously failing test', function() {
+          expect(false).to.be.equal(true);
+      });
+
+    });
+
+  </script>
+
+</body>
+</html>
