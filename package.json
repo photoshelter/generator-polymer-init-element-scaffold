@@ -1,6 +1,6 @@
 {
   "name": "generator-polymer-init-element-scaffold",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "webcomponent element generator",
   "homepage": "https://github.com/photoshelter/generator-polymer-init-element-scaffold",
   "author": {
@@ -41,12 +41,12 @@
       "mocha": true
     }
   },
-   "engines": {
+  "engines": {
     "node": ">=6.0"
   },
-  "repository":{
+  "repository": {
     "type": "git",
-    "url":"https://github.com/photoshelter/generator-polymer-init-element-scaffold"
+    "url": "https://github.com/photoshelter/generator-polymer-init-element-scaffold"
   },
   "bugs": {
     "url": "https://github.com/photoshelter/generator-polymer-init-element-scaffold/issues"
