@@ -145,34 +145,30 @@ module.exports = yeoman.Base.extend({
 
   _sharedWrites: function() {
 
-    // copy evey
+    // copy all general files.
     this.fs.copyTpl(
       `${this.templatePath()}/**/!(_)*`,
       this.destinationPath(),
       this.props
     );
 
-
-
-    this.fs.copyTpl(
-      this.templatePath('.gitignorefile'),
-      this.destinationPath('.gitignore'),
-      this.props
-    );
-
-    
-
-    // copy over dot files for bower
+    // copy over dot files for bower.
     if (this.props.elementType === 'bower') {
       this.fs.copyTpl(
-        this.templatePath('\.(?!gitignore)(.+)'),
+       `${this.templatePath()}/.!(gitignore)*`,
         this.destinationRoot(),
         this.props
       );
+
+      // get over npm publish quirk with file rename.
+      this.fs.copyTpl(
+        this.templatePath('.gitignorefile'),
+        this.destinationPath('.gitignore'),
+        this.props
+      );
+
     }
   },
-
-
 
 
   _versionWrite:function(version, elementName) {
