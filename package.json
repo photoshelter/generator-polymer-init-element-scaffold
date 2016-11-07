@@ -1,6 +1,6 @@
 {
   "name": "generator-polymer-init-element-scaffold",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "webcomponent element generator",
   "homepage": "https://github.com/photoshelter/generator-polymer-init-element-scaffold",
   "author": {
