@@ -145,21 +145,35 @@ module.exports = yeoman.Base.extend({
 
   _sharedWrites: function() {
 
+    // copy evey
     this.fs.copyTpl(
       `${this.templatePath()}/**/!(_)*`,
       this.destinationPath(),
       this.props
     );
 
+
+
+    this.fs.copyTpl(
+      this.templatePath('.gitignorefile'),
+      this.destinationPath('.gitignore'),
+      this.props
+    );
+
+    
+
     // copy over dot files for bower
     if (this.props.elementType === 'bower') {
       this.fs.copyTpl(
-        this.templatePath('.*'),
+        this.templatePath('\.(?!gitignore)(.+)'),
         this.destinationRoot(),
         this.props
       );
     }
   },
+
+
+
 
   _versionWrite:function(version, elementName) {
 

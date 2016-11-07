@@ -1,2 +1,0 @@
-# This is a an empty file to get around an npm publish quirk that requires .npmignore files.
-# The templates are meant to work with Bower, so until they work with NPM as well this will remain empty. 
