@@ -46,10 +46,10 @@ npm install -g generator-polymer-init-element-scaffold
 
 - Create your element in the folder you want to add it to. 
 ```bash
-polymer-init
+polymer init
 ```
 
-- Select `element-scafold` and follow the instructions
+- Select `element-scaffold` and follow the instructions
 
 
 ### Development
