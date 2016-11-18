@@ -24,6 +24,7 @@
     "demo",
     "implementation",
     ".travis.yml",
+    ".github",
     "wtc.conf.json",
     "gulpfile.js"
 
