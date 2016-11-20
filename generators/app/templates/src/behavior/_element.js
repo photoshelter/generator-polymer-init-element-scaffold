@@ -1,4 +1,4 @@
-let <%=className%> = (PolymerElement) => class extends PolymerElement {
+let <%=className%> = (ParentEl) => class extends ParentEl {
 
   static get is() { return '<%= elementName %>'; }
 
@@ -22,15 +22,7 @@ let <%=className%> = (PolymerElement) => class extends PolymerElement {
   constructor() {
     super();
   }
-
-  /**
-   * Life cycle function that gets called when the element is
-   * first attached to the DOM
-   */
-  connectedCallback() {
-    super.connectedCallback();
-  }
-
+  
   /**
    * A public function  that doesnt do anything
    *

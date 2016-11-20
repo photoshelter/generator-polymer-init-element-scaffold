@@ -36,10 +36,10 @@ class <%=className%> extends Polymer.Element {
 
   /**
    * Life cycle function that gets called when the element is
-   * first attached to the DOM
+   * removed from the DOM
   **/
   disconnectedCallback() {
-      super.connectedCallback();
+    super.disconnectedCallback();
   }
   /**
    * For Polymer elements, only properties explicitly declared in the

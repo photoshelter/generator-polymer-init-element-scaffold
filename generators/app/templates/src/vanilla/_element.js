@@ -13,13 +13,32 @@ class <%=className%> extends HTMLElement {
   }
 
   /**
-   * Life cycle function that gets called when the element is
-   * first attached to the DOM
-   */
+   * Called every time the element is inserted into the DOM. Useful for
+   * running setup code, such as fetching resources or rendering. Generally,
+   * you should try to delay work until this time.
+  **/
   connectedCallback() {
+    super.connectedCallback();
     const imported = ownerDoc.querySelector('#<%= elementName %>');
     const root = this.attachShadow({mode: 'open'});
     root.appendChild(document.importNode(imported.content, true));
+  }
+
+  /**
+   * Called every time the element is removed from the DOM. Useful
+   * for running clean up code (removing event listeners, etc.).
+  **/
+  disconnectedCallback() {
+    super.disconnectedCallback();
+  }
+
+  /**
+   * An attribute was added, removed, updated, or replaced. Also
+   * called for initial values when an element is created by the
+   * parser, or upgraded. Note: only attributes listed in the
+   * observedAttributes property will receive this callback.
+  **/
+  attributeChangedCallback(attrName, oldVal, newVal) {
   }
 
   /**
