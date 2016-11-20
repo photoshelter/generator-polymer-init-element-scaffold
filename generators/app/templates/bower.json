@@ -27,7 +27,6 @@
     ".github",
     "wtc.conf.json",
     "gulpfile.js"
-
   ],
   "dependencies": {
     <% if (polyVers === '2.0' || polyVers === 'behavior') { %>
