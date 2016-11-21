@@ -16,7 +16,10 @@ class <%=className%> extends Polymer.Element {
 
   /**
    * Inital Constructor for the class
-   *
+   *  ---
+   * The custom elements v1 spec forbids reading attributes, children, or parent
+   * information from the DOM API in the constructor
+   * -- Note:
    * Always call super
    */
   constructor() {
@@ -26,9 +29,24 @@ class <%=className%> extends Polymer.Element {
   /**
    * Life cycle function that gets called when the element is
    * first attached to the DOM
-   */
+  **/
   connectedCallback() {
     super.connectedCallback();
+  }
+
+  /**
+   * Life cycle function that gets called when the element is
+   * removed from the DOM
+  **/
+  disconnectedCallback() {
+    super.disconnectedCallback();
+  }
+  /**
+   * For Polymer elements, only properties explicitly declared in the
+   * properties object are tracked for attribute changes.
+  **/
+  attributeChangedCallback() {
+
   }
 
   /**
