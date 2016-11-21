@@ -14,6 +14,9 @@
 
 ## Features
 
+- [x] [Gulp](http://gulpjs.com/) based build system.
+- [x] [Browser Sync](https://www.browsersync.io/) for enjoyable development.
+
 - Auto generated docs
  - [x] 1.7 support
  - [ ] 2.x support
@@ -23,7 +26,7 @@
   - [x] 1.7 support
 - Extended support for Sauce labs
   - [x] 1.7 support
-- One line github pages deployment
+- Github pages deployment
   - [x] 1.7 support
 
 
