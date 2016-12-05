@@ -9,12 +9,12 @@
 During development there are 3 pages you might be interested in.
  - The root page is there to display the documentation.
  - The `/demo` page is there to display various demos for how to use your component.
- - The `/implementation` page, is a sandbox where you can work with less noise, compared to the demo page.
+ - The `/implementation` page, is a sandbox where you can work with less noise compared to the demo page.
 
 **Running Your Project**
 
  - `npm start` is the default command to spin your project. It will clean up any old builds
- and then start up a development server on port `3000`  using (Browsersync)[https://www.browsersync.io/] to reload the page when changes occur.
+ and then start up a development server on port `3000`  using [Browsersync](https://www.browsersync.io/) to reload the page when changes occur.
 
 **note:** If you are finding that when reloading it is switching from demos back to docs, then in the browser add the route `/demo` to the url and then the refreshes will happen on that route.
 
