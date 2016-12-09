@@ -30,7 +30,7 @@ module.exports = yeoman.Base.extend({
       type: 'list',
       name: 'polyVers',
       message: 'What kind of element are you building?',
-      choices: ['1.x', '2.0','behavior','vanilla'],
+      choices: ['1.x', '2.0','behavior','vanilla', 'style'],
       default: '1.x'
     },
     {
@@ -173,32 +173,39 @@ module.exports = yeoman.Base.extend({
 
   _versionWrite:function(version, elementName) {
 
+    // Copy the main html file.
     this.fs.copyTpl(
       this.templatePath(`src/${version}/_element.html`),
       this.destinationPath(`${elementName}.html`),
       this.props
     );
 
-    this.fs.copyTpl(
-      this.templatePath(`src/${version}/_element.js`),
-      this.destinationPath(`${elementName}.js`),
-      this.props
-    );
-
-    if(version == 'vanilla')
-    {
+    
+    if(version != 'style') {
+      // copy the js for all the components. 
       this.fs.copyTpl(
-        this.templatePath(`src/${version}/_element-styles.css`),
-        this.destinationPath(`${elementName}-styles.css`),
+        this.templatePath(`src/${version}/_element.js`),
+        this.destinationPath(`${elementName}.js`),
+        this.props
+      );
+
+      // copy the styles. css for vanilla and html for polymer
+      const fileExt =  version == 'vanilla' ? 'css': 'html';
+      this.fs.copyTpl(
+        this.templatePath(`src/${version}/_element-styles.${fileExt}`),
+        this.destinationPath(`${elementName}-styles.${fileExt}`),
         this.props
       );
     } else {
+      // copy the classes implementation for a style
       this.fs.copyTpl(
-        this.templatePath(`src/${version}/_element-styles.html`),
-        this.destinationPath(`${elementName}-styles.html`),
+        this.templatePath(`src/${version}/_element-classes.html`),
+        this.destinationPath(`${elementName}-classes.html`),
         this.props
       );
     }
+
+   
   },
 
   install: function () {

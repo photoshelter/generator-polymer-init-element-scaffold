@@ -11,6 +11,7 @@
 </head>
 <body unresolved>
 
+   <% if (polyVers != 'style') { %>
 	<h3>Example of <%= elementName %></h3>
 	<p>Further description of <%= elementName %> example</p>
 	<demo-snippet class="centered-demo">
@@ -26,7 +27,9 @@
 			<<%= elementName %>></<%= elementName %>>
 		</template>
 	</demo-snippet>
-
+   <% }  else { %>
+   
+   <% } %>
 
 </body>
 </html>
