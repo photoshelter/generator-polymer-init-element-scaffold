@@ -1,0 +1,37 @@
+
+<link rel="import" href="../polymer/polymer.html">
+<!--
+A set of  classes that let you specify properties directly in markup.
+You must include this file in every element that needs to use them.
+
+  Sample use:
+      <link rel="import" href="../<%=elementName%>/<%=elementName%>-classes.html">
+      <style is="custom-style" include="<%=elementName%>-module"></style>
+      <div class="<%=elementName%>-class">
+        <div>Foo bar</div>
+      </div>
+
+The following imports are available:
+
+ - <%=elementName%>-module
+
+-->
+
+
+<!-- <%=elementDescription%> -->
+<dom-module id="<%=elementName%>-module">
+  <template>
+    <style>
+
+       /**
+        * class description 
+       **/
+      .<%=elementName%>-basic-class {
+        display: block;
+        width:100px;
+        height:100px;
+        background:red;
+      }
+    </style>
+  </template>
+</dom-module>

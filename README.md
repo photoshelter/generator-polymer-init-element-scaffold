@@ -3,6 +3,7 @@
 ## Available Templates
 
 - Polymer 1.7 elements (Allows hybrid elements)
+- 1.7 flavored style library 
 - Polymer 2.x elements (Still in prerelease)
 - Vanilla v1 [webcomponents](https://developers.google.com/web/fundamentals/getting-started/primers/customelements)
 - [Classbased mixins](http://justinfagnani.com/2015/12/21/real-mixins-with-javascript-classes/)
@@ -19,16 +20,19 @@
 
 - Auto generated docs
  - [x] 1.7 support
+ - [x] Style Library (1.7)
  - [ ] 2.x support
  - [ ] Vanilla support
  - [ ] Mixin support
 - Basic travis testing support
   - [x] 1.7 support
+  - [x] Style Library (1.7)
 - Extended support for Sauce labs
   - [x] 1.7 support
+  - [x] Style Library (1.7)
 - Github pages deployment
   - [x] 1.7 support
-
+  - [x] Style Library (1.7)
 
 ### Usage
 

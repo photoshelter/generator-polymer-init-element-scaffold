@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git://<%=gitDomain%>.com/<%=orgName%>/<%=elementName%>.git"
   },
-  "keywords": [<% if (polyVers === '2.0' || polyVers === '1.x' || polyVers === 'behavior' ) { %>
+  "keywords": [<% if (polyVers === '2.0' || polyVers === '1.x' || polyVers === 'behavior' || polyVers === 'style' ) { %>
     "polymer",
     <% }%>
     "web-components",
@@ -31,7 +31,7 @@
   "dependencies": {
     <% if (polyVers === '2.0' || polyVers === 'behavior') { %>
     "polymer": "Polymer/polymer#2.0-preview"
-    <% } else if (polyVers === '1.x') { %>
+    <% } else if (polyVers === '1.x' || polyVers === 'style') { %>
     "polymer": "Polymer/polymer#^1.7.0"
     <% }%>
   },
@@ -40,7 +40,7 @@
     "custom-elements": "^1.0.3",
     "webcomponentsjs": "^0.7.22",
     <% } %>
-    <% if (polyVers === '1.x' || polyVers === '2.0' || polyVers === 'behavior') { %>
+    <% if (polyVers === '1.x' || polyVers === '2.0' || polyVers === 'style' || polyVers === 'behavior') { %>
     "iron-component-page": "PolymerElements/iron-component-page#^1.1.7",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.2.5",
     <% }%>

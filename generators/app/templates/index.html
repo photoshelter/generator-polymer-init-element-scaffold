@@ -45,7 +45,7 @@
       })();
     </script>
 
-    <% if ( polyVers === '1.x' && elementType === 'bower') { %>
+    <% if ( (polyVers === '1.x' ||  polyVers === 'style') && elementType === 'bower') { %>
     <link rel="import" href="bower_components/iron-component-page/iron-component-page.html">
     <% } %>
 
@@ -76,7 +76,7 @@
       <div slot="content">GOOD-BYE</div>
     </<%=elementName%>>
     <h1>HOPE IM NOT GREY</h1>
-    <% } else if ( polyVers === '1.x'){ %>
+    <% } else if ( polyVers === '1.x' || polyVers === 'style' ){ %>
     <iron-component-page src="bower_components/<%=elementName%>/<%=elementName%>.html" active="<%=elementName%>"></iron-component-page>
     <% } else { %>
     <script>
