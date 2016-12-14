@@ -1,9 +1,11 @@
-<% if (elementType === 'bower') { %>
+<% if (elementImplementation === 'bower') { %>
 <link rel="import" href="../polymer/polymer.html">
 <% } else { %>
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<% } %>
+<% }%>
 
+
+<% if (elementImplementation === 'bower') { %>
 <!--
 <%= elementDescription %>
 -->
@@ -29,6 +31,7 @@ Key                              | Description                            | Usag
 @demo
 @test test/index.html
 -->
+<% } %>
 
 
 <link rel="import" href="<%= elementName %>-styles.html">

@@ -10,9 +10,9 @@
     "type": "git",
     "url": "git://<%=gitDomain%>.com/<%=orgName%>/<%=elementName%>.git"
   },
-  "keywords": [<% if (polyVers === '2.0' || polyVers === '1.x' || polyVers === 'behavior' || polyVers === 'style' ) { %>
+  "keywords": [<% if (elementVersion !== 'vanilla') { %>
     "polymer",
-    <% }%>
+    <% } %>
     "web-components",
     "web-component"
   ],
@@ -29,26 +29,29 @@
     "gulpfile.js"
   ],
   "dependencies": {
-    <% if (polyVers === '2.0' || polyVers === 'behavior') { %>
-    "polymer": "Polymer/polymer#2.0-preview"
-    <% } else if (polyVers === '1.x' || polyVers === 'style') { %>
-    "polymer": "Polymer/polymer#^1.7.0"
-    <% }%>
+    <% if (elementVersion === '2.0') { %>
+     "polymer": "Polymer/polymer#2.0-preview"
+    <% } else if (elementVersion === '1.x') { %>
+     "polymer": "Polymer/polymer#^1.7.0"
+    <% } %>
   },
   "devDependencies": {
-    <% if (polyVers === 'vanilla') { %>
-    "custom-elements": "^1.0.3",
-    "webcomponentsjs": "^0.7.22",
+     "web-component-tester": "*",
+    <% if (elementVersion === 'vanilla') { %>
+      "custom-elements": "^1.0.3",
+      "webcomponentsjs": "^0.7.22"
+    <% } else if (elementVersion === '1.x') { %>
+      "iron-component-page": "PolymerElements/iron-component-page#^1.1.7",
+      "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.2.5"
+    <% } else if (elementVersion === '2.0') { %>
+      "iron-component-page": "PolymerElements/iron-component-page#2.0-preview",
+      "iron-demo-helpers": "PolymerElements/iron-demo-helpers#2.0-preview"
     <% } %>
-    <% if (polyVers === '1.x' || polyVers === '2.0' || polyVers === 'style' || polyVers === 'behavior') { %>
-    "iron-component-page": "PolymerElements/iron-component-page#^1.1.7",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.2.5",
-    <% }%>
-    "web-component-tester": "*"
-  }<% if (polyVers === '2.0' || polyVers === 'behavior') { %>,
+   
+  }<% if (elementVersion === '2.0') { %>,
   "resolutions": {
     "polymer": "2.0-preview",
     "webcomponentsjs": "v1"
   }
-  <% }%>
+  <% } %>
 }

@@ -18,6 +18,10 @@ During development there are 3 pages you might be interested in.
 
 **note:** If you are finding that when reloading it is switching from demos back to docs, then in the browser add the route `/demo` to the url and then the refreshes will happen on that route.
 
+<% if (elementVersion === '2.0') { %>
+ **note:** Make sure you are using [Chrome Canary](https://www.google.com/chrome/browser/canary.html) for development
+<% } %>
+
 **Deploying your Project**
 
 - `npm run pages` is the command to deploy a [Github Pages](https://pages.github.com/) site for your project [https://<%=orgName%>.github.io/<%=elementName%>](https://<%=orgName%>.github.io/<%=elementName%>)

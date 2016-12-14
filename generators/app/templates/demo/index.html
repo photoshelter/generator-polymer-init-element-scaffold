@@ -11,25 +11,55 @@
 </head>
 <body unresolved>
 
-   <% if (polyVers != 'style') { %>
-	<h3>Example of <%= elementName %></h3>
-	<p>Further description of <%= elementName %> example</p>
-	<demo-snippet class="centered-demo">
-		<template>
-			<<%= elementName %>></<%= elementName %>>
-		</template>
-	</demo-snippet>
+	<% if (elementType === 'component') { %>
 
+		<h3>Example of <%= elementName %></h3>
+		<p>Further description of <%= elementName %> example</p>
+		<demo-snippet class="centered-demo">
+			<template>
+				<<%= elementName %>></<%= elementName %>>
+			</template>
+		</demo-snippet>
 
-	<h3>Second example of <%= elementName %></h3>
-	<demo-snippet class="centered-demo">
-		<template>
-			<<%= elementName %>></<%= elementName %>>
-		</template>
-	</demo-snippet>
-   <% }  else { %>
-   
-   <% } %>
+		<h3>Second example of <%= elementName %></h3>
+		<demo-snippet class="centered-demo">
+			<template>
+				<<%= elementName %>></<%= elementName %>>
+			</template>
+		</demo-snippet>
+
+	<% } else if (elementType === 'style') { %>
+
+		<h3>Example of <%= elementName %></h3>
+		<p>Included somewhere higher up in the dependency tree.</p>
+		<p>Can be applied to any object.</p>
+		<demo-snippet class="centered-demo">
+			<style is="custom-style">
+				div.at-apply {
+					@apply  --<%=elementName%>-basic-mixin;
+				}
+			</style>
+			<template>
+				<div class="at-apply">
+					<p>HELLO WORLD</p>
+				</div>
+			</template>
+		</demo-snippet>
+
+		<h3>Example of the class based <%= elementName %> implementation.</h3>
+		<p>Imported as a direct dependency, and then include the dom module.</p>
+		<p>The class can now be appended to any object.</p>
+		<demo-snippet class="centered-demo">
+			<link rel="import" href="../bower_components/<%=elementName%>/<%=elementName%>-classes.html">
+			<style is="custom-style" include="<%=elementName%>-module"></style>
+			<template>
+				<div class="<%=elementName%>-basic-class">
+					<p>HELLO WORLD</p>
+				</div>
+			</template>
+		</demo-snippet>
+
+	<% } %>
 
 </body>
 </html>

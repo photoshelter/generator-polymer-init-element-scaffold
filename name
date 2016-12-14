@@ -6,7 +6,7 @@
 
     <title><%= elementName %> Seed</title>
 
-    <% if  (elementVersion !== 'vanilla') { %>
+    <% if ( (elementVersion !== 'vanilla' { %>
     <script>
       // Setup Polymer options
       window.Polymer = {
@@ -50,15 +50,13 @@
     <% if (elementVersion === '1.x') { %>
     <link rel="import" href="bower_components/iron-component-page/iron-component-page.html">
     <% } else if (elementVersion === '2.0') { %>
-    <link rel="import" href="bower_components/<%= elementName %>/<%= elementName %>.html">
     <script src="/bower_components/custom-elements/custom-elements.min.js"></script>
     <% } else if (elementVersion === 'vanilla') { %>
-    <link rel="import" href="bower_components/<%= elementName %>/<%= elementName %>.html">
     <script src="/bower_components/custom-elements/dist/CustomElements.min.js"></script>
     <% } %>
 
 
-
+    <link rel="import" href="bower_components/<%= elementName %>/<%= elementName %>.html">
 
     <style>
       body {
@@ -88,7 +86,7 @@
         -->
         <!-- This works as just a demo-->
         <<%=elementName%>>
-          <p>NOT WORKING ?</p>
+          <div slot="content">GOOD-BYE</div>
         </<%=elementName%>>
       <% } else if ( elementType === 'style' ){ %>
           <div>This is the place for a 2.0 style</div>
@@ -106,7 +104,7 @@
       <% if ( elementType === 'component' ) { %>
         <!-- This works as just a demo-->
         <<%=elementName%>>
-          <p>NOT WORKING ?</p>
+          <div slot="content">GOOD-BYE</div>
         </<%=elementName%>>
       <% } else if ( elementType === 'style' ) { %>
         <div>This is the place for a vanilla style</div>
