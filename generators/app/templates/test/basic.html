@@ -17,7 +17,7 @@
   <!-- You can use the document as a place to set up your fixtures. -->
   <test-fixture id="<%= elementName %>">
       <template>
-        <% if (polyVers != 'style') { %>
+        <% if (elementVersion != 'style') { %>
           <<%= elementName %>></<%= elementName %>>
         <% } else { %>
             <div class="basic"></div>
@@ -44,7 +44,7 @@
           expect(false).to.be.equal(true);
       });
 
-      <% if (polyVers != 'style') { %>
+      <% if (elementVersion != 'style') { %>
       it('A hopefully passing foo test', function() {
           expect(elem.foo()).to.be.equal(true);
       });

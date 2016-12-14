@@ -7,7 +7,7 @@ class <%=className%> extends Polymer.Element {
       properties: {
         prop1: {
           type:String,
-          value :'TEST'
+          value :'Working Correctly'
         }
       },
       observers: []

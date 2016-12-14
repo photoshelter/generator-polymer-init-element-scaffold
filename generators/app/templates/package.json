@@ -11,7 +11,7 @@
     "url": "https://<%=gitDomain%>.com/<%=orgName%>/<%=elementName%>/issues"
   },
   "license": "https://<%=gitDomain%>.com/<%=orgName%>/<%=elementName%>/LICENSE.txt",
-  "scripts": {<% if (elementType === 'implementation') { %>
+  "scripts": {<% if (elementImplementation === 'implementation') { %>
     "postinstall":"ls | grep -v <%=elementName%> | xargs rm -rf"<% } else { %>
     "clean": "rm -rf bower_components/<%=elementName%>",
     "test" : "npm run clean && gulp build && wct",
@@ -20,7 +20,7 @@
   },
   "engines": {
     "node": ">=6.0"
-  },<% if (elementType === 'bower') { %>
+  },<% if (elementImplementation === 'bower') { %>
   "devDependencies": {
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-gh-pages": "^0.5.4",
