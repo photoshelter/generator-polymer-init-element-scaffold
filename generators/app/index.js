@@ -132,7 +132,7 @@ module.exports = yeoman.Base.extend({
   
   _elementOptions:function(props) {
     if(props.elementVersion === '1.x') {
-      return ['component','style']
+      return ['component','style', 'behavior']
     } else if(props.elementVersion === '2.0') {
       return ['component','behavior']
     } else {
@@ -199,62 +199,123 @@ module.exports = yeoman.Base.extend({
       this.props
     );
 
-     if(elementType === 'style') {
 
-       // copy the style classes implementation
-       this.fs.copyTpl(
+    //If it is a style type you need to copy over the file
+    if(elementType === 'style') {
+      this.fs.copyTpl(
+        this.templatePath(`src/${version}/${elementType}/_${elementType}-classes.html`),
+      this.destinationPath(`${elementName}-classes.html`),
+      this.props
+      );
+    } 
+    
+    // Each Version 
+    if(version === '1.x') {
+      this._PolymerOneWrite(version,elementType, elementName);
+    }
+
+    else if(version === '2.0') {
+      this._PolymerTwoWrite(version,elementType, elementName);
+    }
+
+    else if(version === 'vanilla') {
+      this._VanillaWrite(version, elementType, elementName);
+    }
+    
+    
+    // else if(elementType === 'behavior') {
+    //     this.fs.copyTpl(
+    //       this.templatePath(`demo/_${elementType}-demo.html`),
+    //       this.destinationPath(`demo/${elementName}-demo.html`),
+    //       this.props
+    //     );
+    //   } else {
+    //     // copy over the script
+    //     this.fs.copyTpl(
+    //       this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
+    //       this.destinationPath(`${elementName}.js`),
+    //       this.props
+    //     );
+
+    //     // copy the component styles. css for vanilla and html for polymer
+    //     const fileExt = elementType == 'vanilla' ? 'css': 'html';
+    //     this.fs.copyTpl(
+    //       this.templatePath(`src/${version}/${elementType}/_${elementType}-styles.${fileExt}`),
+    //       this.destinationPath(`${elementName}-styles.${fileExt}`),
+    //       this.props
+    //     );
+    //  }
+
+
+  },
+
+  _PolymerOneWrite: function(version,elementType, elementName) {
+    
+    if(elementType === 'component') {
+      this.fs.copyTpl(
+          this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
+          this.destinationPath(`${elementName}.js`),
+          this.props
+      );
+      
+      this.fs.copyTpl(
+        this.templatePath(`src/${version}/${elementType}/_${elementType}-styles.html`),
+        this.destinationPath(`${elementName}-styles.html`),
+        this.props
+      );
+    }
+    
+    if(elementType === 'style') {
+      this.fs.copyTpl(
         this.templatePath(`src/${version}/${elementType}/_${elementType}-classes.html`),
         this.destinationPath(`${elementName}-classes.html`),
         this.props
       );
+    } 
 
-     } else {
-       
-        // copy over the script
+    if(elementType === 'behavior') {
         this.fs.copyTpl(
-          this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
-          this.destinationPath(`${elementName}.js`),
+          this.templatePath(`demo/_${elementType}-demo.html`),
+          this.destinationPath(`demo/${elementName}-demo.html`),
           this.props
         );
+    }
 
-        // copy the component styles. css for vanilla and html for polymer
-        const fileExt = elementType == 'vanilla' ? 'css': 'html';
-        this.fs.copyTpl(
-          this.templatePath(`src/${version}/${elementType}/_${elementType}-styles.${fileExt}`),
-          this.destinationPath(`${elementName}-styles.${fileExt}`),
-          this.props
-        );
-       
-     }
+  },
+  _PolymerTwoWrite: function(elementType, elementName) {
 
-    /*
-
-    if(elementType === 'style') {
-      // copy the js for all the components.
+    if(elementType === 'component' || elementType === 'behavior') {
+     
       this.fs.copyTpl(
         this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
         this.destinationPath(`${elementName}.js`),
         this.props
       );
 
-      // copy the styles. css for vanilla and html for polymer
-      const fileExt =  version == 'vanilla' ? 'css': 'html';
       this.fs.copyTpl(
-        this.templatePath(`src/${version}/${elementType}/_${elementType}-styles.${fileExt}`),
-        this.destinationPath(`${elementName}-styles.${fileExt}`),
-        this.props
-      );
-    } else {
-      // copy the classes implementation for a style
-      this.fs.copyTpl(
-        this.templatePath(`src/${version}/${elementType}/_${elementType}-classes.html`),
-        this.destinationPath(`${elementName}-classes.html`),
+        this.templatePath(`src/${version}/${elementType}/_${elementType}-styles.html`),
+        this.destinationPath(`${elementName}-styles.html`),
         this.props
       );
     }
+    
+  },
+  _VanillaOneWrite: function(version, elementType, elementName) {
 
-    */
+    if(elementType === 'component') {
+      this.fs.copyTpl(
+        this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
+        this.destinationPath(`${elementName}.js`),
+        this.props
+      );
 
+      this.fs.copyTpl(
+        this.templatePath(`src/${version}/${elementType}/_${elementType}-styles.css`),
+        this.destinationPath(`${elementName}-styles.css`),
+        this.props
+      );
+
+    }
   },
 
   install: function () {

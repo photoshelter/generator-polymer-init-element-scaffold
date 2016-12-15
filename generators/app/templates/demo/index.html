@@ -7,7 +7,7 @@
 	<script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 	<link rel="import" href="../bower_components/<%= elementName %>/<%= elementName %>.html">
 	<link rel="import" href="../bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
-  <link rel="import" href="../bower_components/iron-demo-helpers/demo-snippet.html">
+	<link rel="import" href="../bower_components/iron-demo-helpers/demo-snippet.html">
 </head>
 <body unresolved>
 
@@ -59,7 +59,17 @@
 			</template>
 		</demo-snippet>
 
-	<% } %>
+	<% } else { %>
 
+	<link rel="import" href="./<%=elementName%>-demo.html">
+	<h3>Example of an element that has a behavior</h3>
+	<p>The behavior is a simple log, so you will need to open your console in order to see it working</p>
+	<demo-snippet class="centered-demo">
+		<template>
+			<<%=elementName%>-demo></<%=elementName%>-demo>
+		</template>
+	</demo-snippet>
+
+	<% } %>
 </body>
 </html>
