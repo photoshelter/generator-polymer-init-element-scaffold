@@ -1,0 +1,76 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<script>
+  /**
+   * `Polymer.<%=className%>` to <%=elementDescription%>
+   * 
+   * @polymerBehavior Polymer.<%=className%>
+   **/
+  Polymer.<%=className%>Impl = {
+
+    properties: {
+      /**
+       * The Foo of this element
+       * 
+       * @attribute foo
+       * @type Boolean
+       * @default true
+      **/
+      foo: {
+        type: Boolean,
+        param:true
+      },
+
+      /**
+       * The Bar of this element
+       * 
+       * @attribute bar
+       * @type Boolean
+       * @default false
+      **/
+      bar: {
+        type: Boolean,
+        value:false
+      }
+    },
+
+    observers: [
+      '_baz(receivedFocusFromKeyboard)'
+    ],
+
+
+
+    /**
+     * A demo log function. 
+     * Logs the param passed in
+     *
+     * @param {param} string .
+    **/
+    basicLog: function(param) {
+      console.log('Log the param', param);
+    },
+
+    /**
+     * A demo private function
+     * just logs itself.
+     *
+    **/
+    _baz: function() {
+      console.log('I am a baz');
+    }
+
+    
+  };
+
+
+Polymer.<%=className%> = [
+    /**
+     * The Bahavior is an array of implementations.
+     * The first is on the local behavior, but feel
+     * free to include other behaviors and wrap them
+     * in this array, to composite functionality. 
+    **/
+    Polymer.<%=className%>Impl
+];
+
+</script>
