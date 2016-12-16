@@ -15,14 +15,14 @@
 			Polymer({
 			is:'<%=elementName%>-demo',
 			behaviors: [
-				Polymer.<%=className%>
+				<%=behaviorNameSpace%>.<%=className%>
 			],
 			attached:function() {
 				this.basicLog('IM A BEHAVIOR');
 				this._bazImplement();
 			},
 			_bazImplement: function() {
-				Polymer.<%=className%>Impl._baz();
+				<%=behaviorNameSpace%>.<%=className%>Impl._baz();
 			}
 			});
 		</script>

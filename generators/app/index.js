@@ -29,7 +29,7 @@ module.exports = yeoman.Base.extend({
     {
       type: 'list',
       name: 'elementVersion',
-      message: 'What kind of element are you building?',
+      message: 'What version of element are you building?',
       choices: ['1.x', '2.0','vanilla'],
       default: '1.x'
     },
@@ -37,9 +37,17 @@ module.exports = yeoman.Base.extend({
     {
       type: 'list',
       name: 'elementType',
-      message: 'What kind of element are you building?',
+      message: 'What type of element are you building?',
       choices: this._elementOptions,
       default: 'component'
+    },
+  
+    {
+      when: (props) => (props.elementType === 'behavior' && props.elementVersion ===  '1.x'),
+      type: 'input',
+      name: 'behaviorNameSpace',
+      message: 'How would you like to namespace your behavior?',
+      default: 'fooBehavior'
     },
 
     {
@@ -49,6 +57,7 @@ module.exports = yeoman.Base.extend({
       choices: ['bower', 'internal'],
       default: 'bower'
     },
+
     {
       when: (props) => (props.elementImplementation === 'bower'),
       type: 'input',

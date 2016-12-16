@@ -1,12 +1,14 @@
 <link rel="import" href="../polymer/polymer.html">
 
 <script>
+
+  window.<%=behaviorNameSpace%> = window.<%=behaviorNameSpace%> || {};
   /**
    * `Polymer.<%=className%>` to <%=elementDescription%>
    * 
    * @polymerBehavior Polymer.<%=className%>
    **/
-  Polymer.<%=className%>Impl = {
+  <%=behaviorNameSpace%>.<%=className%>Impl = {
 
     properties: {
       /**
@@ -39,7 +41,6 @@
     ],
 
 
-
     /**
      * A demo log function. 
      * Logs the param passed in
@@ -63,14 +64,13 @@
   };
 
 
-Polymer.<%=className%> = [
+<%=behaviorNameSpace%>.<%=className%> = [
     /**
-     * The Bahavior is an array of implementations.
-     * The first is on the local behavior, but feel
-     * free to include other behaviors and wrap them
-     * in this array, to composite functionality. 
+     * This is how you can extends behaviors. Each succeeding behavior
+     * will overwrite properties and functions of the preceding ones. 
+     * Your Local Impl will most likely be last in the array. 
     **/
-    Polymer.<%=className%>Impl
+    <%=behaviorNameSpace%>.<%=className%>Impl
 ];
 
 </script>
