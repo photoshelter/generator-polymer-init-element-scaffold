@@ -46,8 +46,18 @@ module.exports = yeoman.Base.extend({
       when: (props) => (props.elementType === 'behavior' && props.elementVersion ===  '1.x'),
       type: 'input',
       name: 'behaviorNameSpace',
-      message: 'How would you like to namespace your behavior?',
-      default: 'fooBehavior'
+      message: 'What namespace would you like for your behavior?',
+      default: 'fooBehavior',
+      store   : true
+    },
+
+     {
+      when: (props) => (props.elementType === 'behavior' && props.elementVersion ===  '1.x'),
+      type: 'confirm',
+      name: 'isBehaviorExtend',
+      message: 'Is this a behavior extension?',
+      default: false
+  
     },
 
     {

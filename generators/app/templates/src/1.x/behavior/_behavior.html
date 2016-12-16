@@ -2,13 +2,17 @@
 
 <script>
 
-  window.<%=behaviorNameSpace%> = window.<%=behaviorNameSpace%> || {};
+  window.isBehaviorExtend=behaviorNameSpace%> = window.<%=behaviorNameSpace%> || {};
   /**
    * `Polymer.<%=className%>` to <%=elementDescription%>
    * 
    * @polymerBehavior Polymer.<%=className%>
    **/
+  <% if(isBehaviorExtend)  { %>
   <%=behaviorNameSpace%>.<%=className%>Impl = {
+  <% } else { %>
+  <%=behaviorNameSpace%>.<%=className%>= {
+  <% } %>
 
     properties: {
       /**
@@ -63,14 +67,16 @@
     
   };
 
+  <% if(isBehaviorExtend)  { %>
+  <%=behaviorNameSpace%>.<%=className%> = [
+      /**
+       * This is how you can extends behaviors. Each succeeding behavior
+       * will overwrite properties and functions of the preceding ones. 
+       * Your Local Impl will most likely be last in the array. 
+      **/
+      <%=behaviorNameSpace%>.<%=className%>Impl
+  ];
+  <% } %>
 
-<%=behaviorNameSpace%>.<%=className%> = [
-    /**
-     * This is how you can extends behaviors. Each succeeding behavior
-     * will overwrite properties and functions of the preceding ones. 
-     * Your Local Impl will most likely be last in the array. 
-    **/
-    <%=behaviorNameSpace%>.<%=className%>Impl
-];
 
 </script>
