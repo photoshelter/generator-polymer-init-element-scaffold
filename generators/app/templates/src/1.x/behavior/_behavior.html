@@ -1,12 +1,18 @@
 <link rel="import" href="../polymer/polymer.html">
 
 <script>
+
+  window.<%=behaviorNameSpace%> = window.<%=behaviorNameSpace%> || {};
   /**
    * `Polymer.<%=className%>` to <%=elementDescription%>
    * 
    * @polymerBehavior Polymer.<%=className%>
    **/
-  Polymer.<%=className%>Impl = {
+  <% if(isBehaviorExtend)  { %>
+  <%=behaviorNameSpace%>.<%=className%>Impl = {
+  <% } else { %>
+  <%=behaviorNameSpace%>.<%=className%>= {
+  <% } %>
 
     properties: {
       /**
@@ -39,12 +45,13 @@
     ],
 
 
-
     /**
      * A demo log function. 
      * Logs the param passed in
      *
      * @param {param} string .
+     * 
+     * @return {null}
     **/
     basicLog: function(param) {
       console.log('Log the param', param);
@@ -54,6 +61,7 @@
      * A demo private function
      * just logs itself.
      *
+     * @return {null}
     **/
     _baz: function() {
       console.log('I am a baz');
@@ -62,15 +70,16 @@
     
   };
 
+  <% if(isBehaviorExtend)  { %>
+  <%=behaviorNameSpace%>.<%=className%> = [
+      /**
+       * This is how you can extends behaviors. Each succeeding behavior
+       * will overwrite properties and functions of the preceding ones. 
+       * Your Local Impl will most likely be last in the array. 
+      **/
+      <%=behaviorNameSpace%>.<%=className%>Impl
+  ];
+  <% } %>
 
-Polymer.<%=className%> = [
-    /**
-     * The Bahavior is an array of implementations.
-     * The first is on the local behavior, but feel
-     * free to include other behaviors and wrap them
-     * in this array, to composite functionality. 
-    **/
-    Polymer.<%=className%>Impl
-];
 
 </script>
