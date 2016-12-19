@@ -34,12 +34,12 @@
 		<p>Included somewhere higher up in the dependency tree.</p>
 		<p>Can be applied to any object.</p>
 		<demo-snippet class="centered-demo">
-			<style is="custom-style">
-				div.at-apply {
-					@apply  --<%=elementName%>-basic-mixin;
-				}
-			</style>
 			<template>
+				<style is="custom-style">
+					div.at-apply {
+						@apply  --<%=elementName%>-basic-mixin;
+					}
+				</style>
 				<div class="at-apply">
 					<p>HELLO WORLD</p>
 				</div>
@@ -51,8 +51,8 @@
 		<p>The class can now be appended to any object.</p>
 		<demo-snippet class="centered-demo">
 			<link rel="import" href="../bower_components/<%=elementName%>/<%=elementName%>-classes.html">
-			<style is="custom-style" include="<%=elementName%>-module"></style>
 			<template>
+				<style is="custom-style" include="<%=elementName%>-module"></style>
 				<div class="<%=elementName%>-basic-class">
 					<p>HELLO WORLD</p>
 				</div>
