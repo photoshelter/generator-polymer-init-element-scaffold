@@ -10,9 +10,9 @@ Versions               | Type      | Supported
 -----------------------|-----------|--------------------
 Polymer 1.X            | Component | :white_check_mark:
 Polymer 1.X            | Style     | :white_check_mark:
-Polymer 1.X            | Behavior  | :clock10:
+Polymer 1.X            | Behavior  | :white_check_mark:
 Polymer 2.0            | Component | :white_check_mark:
-Polymer 2.0            | Style     | :clock9:
+Polymer 2.0            | Style     | :clock10:
 Polymer 2.0            | Behavior  | :white_check_mark:
 Vanilla Web Components | Component | :wavy_dash: :thought_balloon:
 Vanilla Web Components | Style     | :interrobang:
