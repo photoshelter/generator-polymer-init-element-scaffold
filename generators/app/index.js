@@ -11,22 +11,35 @@ module.exports = yeoman.Base.extend({
     this.appname = this._dashedCaseFromSpaces(this.appname);
   },
 
-  // Have Yeoman greet the user.
+
+
+
+/*
+__ GREETING ________________________________________________________________________________________________ */
+
   prompting: function () {
 
     this.log(yosay(
       'Welcome to the solid ' + chalk.red('generator-polymer-init-element-scaffold') + ' generator!'
     ));
 
-    var prompts = [{
+
+
+
+/*
+__ PROMPTS ________________________________________________________________________________________________ */
+
+    var prompts = [
+    
+    { /* ELEMENT: Name */
       type: 'input',
       name: 'elementName',
       message: 'What is the name of the new element?',
       validate: (input) => (input.indexOf('-') === -1 ? 'Element name needs a \'-\'' : true),
-      default :this.appname
+      default: this.appname
     },
 
-    {
+    { /* ELEMENT Version: 1.x || 2.0 || Vanilla */
       type: 'list',
       name: 'elementVersion',
       message: 'What version of element are you building?',
@@ -34,7 +47,7 @@ module.exports = yeoman.Base.extend({
       default: '1.x'
     },
 
-    {
+    { /* ELEMENT Type: component || style || behavior */
       type: 'list',
       name: 'elementType',
       message: 'What type of element are you building?',
@@ -42,25 +55,24 @@ module.exports = yeoman.Base.extend({
       default: 'component'
     },
   
-    {
+    { /* BEHAVIOR: Name */
       when: (props) => (props.elementType === 'behavior' && props.elementVersion ===  '1.x'),
       type: 'input',
       name: 'behaviorNameSpace',
       message: 'What namespace would you like for your behavior?',
       default: 'fooBehavior',
-      store   : true
+      store: true
     },
 
-     {
+    { /* BEHAVIOR: Extension */
       when: (props) => (props.elementType === 'behavior' && props.elementVersion ===  '1.x'),
       type: 'confirm',
       name: 'isBehaviorExtend',
       message: 'Is this a behavior extension?',
       default: false
-  
     },
 
-    {
+    { /* IMPLEMENTATION: Bower || Internal */
       type: 'list',
       name: 'elementImplementation',
       message: 'Is this a bower element or internal element?',
@@ -68,60 +80,74 @@ module.exports = yeoman.Base.extend({
       default: 'bower'
     },
 
-    {
+    { /* NEW DIRECTORY: Yes || No */
+      type: 'confirm',
+      name: 'createDirectory',
+      message: 'Should I create a directory for you?',
+      default: this._directoryOptions
+    },
+
+    { /* ELEMENT: Description */
       when: (props) => (props.elementImplementation === 'bower'),
       type: 'input',
       name: 'elementDescription',
       message: 'What does this element do?',
       default: 'nothing yet'
     },
-    {
+
+    { /* AUTHOR */
       when: (props) => (props.elementImplementation === 'bower'),
       type: 'input',
       name: 'authorName',
       message: 'What is your name?',
       default: 'author',
-      store   : true
+      store: true
     },
-    {
+
+    { /* REPO */
       when: (props) => (props.elementImplementation === 'bower'),
       type: 'input',
       name: 'gitDomain',
       message: 'Where does your repo reside?',
       default: 'github',
-      store   : true
+      store: true
     },
-    {
+
+    { /* ORG */
       when: (props) => (props.elementImplementation === 'bower'),
       type: 'input',
       name: 'orgName',
       message: 'What is your organiztion\'s repo?',
       default: 'org',
-      store   : true
+      store: true
     },
-    {
+
+    { /* GROUP */
       when: (props) => (props.elementImplementation === 'bower'),
       type: 'input',
       name: 'elementGrouping',
       message: 'What group does your element belong to?',
       default: 'none',
-      store   : true
+      store: true
     },
+
     // // TODO: implement regex for tests inclusion
-    // {
+    // { /* TESTS */
     //   when: (props) => (props.elementImplementation === 'bower'),
     //   type: 'confirm',
     //   name: 'testable',
     //   message: 'Would you like to include tests ?',
     //   default: true
     // },
-    {
+    
+    { /* SAUCE LABS */
       when: (props) => (props.elementImplementation === 'bower'/*&& props.testable*/),
       type: 'confirm',
       name: 'sauceLabs',
       message: 'Would you like to use sauce labs for cross browser testing ?',
       default: true
     }];
+
 
 
     return this.prompt(prompts).then(function (props) {
@@ -134,6 +160,7 @@ module.exports = yeoman.Base.extend({
     }.bind(this));
   },
 
+
   _cappedCaseFromDashed: function(element) {
     if( typeof element !== "undefined") {
       return element.split('-').map( (name) => {
@@ -143,13 +170,15 @@ module.exports = yeoman.Base.extend({
     return element
   },
 
+
   _dashedCaseFromSpaces: function(name) {
     if( typeof name !== "undefined") {
       return name.replace(/\s/g,'-');
     }
   },
   
-  _elementOptions:function(props) {
+
+  _elementOptions: function(props) {
     if(props.elementVersion === '1.x') {
       return ['component','style', 'behavior']
     } else if(props.elementVersion === '2.0') {
@@ -159,8 +188,17 @@ module.exports = yeoman.Base.extend({
     }
   },
 
-  _setDefaultValues: function() {
 
+  _directoryOptions: function(props) {
+    if (props.elementImplementation === 'bower') {
+      return false
+    } else if (props.elementImplementation === 'internal') {
+      return true
+    }
+  },
+
+
+  _setDefaultValues: function() {
     this.props.authorName = this.props.authorName || 'internal';
     this.props.orgName = this.props.orgName || 'internal';
     this.props.elementDescription = this.props.elementDescription || 'internal';
@@ -168,8 +206,14 @@ module.exports = yeoman.Base.extend({
     this.props.testable = this.props.testable || false;
     this.props.sauceLabs = this.props.sauceLabs || false;
     this.props.gitDomain = this.props.gitDomain || 'github';
-
   },
+
+
+
+
+
+/*
+__ WRITING ________________________________________________________________________________________________ */
 
   writing: function () {
 
@@ -177,67 +221,152 @@ module.exports = yeoman.Base.extend({
     const elementType = this.props.elementType;
     const elementName = this.props.elementName;
 
-    this._sharedWrites();
+    this._sharedWrites(elementName); // ??? Put at bottom ???
     this._versionWrite(elementVersion, elementType, elementName);
   },
 
-  _sharedWrites: function() {
 
-    // copy all general files.
+
+/*
+__ SHARED WRITES _____________________________________________ */
+
+  _sharedWrites: function(elementName) {
+
+    // Global: Copy over all files.
     this.fs.copyTpl(
       `${this.templatePath()}/**/!(_)*`,
       this.destinationPath(),
       this.props
     );
 
-    // copy over dot files for bower.
+
+    // USER SELECTS: 'bower'
     if (this.props.elementImplementation === 'bower') {
+
+      // Bower: Copy over dot files.
       this.fs.copyTpl(
        `${this.templatePath()}/.!(gitignore)*`,
         this.destinationRoot(),
         this.props
       );
 
-      // get over npm publish quirk with file rename.
+      // NPM: get over npm publish quirk with file rename.
       this.fs.copyTpl(
         this.templatePath('.gitignorefile'),
-        this.destinationPath('.gitignore'),
+        this.destinationPath(`.gitignore`),
         this.props
       );
-
     }
+
   },
 
 
-  _versionWrite:function(version, elementType, elementName) {
 
-    // Copy the main html file.
-    this.fs.copyTpl(
-      this.templatePath(`src/${version}/${elementType}/_${elementType}.html`),
-      this.destinationPath(`${elementName}.html`),
-      this.props
-    );
+/*
+__ VERSION WRITES _____________________________________________ */
+
+  _versionWrite: function(version, elementType, elementName) {
 
 
-    //If it is a style type you need to copy over the file
-    if(elementType === 'style') {
+
+                            /* ::: HTML: Copy main file over ::: */ 
+
+
+    // USER SELECTED: 'bower' + 'No directory'
+    if (this.props.elementImplementation === 'bower' && this.props.createDirectory === false) {
+
       this.fs.copyTpl(
-        this.templatePath(`src/${version}/${elementType}/_${elementType}-classes.html`),
-      this.destinationPath(`${elementName}-classes.html`),
-      this.props
+        this.templatePath(`src/${version}/${elementType}/_${elementType}.html`),
+        this.destinationPath(`${elementName}.html`),
+        this.props
       );
-    } 
-    
-    // Each Version 
-    if(version === '1.x') {
-      this._PolymerOneWrite(version,elementType, elementName);
     }
 
-    else if(version === '2.0') {
+    // USER SELECTED: 'bower' + 'Yes directory'
+    else if (this.props.elementImplementation === 'bower' && this.props.createDirectory === true) {
+      this.fs.copyTpl(
+        this.templatePath(`src/${version}/${elementType}/_${elementType}.html`),
+        this.destinationPath(`${elementName}/${elementName}.html`),
+        this.props
+      );
+    }
+
+    // USER SELECTED: 'internal' + 'No directory'
+    else if (this.props.elementImplementation === 'internal' && this.props.createDirectory === false) {
+      this.fs.copyTpl(
+        this.templatePath(`src/${version}/${elementType}/_${elementType}.html`),
+        this.destinationPath(`${elementName}.html`),
+        this.props
+      );
+    } 
+
+    // USER SELECTED: 'internal' + 'Yes directory'
+    else if (this.props.elementImplementation === 'internal' && this.props.createDirectory === true) {
+      this.fs.copyTpl(
+        this.templatePath(`src/${version}/${elementType}/_${elementType}.html`),
+        this.destinationPath(`${elementName}/${elementName}.html`),
+        this.props
+      );
+    } 
+
+
+
+
+                            /* ::: STYLE: Copy style file over ::: */ 
+
+    // USER SELECTED: 'style' + 'bower' + 'No directory'
+    if (elementType === 'style' && this.props.elementImplementation === 'bower' && this.props.createDirectory === false) {
+      this.fs.copyTpl(
+        this.templatePath(`src/${version}/${elementType}/_${elementType}-classes.html`),
+        this.destinationPath(`${elementName}-classes.html`),
+        this.props
+      );
+    }
+
+    // USER SELECTED: 'style' + 'bower' + 'Yes directory'
+    else if (elementType === 'style' && this.props.elementImplementation === 'bower' && this.props.createDirectory === true) {
+      this.fs.copyTpl(
+        this.templatePath(`src/${version}/${elementType}/_${elementType}-classes.html`),
+        this.destinationPath(`${elementName}/${elementName}-classes.html`),
+        this.props
+      );
+    }
+
+    // USER SELECTED: 'style' + 'internal' + 'No directory'
+    else if (elementType === 'style' && this.props.elementImplementation === 'internal' && this.props.createDirectory === false) {
+      this.fs.copyTpl(
+        this.templatePath(`src/${version}/${elementType}/_${elementType}-classes.html`),
+        this.destinationPath(`${elementName}-classes.html`),
+        this.props
+      );
+    }
+
+    // USER SELECTED: 'style' + 'internal' + 'Yes directory'
+    else if (elementType === 'style' && this.props.elementImplementation === 'internal' && this.props.createDirectory === true) {
+      this.fs.copyTpl(
+        this.templatePath(`src/${version}/${elementType}/_${elementType}-classes.html`),
+        this.destinationPath(`${elementName}/${elementName}-classes.html`),
+        this.props
+      );
+    } 
+
+
+
+
+                                      /* ::: VERSIONS ::: */ 
+
+    // USER SELECTED: Version 1.x
+    if (version === '1.x') {
+      this._PolymerOneWrite(version, elementType, elementName);
+    }
+
+    // USER SELECTED: Version 2.0
+    else if (version === '2.0') {
       this._PolymerTwoWrite(version,elementType, elementName);
     }
 
-    else if(version === 'vanilla') {
+    // USER SELECTED: Vanilla
+    else if (version === 'vanilla') {
       this._VanillaWrite(version, elementType, elementName);
     }
     
@@ -268,13 +397,22 @@ module.exports = yeoman.Base.extend({
 
   },
 
-  _PolymerOneWrite: function(version,elementType, elementName) {
-    
-    if(elementType === 'component') {
+
+
+/*
+__ POLYMER 1.0 _____________________________________________ */
+
+  _PolymerOneWrite: function(version, elementType, elementName) {
+
+
+                                                    /* ::: COMPONENT ::: */ 
+
+    // USER SELECTED: 'component' + 'bower' + 'No directory'
+    if (elementType === 'component' && this.props.elementImplementation === 'bower' && this.props.createDirectory === false) {
       this.fs.copyTpl(
-          this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
-          this.destinationPath(`${elementName}.js`),
-          this.props
+        this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
+        this.destinationPath(`${elementName}.js`),
+        this.props
       );
       
       this.fs.copyTpl(
@@ -283,8 +421,57 @@ module.exports = yeoman.Base.extend({
         this.props
       );
     }
+
+    // USER SELECTED: 'component' + 'bower' + 'Yes directory'
+    else if (elementType === 'component' && this.props.elementImplementation === 'bower' && this.props.createDirectory === true) {
+      this.fs.copyTpl(
+        this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
+        this.destinationPath(`${elementName}/${elementName}.js`),
+        this.props
+      );
+      
+      this.fs.copyTpl(
+        this.templatePath(`src/${version}/${elementType}/_${elementType}-styles.html`),
+        this.destinationPath(`${elementName}/${elementName}-styles.html`),
+        this.props
+      );
+    }
+
+    // USER SELECTED: 'component' + 'internal' + 'No directory'
+    else if (elementType === 'component' && this.props.elementImplementation === 'internal' && this.props.createDirectory === false) {
+      this.fs.copyTpl(
+        this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
+        this.destinationPath(`${elementName}.js`),
+        this.props
+      );
+      
+      this.fs.copyTpl(
+        this.templatePath(`src/${version}/${elementType}/_${elementType}-styles.html`),
+        this.destinationPath(`${elementName}-styles.html`),
+        this.props
+      );
+    }
+
+    // USER SELECTED: 'component' + 'internal' + 'Yes directory'
+    else if (elementType === 'component' && this.props.elementImplementation === 'internal' && this.props.createDirectory === true) {
+      this.fs.copyTpl(
+        this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
+        this.destinationPath(`${elementName}/${elementName}.js`),
+        this.props
+      );
+      
+      this.fs.copyTpl(
+        this.templatePath(`src/${version}/${elementType}/_${elementType}-styles.html`),
+        this.destinationPath(`${elementName}/${elementName}-styles.html`),
+        this.props
+      );
+    }
     
-    if(elementType === 'style') {
+
+                                                    /* ::: STYLE ::: */ 
+
+    // USER SELECTED: 'style' + 'bower' + 'No directory'
+    if (elementType === 'style' && this.props.elementImplementation === 'bower' && this.props.createDirectory === false) {
       this.fs.copyTpl(
         this.templatePath(`src/${version}/${elementType}/_${elementType}-classes.html`),
         this.destinationPath(`${elementName}-classes.html`),
@@ -292,15 +479,55 @@ module.exports = yeoman.Base.extend({
       );
     } 
 
-    if(elementType === 'behavior') {
-        this.fs.copyTpl(
-          this.templatePath(`demo/_${elementType}-demo.html`),
-          this.destinationPath(`demo/${elementName}-demo.html`),
-          this.props
-        );
+    // USER SELECTED: 'style' + 'bower' + 'Yes directory'
+    else if (elementType === 'style' && this.props.elementImplementation === 'bower' && this.props.createDirectory === true) {
+      this.fs.copyTpl(
+        this.templatePath(`src/${version}/${elementType}/_${elementType}-classes.html`),
+        this.destinationPath(`${elementName}/${elementName}-classes.html`),
+        this.props
+      );
+    } 
+
+    // USER SELECTED: 'style' + 'internal' + 'No directory'
+    else if (elementType === 'style' && this.props.elementImplementation === 'internal' && this.props.createDirectory === false) {
+      this.fs.copyTpl(
+        this.templatePath(`src/${version}/${elementType}/_${elementType}-classes.html`),
+        this.destinationPath(`${elementName}-classes.html`),
+        this.props
+      );
+    } 
+
+    // USER SELECTED: 'style' + 'internal' + 'Yes directory'
+    else if (elementType === 'style' && this.props.elementImplementation === 'internal' && this.props.createDirectory === true) {
+      this.fs.copyTpl(
+        this.templatePath(`src/${version}/${elementType}/_${elementType}-classes.html`),
+        this.destinationPath(`${elementName}/${elementName}-classes.html`),
+        this.props
+      );
+    } 
+
+
+
+
+
+
+    // Behavior
+    if (elementType === 'behavior') {
+      this.fs.copyTpl(
+        this.templatePath(`demo/_${elementType}-demo.html`),
+        this.destinationPath(`demo/${elementName}-demo.html`),
+        this.props
+      );
     }
 
   },
+
+
+
+
+/*
+__ POLYMER 2.0 _____________________________________________ */
+
   _PolymerTwoWrite: function(elementType, elementName) {
 
     if(elementType === 'component' || elementType === 'behavior') {
@@ -319,7 +546,14 @@ module.exports = yeoman.Base.extend({
     }
     
   },
-  _VanillaOneWrite: function(version, elementType, elementName) {
+
+
+
+
+/*
+__ VANILLA _____________________________________________ */
+
+  _VanillaWrite: function(version, elementType, elementName) {
 
     if(elementType === 'component') {
       this.fs.copyTpl(
@@ -337,10 +571,17 @@ module.exports = yeoman.Base.extend({
     }
   },
 
+
+
+
+
+/*
+__ INSTALL ________________________________________________________________________________________________ */
+
   install: function () {
 
     this.installDependencies({
-      bower:this.props.elementImplementation === 'bower',
+      bower: this.props.elementImplementation === 'bower',
       npm: true
     });
   }
