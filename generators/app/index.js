@@ -148,7 +148,6 @@ module.exports = yeoman.Base.extend({
   },
 
   _cappedCaseFromDashed: function(element) {
-   
     if(typeof element !== "undefined") {
       return element.split('-').map( (name) => {
         return name.charAt(0).toUpperCase() + name.slice(1);
@@ -158,14 +157,12 @@ module.exports = yeoman.Base.extend({
   },
 
   _dashedCaseFromSpaces: function(name) {
-    
     if(typeof name !== "undefined") {
       return name.replace(/\s/g,'-');
     }
   },
 
   _elementOptions: function(props) {
-   
     if(props.elementVersion === '1.x') {
       return ['component','style', 'behavior']
     } else if(props.elementVersion === '2.0') {
@@ -176,7 +173,7 @@ module.exports = yeoman.Base.extend({
   },
 
   _setDefaultValues: function() {
-  
+    // Sort of annoying but nothing can be undefined, even if it isn't "used" 
     this.props.authorName = this.props.authorName || 'internal';
     this.props.orgName = this.props.orgName || 'internal';
     this.props.elementDescription = this.props.elementDescription || 'internal';
@@ -187,7 +184,7 @@ module.exports = yeoman.Base.extend({
   },
 
   writing: function () {
-
+    // Grab the vars you need and write the files
     const elementVersion = this.props.elementVersion;
     const elementType = this.props.elementType;
     const elementName = this.props.elementName;
@@ -205,7 +202,6 @@ module.exports = yeoman.Base.extend({
   },
 
   _sharedWrites: function(elementName) {
-
     // Global: Copy over all files.
     this.fs.copyTpl(
       `${this.templatePath()}/**/!(_)*`,
@@ -230,11 +226,9 @@ module.exports = yeoman.Base.extend({
         this.props
       );
     }
-
   },
 
   _versionWrite: function(version, elementType, elementName) {
-
     // Copy the main html file.
     this.fs.copyTpl(
       this.templatePath(`src/${version}/${elementType}/_${elementType}.html`),
@@ -246,8 +240,8 @@ module.exports = yeoman.Base.extend({
     if(elementType === 'style') {
       this.fs.copyTpl(
         this.templatePath(`src/${version}/${elementType}/_${elementType}-classes.html`),
-      this.destinationPath(`${elementName}-classes.html`),
-      this.props
+        this.destinationPath(`${elementName}-classes.html`),
+        this.props
       );
     }
 
@@ -265,16 +259,14 @@ module.exports = yeoman.Base.extend({
     else if (version === 'vanilla') {
       this._VanillaWrite(version, elementType, elementName);
     }
-
   },
 
   _PolymerOneWrite: function(version,elementType, elementName) {
-    
     if(elementType === 'component') {
       this.fs.copyTpl(
-          this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
-          this.destinationPath(`${elementName}.js`),
-          this.props
+        this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
+        this.destinationPath(`${elementName}.js`),
+        this.props
       );
       
       this.fs.copyTpl(
@@ -293,19 +285,16 @@ module.exports = yeoman.Base.extend({
     } 
 
     if(elementType === 'behavior') {
-        this.fs.copyTpl(
-          this.templatePath(`demo/_${elementType}-demo.html`),
-          this.destinationPath(`demo/${elementName}-demo.html`),
-          this.props
-        );
+      this.fs.copyTpl(
+        this.templatePath(`demo/_${elementType}-demo.html`),
+        this.destinationPath(`demo/${elementName}-demo.html`),
+        this.props
+      );
     }
-
   },
 
   _PolymerTwoWrite: function(elementType, elementName) {
-
     if(elementType === 'component' || elementType === 'behavior') {
-     
       this.fs.copyTpl(
         this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
         this.destinationPath(`${elementName}.js`),
@@ -318,11 +307,9 @@ module.exports = yeoman.Base.extend({
         this.props
       );
     }
-    
   },
 
   _VanillaWrite: function(version, elementType, elementName) {
-
     if(elementType === 'component') {
       this.fs.copyTpl(
         this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
@@ -335,12 +322,11 @@ module.exports = yeoman.Base.extend({
         this.destinationPath(`${elementName}-styles.css`),
         this.props
       );
-
     }
   },
 
   install: function () {
-
+    // How to handle the deps
     this.installDependencies({
       bower: this.props.elementImplementation === 'bower',
       npm: true
