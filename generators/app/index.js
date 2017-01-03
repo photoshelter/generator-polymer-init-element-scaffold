@@ -25,7 +25,6 @@ __ GREETING ____________________________________________________________________
 
 
 
-
 /*
 __ PROMPTS ________________________________________________________________________________________________ */
 
@@ -64,7 +63,7 @@ __ PROMPTS _____________________________________________________________________
       store: true
     },
 
-    { /* BEHAVIOR: Extension */
+    { /* BEHAVIOR: Extended */
       when: (props) => (props.elementType === 'behavior' && props.elementVersion ===  '1.x'),
       type: 'confirm',
       name: 'isBehaviorExtend',
@@ -148,8 +147,6 @@ __ PROMPTS _____________________________________________________________________
       default: true
     }];
 
-
-
     return this.prompt(prompts).then(function (props) {
       this.props = props;
       this.props.className = this._cappedCaseFromDashed(props.elementName);
@@ -160,7 +157,6 @@ __ PROMPTS _____________________________________________________________________
     }.bind(this));
   },
 
-
   _cappedCaseFromDashed: function(element) {
     if( typeof element !== "undefined") {
       return element.split('-').map( (name) => {
@@ -170,13 +166,11 @@ __ PROMPTS _____________________________________________________________________
     return element
   },
 
-
   _dashedCaseFromSpaces: function(name) {
     if( typeof name !== "undefined") {
       return name.replace(/\s/g,'-');
     }
   },
-  
 
   _elementOptions: function(props) {
     if(props.elementVersion === '1.x') {
@@ -188,7 +182,6 @@ __ PROMPTS _____________________________________________________________________
     }
   },
 
-
   _directoryOptions: function(props) {
     if (props.elementImplementation === 'bower') {
       return false
@@ -196,7 +189,6 @@ __ PROMPTS _____________________________________________________________________
       return true
     }
   },
-
 
   _setDefaultValues: function() {
     this.props.authorName = this.props.authorName || 'internal';
@@ -208,13 +200,6 @@ __ PROMPTS _____________________________________________________________________
     this.props.gitDomain = this.props.gitDomain || 'github';
   },
 
-
-
-
-
-/*
-__ WRITING ________________________________________________________________________________________________ */
-
   writing: function () {
 
     const elementVersion = this.props.elementVersion;
@@ -225,11 +210,6 @@ __ WRITING _____________________________________________________________________
     this._versionWrite(elementVersion, elementType, elementName);
   },
 
-
-
-/*
-__ SHARED WRITES _____________________________________________ */
-
   _sharedWrites: function(elementName) {
 
     // Global: Copy over all files.
@@ -238,7 +218,6 @@ __ SHARED WRITES _____________________________________________ */
       this.destinationPath(),
       this.props
     );
-
 
     // USER SELECTS: 'bower'
     if (this.props.elementImplementation === 'bower') {
@@ -260,16 +239,12 @@ __ SHARED WRITES _____________________________________________ */
 
   },
 
-
-
 /*
 __ VERSION WRITES _____________________________________________ */
 
   _versionWrite: function(version, elementType, elementName) {
 
-
-
-                            /* ::: HTML: Copy main file over ::: */ 
+    /* ::: HTML: Copy main file over ::: */ 
 
 
     // USER SELECTED: 'bower' + 'No directory'
@@ -309,10 +284,7 @@ __ VERSION WRITES _____________________________________________ */
       );
     } 
 
-
-
-
-                            /* ::: STYLE: Copy style file over ::: */ 
+    /* ::: STYLE: Copy style file over ::: */ 
 
     // USER SELECTED: 'style' + 'bower' + 'No directory'
     if (elementType === 'style' && this.props.elementImplementation === 'bower' && this.props.createDirectory === false) {
@@ -349,11 +321,8 @@ __ VERSION WRITES _____________________________________________ */
         this.props
       );
     } 
-
-
-
-
-                                      /* ::: VERSIONS ::: */ 
+    
+    /* ::: VERSIONS ::: */ 
 
     // USER SELECTED: Version 1.x
     if (version === '1.x') {
