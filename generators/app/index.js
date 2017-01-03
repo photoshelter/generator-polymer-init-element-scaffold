@@ -11,22 +11,11 @@ module.exports = yeoman.Base.extend({
     this.appname = this._dashedCaseFromSpaces(this.appname);
   },
 
-
-
-
-/*
-__ GREETING ________________________________________________________________________________________________ */
-
   prompting: function () {
 
     this.log(yosay(
       'Welcome to the solid ' + chalk.red('generator-polymer-init-element-scaffold') + ' generator!'
     ));
-
-
-
-/*
-__ PROMPTS ________________________________________________________________________________________________ */
 
     var prompts = [
     
@@ -83,7 +72,8 @@ __ PROMPTS _____________________________________________________________________
       type: 'confirm',
       name: 'createDirectory',
       message: 'Should I create a directory for you?',
-      default: this._directoryOptions
+      // defaults to true for internal elements. 
+      default: (props) => (props.elementImplementation === 'internal')
     },
 
     { /* ELEMENT: Description */
@@ -158,7 +148,8 @@ __ PROMPTS _____________________________________________________________________
   },
 
   _cappedCaseFromDashed: function(element) {
-    if( typeof element !== "undefined") {
+   
+    if(typeof element !== "undefined") {
       return element.split('-').map( (name) => {
         return name.charAt(0).toUpperCase() + name.slice(1);
       }).join('');
@@ -167,12 +158,14 @@ __ PROMPTS _____________________________________________________________________
   },
 
   _dashedCaseFromSpaces: function(name) {
-    if( typeof name !== "undefined") {
+    
+    if(typeof name !== "undefined") {
       return name.replace(/\s/g,'-');
     }
   },
 
   _elementOptions: function(props) {
+   
     if(props.elementVersion === '1.x') {
       return ['component','style', 'behavior']
     } else if(props.elementVersion === '2.0') {
@@ -182,15 +175,8 @@ __ PROMPTS _____________________________________________________________________
     }
   },
 
-  _directoryOptions: function(props) {
-    if (props.elementImplementation === 'bower') {
-      return false
-    } else if (props.elementImplementation === 'internal') {
-      return true
-    }
-  },
-
   _setDefaultValues: function() {
+  
     this.props.authorName = this.props.authorName || 'internal';
     this.props.orgName = this.props.orgName || 'internal';
     this.props.elementDescription = this.props.elementDescription || 'internal';
@@ -205,9 +191,17 @@ __ PROMPTS _____________________________________________________________________
     const elementVersion = this.props.elementVersion;
     const elementType = this.props.elementType;
     const elementName = this.props.elementName;
+  
+    if (this.props.createDirectory) {
+      this._updateRoot(elementName);
+    }
 
-    this._sharedWrites(elementName); // ??? Put at bottom ???
+    this._sharedWrites(elementName);
     this._versionWrite(elementVersion, elementType, elementName);
+  },
+
+   _updateRoot:function(elementName) {
+    this.destinationRoot(elementName);
   },
 
   _sharedWrites: function(elementName) {
@@ -239,90 +233,23 @@ __ PROMPTS _____________________________________________________________________
 
   },
 
-/*
-__ VERSION WRITES _____________________________________________ */
-
   _versionWrite: function(version, elementType, elementName) {
 
-    /* ::: HTML: Copy main file over ::: */ 
+    // Copy the main html file.
+    this.fs.copyTpl(
+      this.templatePath(`src/${version}/${elementType}/_${elementType}.html`),
+      this.destinationPath(`${elementName}.html`),
+      this.props
+    );
 
-
-    // USER SELECTED: 'bower' + 'No directory'
-    if (this.props.elementImplementation === 'bower' && this.props.createDirectory === false) {
-
-      this.fs.copyTpl(
-        this.templatePath(`src/${version}/${elementType}/_${elementType}.html`),
-        this.destinationPath(`${elementName}.html`),
-        this.props
-      );
-    }
-
-    // USER SELECTED: 'bower' + 'Yes directory'
-    else if (this.props.elementImplementation === 'bower' && this.props.createDirectory === true) {
-      this.fs.copyTpl(
-        this.templatePath(`src/${version}/${elementType}/_${elementType}.html`),
-        this.destinationPath(`${elementName}/${elementName}.html`),
-        this.props
-      );
-    }
-
-    // USER SELECTED: 'internal' + 'No directory'
-    else if (this.props.elementImplementation === 'internal' && this.props.createDirectory === false) {
-      this.fs.copyTpl(
-        this.templatePath(`src/${version}/${elementType}/_${elementType}.html`),
-        this.destinationPath(`${elementName}.html`),
-        this.props
-      );
-    } 
-
-    // USER SELECTED: 'internal' + 'Yes directory'
-    else if (this.props.elementImplementation === 'internal' && this.props.createDirectory === true) {
-      this.fs.copyTpl(
-        this.templatePath(`src/${version}/${elementType}/_${elementType}.html`),
-        this.destinationPath(`${elementName}/${elementName}.html`),
-        this.props
-      );
-    } 
-
-    /* ::: STYLE: Copy style file over ::: */ 
-
-    // USER SELECTED: 'style' + 'bower' + 'No directory'
-    if (elementType === 'style' && this.props.elementImplementation === 'bower' && this.props.createDirectory === false) {
+    // If it is a style type you need to copy over the file
+    if(elementType === 'style') {
       this.fs.copyTpl(
         this.templatePath(`src/${version}/${elementType}/_${elementType}-classes.html`),
-        this.destinationPath(`${elementName}-classes.html`),
-        this.props
+      this.destinationPath(`${elementName}-classes.html`),
+      this.props
       );
     }
-
-    // USER SELECTED: 'style' + 'bower' + 'Yes directory'
-    else if (elementType === 'style' && this.props.elementImplementation === 'bower' && this.props.createDirectory === true) {
-      this.fs.copyTpl(
-        this.templatePath(`src/${version}/${elementType}/_${elementType}-classes.html`),
-        this.destinationPath(`${elementName}/${elementName}-classes.html`),
-        this.props
-      );
-    }
-
-    // USER SELECTED: 'style' + 'internal' + 'No directory'
-    else if (elementType === 'style' && this.props.elementImplementation === 'internal' && this.props.createDirectory === false) {
-      this.fs.copyTpl(
-        this.templatePath(`src/${version}/${elementType}/_${elementType}-classes.html`),
-        this.destinationPath(`${elementName}-classes.html`),
-        this.props
-      );
-    }
-
-    // USER SELECTED: 'style' + 'internal' + 'Yes directory'
-    else if (elementType === 'style' && this.props.elementImplementation === 'internal' && this.props.createDirectory === true) {
-      this.fs.copyTpl(
-        this.templatePath(`src/${version}/${elementType}/_${elementType}-classes.html`),
-        this.destinationPath(`${elementName}/${elementName}-classes.html`),
-        this.props
-      );
-    } 
-    
-    /* ::: VERSIONS ::: */ 
 
     // USER SELECTED: Version 1.x
     if (version === '1.x') {
@@ -338,50 +265,16 @@ __ VERSION WRITES _____________________________________________ */
     else if (version === 'vanilla') {
       this._VanillaWrite(version, elementType, elementName);
     }
-    
-    
-    // else if(elementType === 'behavior') {
-    //     this.fs.copyTpl(
-    //       this.templatePath(`demo/_${elementType}-demo.html`),
-    //       this.destinationPath(`demo/${elementName}-demo.html`),
-    //       this.props
-    //     );
-    //   } else {
-    //     // copy over the script
-    //     this.fs.copyTpl(
-    //       this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
-    //       this.destinationPath(`${elementName}.js`),
-    //       this.props
-    //     );
-
-    //     // copy the component styles. css for vanilla and html for polymer
-    //     const fileExt = elementType == 'vanilla' ? 'css': 'html';
-    //     this.fs.copyTpl(
-    //       this.templatePath(`src/${version}/${elementType}/_${elementType}-styles.${fileExt}`),
-    //       this.destinationPath(`${elementName}-styles.${fileExt}`),
-    //       this.props
-    //     );
-    //  }
-
 
   },
 
-
-
-/*
-__ POLYMER 1.0 _____________________________________________ */
-
-  _PolymerOneWrite: function(version, elementType, elementName) {
-
-
-                                                    /* ::: COMPONENT ::: */ 
-
-    // USER SELECTED: 'component' + 'bower' + 'No directory'
-    if (elementType === 'component' && this.props.elementImplementation === 'bower' && this.props.createDirectory === false) {
+  _PolymerOneWrite: function(version,elementType, elementName) {
+    
+    if(elementType === 'component') {
       this.fs.copyTpl(
-        this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
-        this.destinationPath(`${elementName}.js`),
-        this.props
+          this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
+          this.destinationPath(`${elementName}.js`),
+          this.props
       );
       
       this.fs.copyTpl(
@@ -390,57 +283,8 @@ __ POLYMER 1.0 _____________________________________________ */
         this.props
       );
     }
-
-    // USER SELECTED: 'component' + 'bower' + 'Yes directory'
-    else if (elementType === 'component' && this.props.elementImplementation === 'bower' && this.props.createDirectory === true) {
-      this.fs.copyTpl(
-        this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
-        this.destinationPath(`${elementName}/${elementName}.js`),
-        this.props
-      );
-      
-      this.fs.copyTpl(
-        this.templatePath(`src/${version}/${elementType}/_${elementType}-styles.html`),
-        this.destinationPath(`${elementName}/${elementName}-styles.html`),
-        this.props
-      );
-    }
-
-    // USER SELECTED: 'component' + 'internal' + 'No directory'
-    else if (elementType === 'component' && this.props.elementImplementation === 'internal' && this.props.createDirectory === false) {
-      this.fs.copyTpl(
-        this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
-        this.destinationPath(`${elementName}.js`),
-        this.props
-      );
-      
-      this.fs.copyTpl(
-        this.templatePath(`src/${version}/${elementType}/_${elementType}-styles.html`),
-        this.destinationPath(`${elementName}-styles.html`),
-        this.props
-      );
-    }
-
-    // USER SELECTED: 'component' + 'internal' + 'Yes directory'
-    else if (elementType === 'component' && this.props.elementImplementation === 'internal' && this.props.createDirectory === true) {
-      this.fs.copyTpl(
-        this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
-        this.destinationPath(`${elementName}/${elementName}.js`),
-        this.props
-      );
-      
-      this.fs.copyTpl(
-        this.templatePath(`src/${version}/${elementType}/_${elementType}-styles.html`),
-        this.destinationPath(`${elementName}/${elementName}-styles.html`),
-        this.props
-      );
-    }
     
-
-                                                    /* ::: STYLE ::: */ 
-
-    // USER SELECTED: 'style' + 'bower' + 'No directory'
-    if (elementType === 'style' && this.props.elementImplementation === 'bower' && this.props.createDirectory === false) {
+    if(elementType === 'style') {
       this.fs.copyTpl(
         this.templatePath(`src/${version}/${elementType}/_${elementType}-classes.html`),
         this.destinationPath(`${elementName}-classes.html`),
@@ -448,54 +292,15 @@ __ POLYMER 1.0 _____________________________________________ */
       );
     } 
 
-    // USER SELECTED: 'style' + 'bower' + 'Yes directory'
-    else if (elementType === 'style' && this.props.elementImplementation === 'bower' && this.props.createDirectory === true) {
-      this.fs.copyTpl(
-        this.templatePath(`src/${version}/${elementType}/_${elementType}-classes.html`),
-        this.destinationPath(`${elementName}/${elementName}-classes.html`),
-        this.props
-      );
-    } 
-
-    // USER SELECTED: 'style' + 'internal' + 'No directory'
-    else if (elementType === 'style' && this.props.elementImplementation === 'internal' && this.props.createDirectory === false) {
-      this.fs.copyTpl(
-        this.templatePath(`src/${version}/${elementType}/_${elementType}-classes.html`),
-        this.destinationPath(`${elementName}-classes.html`),
-        this.props
-      );
-    } 
-
-    // USER SELECTED: 'style' + 'internal' + 'Yes directory'
-    else if (elementType === 'style' && this.props.elementImplementation === 'internal' && this.props.createDirectory === true) {
-      this.fs.copyTpl(
-        this.templatePath(`src/${version}/${elementType}/_${elementType}-classes.html`),
-        this.destinationPath(`${elementName}/${elementName}-classes.html`),
-        this.props
-      );
-    } 
-
-
-
-
-
-
-    // Behavior
-    if (elementType === 'behavior') {
-      this.fs.copyTpl(
-        this.templatePath(`demo/_${elementType}-demo.html`),
-        this.destinationPath(`demo/${elementName}-demo.html`),
-        this.props
-      );
+    if(elementType === 'behavior') {
+        this.fs.copyTpl(
+          this.templatePath(`demo/_${elementType}-demo.html`),
+          this.destinationPath(`demo/${elementName}-demo.html`),
+          this.props
+        );
     }
 
   },
-
-
-
-
-/*
-__ POLYMER 2.0 _____________________________________________ */
 
   _PolymerTwoWrite: function(elementType, elementName) {
 
@@ -516,12 +321,6 @@ __ POLYMER 2.0 _____________________________________________ */
     
   },
 
-
-
-
-/*
-__ VANILLA _____________________________________________ */
-
   _VanillaWrite: function(version, elementType, elementName) {
 
     if(elementType === 'component') {
@@ -539,13 +338,6 @@ __ VANILLA _____________________________________________ */
 
     }
   },
-
-
-
-
-
-/*
-__ INSTALL ________________________________________________________________________________________________ */
 
   install: function () {
 
