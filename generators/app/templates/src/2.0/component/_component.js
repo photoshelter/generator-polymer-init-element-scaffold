@@ -9,6 +9,13 @@ class <%=className%> extends Polymer.Element {
           type:String,
           value :'Working Correctly'
         }
+        /**
+         * A demo of a computed property
+        **/
+        computedProp: {
+          type:String,
+          computed: '_computeReverse(prop1)'
+        }
       },
       observers: []
     }
@@ -55,21 +62,25 @@ class <%=className%> extends Polymer.Element {
    * Just demonstating how to document methods
    *
    * @param {object} takes a baz object
-   * @return {null}
+   * @return {Bool}
    */
   foo(baz) {
-    return this._bar();
+    if (typeof baz === "undefined"){
+       return false
+
+    }
+    return true;
   }
 
   /**
-   * A private that doesnt do anything
+   * A private function for a computed property
+   * Demonstating how to document private methods
    *
-   * Just demonstating how to document private methods
-   *
-   * @return {null}
-   */
-  _bar() {
-    return true;
+   * Returns a reservsed version of the string
+   * @return {String}
+  **/
+  _computeReverse() {
+    return  stringVal.split('').reverse().join('');
   }
 
   /**

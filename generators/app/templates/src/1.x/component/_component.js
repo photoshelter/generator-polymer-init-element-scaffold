@@ -8,6 +8,14 @@ Polymer({
     prop1: {
       type:String,
       value :'TEST'
+    },
+
+    /**
+     * A demo of a computed property
+    **/
+    computedProp: {
+      type:String,
+      computed: '_computeReverse(prop1)'
     }
   },
 
@@ -62,20 +70,25 @@ Polymer({
    * Just demonstating how to document methods
    *
    * @param {object} takes a baz object
-   * @return {null}
+   * @return {Bool}
   **/
   foo: function (baz) {
-    return this._bar();
+    if (typeof baz === "undefined"){
+       return false
+
+    }
+    return true;
   },
 
   /**
-   * A private that doesnt do anything
-   * Just demonstating how to document private methods
+   * A private function for a computed property
+   * Demonstating how to document private methods
    *
-   * @return {null}
+   * Returns a reservsed version of the string
+   * @return {String}
   **/
-  _bar: function () {
-    return true;
+  _computeReverse: function (stringVal) {
+    return  stringVal.split('').reverse().join('');
   }
 
   /**

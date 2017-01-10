@@ -301,7 +301,7 @@ module.exports = yeoman.Base.extend({
     }
 
   },
-  _PolymerTwoWrite: function(elementType, elementName) {
+  _PolymerTwoWrite: function(version,elementType, elementName) {
 
     if(elementType === 'component' || elementType === 'behavior') {
      
