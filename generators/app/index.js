@@ -59,7 +59,6 @@ module.exports = yeoman.Base.extend({
       default: false
   
     },
-
     {
       type: 'list',
       name: 'elementImplementation',
@@ -85,17 +84,26 @@ module.exports = yeoman.Base.extend({
     },
     {
       when: (props) => (props.elementImplementation === 'bower'),
-      type: 'input',
-      name: 'gitDomain',
-      message: 'Where does your repo reside?',
-      default: 'github',
+      type: 'list',
+      name: 'gitAccount',
+      message: 'Is this an enterprise (privately hosted account) or personal?',
+      choices: ['enterprise', 'personal'],
+      default: 'enterprise',
       store   : true
     },
     {
+      when: (props) => (props.elementImplementation === 'bower' && props.gitAccount ===  'enterprise'),
+      type: 'input',
+      name: 'gitRoot',
+      message: 'Where is the root domain name?',
+      default: 'gh.enterprise.server',
+      store   : true
+    },
+     {
       when: (props) => (props.elementImplementation === 'bower'),
       type: 'input',
       name: 'orgName',
-      message: 'What is your organiztion\'s repo?',
+      message: 'What is your organiztion or account name ',
       default: 'org',
       store   : true
     },
@@ -167,7 +175,8 @@ module.exports = yeoman.Base.extend({
     this.props.elementGrouping = this.props.elementGrouping || 'internal';
     this.props.testable = this.props.testable || false;
     this.props.sauceLabs = this.props.sauceLabs || false;
-    this.props.gitDomain = this.props.gitDomain || 'github';
+    this.props.gitRoot = this.props.gitRoot || 'github';
+    this.props.gitAccount = this.props.gitAccount || 'internal'
 
   },
 
@@ -208,7 +217,6 @@ module.exports = yeoman.Base.extend({
     }
   },
 
-
   _versionWrite:function(version, elementType, elementName) {
 
     // Copy the main html file.
@@ -240,7 +248,6 @@ module.exports = yeoman.Base.extend({
     else if(version === 'vanilla') {
       this._VanillaWrite(version, elementType, elementName);
     }
-    
     
     // else if(elementType === 'behavior') {
     //     this.fs.copyTpl(

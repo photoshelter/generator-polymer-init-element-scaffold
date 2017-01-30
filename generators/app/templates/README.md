@@ -24,7 +24,12 @@ During development there are 3 pages you might be interested in.
 
 **Deploying your Project**
 
-- `npm run pages` is the command to deploy a [Github Pages](https://pages.github.com/) site for your project [https://<%=orgName%>.github.io/<%=elementName%>](https://<%=orgName%>.github.io/<%=elementName%>)
+- `npm run pages` is the command to deploy a [Github Pages](https://pages.github.com/) site for your project 
+<% if (gitAccount === 'personal') { %> - [<%=elementName%>](https://<%=orgName%>.github.io/<%=elementName%>) <% } else { %>
+[<%=elementName%>](https://<%=gitRoot%>.com/pages/<%=orgName%>/<%=elementName%>)
+<% } %>
+
+
 
 **note:**
   - This creates a orphan branch with no history.
