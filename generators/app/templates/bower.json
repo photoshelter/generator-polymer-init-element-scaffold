@@ -4,11 +4,11 @@
   "version": "1.0.0",
   "description": "<%= elementDescription %>",
   "private": true,
-  "license": "https://<%=gitDomain%>.com/<%=orgName%>/<%=elementName%>/LICENSE",
-  "homepage": "https://<%=gitDomain%>.com/<%=orgName%>/<%=elementName%>",
+  "license": "https://<%=gitRoot%>.com/<%=orgName%>/<%=elementName%>/LICENSE",
+  "homepage": "https://<%=gitRoot%>.com/<%=orgName%>/<%=elementName%>",
   "repository": {
     "type": "git",
-    "url": "git://<%=gitDomain%>.com/<%=orgName%>/<%=elementName%>.git"
+    "url": "git://<%=gitRoot%>.com/<%=orgName%>/<%=elementName%>.git"
   },
   "keywords": [<% if (elementVersion !== 'vanilla') { %>
     "polymer",
