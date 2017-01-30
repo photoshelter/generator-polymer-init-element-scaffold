@@ -5,12 +5,12 @@
   "description": "<%= elementDescription %>",
   "repository": {
     "type": "git",
-    "url": "https://<%=gitDomain%>.com/<%=orgName%>/<%=elementName%>.git"
+    "url": "https://<%=gitRoot%>.com/<%=orgName%>/<%=elementName%>.git"
   },
   "bugs": {
-    "url": "https://<%=gitDomain%>.com/<%=orgName%>/<%=elementName%>/issues"
+    "url": "https://<%=gitRoot%>.com/<%=orgName%>/<%=elementName%>/issues"
   },
-  "license": "https://<%=gitDomain%>.com/<%=orgName%>/<%=elementName%>/LICENSE.txt",
+  "license": "https://<%=gitRoot%>.com/<%=orgName%>/<%=elementName%>/LICENSE.txt",
   "scripts": {<% if (elementImplementation === 'internal') { %>
     "postinstall":"ls | grep -v <%=elementName%> | xargs rm -rf"<% } else { %>
     "clean": "rm -rf bower_components/<%=elementName%>",
