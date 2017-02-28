@@ -29,3 +29,9 @@ gulp.task('pages', function() {
 gulp.task('build', gulp.series('copy'));
 gulp.task('pages-deployment', gulp.series('build', 'pages'));
 gulp.task('default', gulp.series('build', 'serve'));
+
+
+const version = require('./gulp-tasks/tagging.js');
+gulp.task('tag-patch', function() { return version.bump('patch')});
+gulp.task('tag-minor', function() { return version.bump('minor')});
+gulp.task('tag-major', function() { return version.bump('major')});
