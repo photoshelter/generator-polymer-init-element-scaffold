@@ -1,4 +1,3 @@
-
 ### DEVELOPMENT
 
 During development there are 3 pages you might be interested in.
@@ -17,38 +16,33 @@ During development there are 3 pages you might be interested in.
  **note:** Make sure you are using [Chrome Canary](https://www.google.com/chrome/browser/canary.html) for development
 <% } %>
 
-**Deploying your Project**
+### Demos and Releases 
 
-- `npm run pages` is the command to deploy a [Github Pages](https://pages.github.com/) site for your project 
-<% if (gitAccount === 'personal') { %> - [<%=elementName%>](https://<%=orgName%>.github.io/<%=elementName%>) <% } else { %>
-[<%=elementName%>](https://<%=gitRoot%>.com/pages/<%=orgName%>/<%=elementName%>)
-<% } %>
+All components should follow semver versioning. 
 
+- You can run one of three commands to bump and tag your new release.
+  - `gulp tag-patch` updates from 0.0.1 to 0.0.2
+  - `gulp tag-minor` updates from 0.0.1 to 0.1.0
+  - `gulp tag-major` updates from 0.0.1 to 1.0.0
 
-**note:**
-  - This creates a orphan branch with no history.
-  - Always run this from `master` after pulling the latest build to ensure your docs reflect
-  the most recent version.
+- All projects also come with built in demos and docs. 
+  - `npm run pages` is the command to deploy a [Github Pages](https://pages.github.com/) site for your project 
+  <% if (gitAccount === 'personal') { %> - [<%=elementName%>](https://<%=orgName%>.github.io/<%=elementName%>) <% } else { %>
+  [<%=elementName%>](https://<%=gitRoot%>.com/pages/<%=orgName%>/<%=elementName%>)
+  <% } %>
+  - **note:**
+    - This creates a orphan branch with no history.
+    - Always run this from `master` after pulling the latest build to ensure your docs reflect the most recent version.
 
-**Testing Your Project**
-
+### Testing
 - `npm run test` is the command to run basic tests using [Web Component Tester](https://github.com/Polymer/web-component-tester) in the terminal.
 
-Automated testing is also supported with [TravisCI](https://travis-ci.org/getting_started). If you enable this feature on the Github repo then tests are set to run on every commit. This can be adjusted in the `.travis.yml`<% if (sauceLabs === true) { %>
+Automated testing is also supported with [TravisCI](https://travis-ci.org/getting_started). If you enable this feature on the Github repo then tests are set to run on every commit. This can be adjusted in the `.travis.yml`
 
+<% if (sauceLabs === true) { %>
 We also support greater cross browser support with testing from [SauceLabs](https://saucelabs.com/). These are currently built to run on every pull request.
 
 To add more VMs to `wtc.conf.json` if you would like to increase your cross browser coverage.
-<% }%>
-
-
-### USAGE
-
-- **Installation**
-  - `bower install <%=orgName%>/<%= elementName %>`
-
-<% if (sauceLabs === true) { %>
-### FAQ
 
 ###### SauceLabs Setup.
 If you already have an account then all you need to do to get SauceLabs working is:
