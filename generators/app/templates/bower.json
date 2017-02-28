@@ -1,7 +1,7 @@
 {
   "name": "<%= elementName %>",
   "author":"<%= authorName %>",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "<%= elementDescription %>",
   "private": true,
   "license": "https://<%=gitRoot%>.com/<%=orgName%>/<%=elementName%>/LICENSE",

@@ -8,8 +8,10 @@
 
 The <%= elementName %> does...
 
-**example**
+- installation
+    `bower install <%=orgName%>/<%= elementName %> --save`
 
+- implementation
 ```html
 <<%= elementName %>></<%= elementName %>>
 ```
@@ -31,7 +33,6 @@ Custom property                  | Description                            | Defa
 
 
 To learn more about how develop this component checkout the [development docs](/development-docs.md)
-
 
 ----
 
