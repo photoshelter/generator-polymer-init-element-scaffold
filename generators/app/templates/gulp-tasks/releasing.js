@@ -5,7 +5,7 @@ var filter = require('gulp-filter');
 var tag = require('gulp-tag-version');
 var push = require('gulp-git-push');
 
-function bumpVersion(importance) {
+function newRelease(importance) {
     return gulp.src(['./package.json', './bower.json'])
         .pipe(bump(
             {type:importance}
@@ -21,9 +21,9 @@ function bumpVersion(importance) {
         .pipe(push({                      
             repository: 'origin',
             refspec: 'HEAD'
-        }))
+        }));
 };
 
 module.exports = {
-    bump: bumpVersion
+    newRelease: newRelease
 };
