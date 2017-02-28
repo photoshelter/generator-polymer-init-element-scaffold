@@ -8,8 +8,8 @@ const browserSync = require('browser-sync').create();
  * GitHub Pages Demos 
 **/
 gulp.task('copy',() =>
-  gulp.src(`<%=elementName%>*`)
-  .pipe(gulp.dest('./bower_components/<%=elementName%>'))
+  gulp.src("<%=elementName%>*")
+  .pipe(gulp.dest("./bower_components/<%=elementName%>"))
 );
 gulp.task('serve',(done) => {
 
@@ -19,8 +19,8 @@ gulp.task('serve',(done) => {
     }
   },done);
 
-  gulp.watch("<%=elementName%>*").on("change", gulp.series('copy', browserSync.reload));
-  gulp.watch("demo/**").on("change", gulp.series(browserSync.reload));
+  gulp.watch("<%=elementName%>*").on('change', gulp.series('copy', browserSync.reload));
+  gulp.watch("demo/**").on('change', gulp.series(browserSync.reload));
 
 });
 gulp.task('build', gulp.series('copy'));
@@ -40,7 +40,7 @@ gulp.task('pages-deployment', gulp.series('build', 'pages'));
 /**
  * Tagging Releases 
 **/
-const releasing = require('./gulp-tasks/releasing.js');
+const releasing = require("./gulp-tasks/releasing.js");
 gulp.task('tag-patch', function() { return releasing.newRelease('patch')});
 gulp.task('tag-minor', function() { return releasing.newRelease('minor')});
 gulp.task('tag-major', function() { return releasing.newRelease('major')});
