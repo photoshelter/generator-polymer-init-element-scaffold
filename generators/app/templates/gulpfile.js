@@ -2,7 +2,7 @@ const path = require('path');
 const gulp = require('gulp');
 const ghPages  = require('gulp-gh-pages');
 const browserSync = require('browser-sync').create();
-
+require('require-dir')('./gulp-tasks');
 
 /**
  * GitHub Pages Demos 
@@ -26,7 +26,6 @@ gulp.task('serve',(done) => {
 gulp.task('build', gulp.series('copy'));
 gulp.task('default', gulp.series('build', 'serve'));
 
-
 /**
  * GitHub Pages Demos 
 **/
@@ -36,11 +35,9 @@ gulp.task('pages', function() {
 });
 gulp.task('pages-deployment', gulp.series('build', 'pages'));
 
-
 /**
  * Tagging Releases 
 **/
-const releasing = require("./gulp-tasks/releasing.js");
-gulp.task('tag-patch', function() { return releasing.newRelease('patch')});
-gulp.task('tag-minor', function() { return releasing.newRelease('minor')});
-gulp.task('tag-major', function() { return releasing.newRelease('major')});
+gulp.task('release-patch', gulp.series('tag-patch', 'commit-bump'));
+gulp.task('release-minor', gulp.series('tag-minor', 'commit-bump'));
+gulp.task('release-major', gulp.series('tag-major', 'commit-bump'));
