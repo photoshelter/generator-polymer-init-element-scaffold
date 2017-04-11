@@ -1,8 +1,12 @@
-## Issue
 <!-- Provide a general summary of the issue in the Title above  -->
-<!-- Add an emoji to make it easy to determine at a glance. :) -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- Add an emoji to the top line of this doc make it easy to determine what kind -->
+<!-- of issue this is when shared on social channels. :) -->
 <!--
 :ledger:   (documentation)
+:rocket:   (performance)
 :pill:     (tests)
 :bug:      (bug)
 :question: (question)
@@ -10,12 +14,16 @@
 :wrench:   (refactor)
 -->
 
-### Expected Behavior
+### Description
+<!-- How has this issue affected you? What are you trying to accomplish? -->
+<!-- Providing context helps us come up with a solution that is most useful in the real world -->
+
+### Expected Behavior :chart_with_upwards_trend: 
 <!-- If you're describing a bug, tell us what should happen -->
 <!-- If you're suggesting a change/improvement, tell us how it should work -->
 <!-- and what new actions it will allow you to accomplish  -->
 
-### Current Behavior
+### Current Behavior :chart_with_downwards_trend:
 <!-- If describing a bug, tell us what happens instead of the expected behavior -->
 <!-- If suggesting a change/improvement, explain the difference from current behavior -->
 
@@ -36,9 +44,15 @@
 - 1.
 - 2.
 
-### Context
-<!-- How has this issue affected you? What are you trying to accomplish? -->
-<!-- Providing context helps us come up with a solution that is most useful in the real world -->
+### Related Issues
+<!-- List of related Issues. -->
+
+Issue Number | Status
+-------------| -----
+#            | :construction: (blocker)
+#            | :rotating_light: (blocked)
+
+
 
 ### Your Environment :globe_with_meridians:
 <!-- Include as many relevant details about the environment you experienced the bug in -->
