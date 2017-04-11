@@ -21,9 +21,9 @@ During development there are 3 pages you might be interested in.
 All components should follow semver versioning. 
 
 - You can run one of three commands to bump and tag your new release.
-  - `gulp release-patch` updates from 0.0.1 to 0.0.2
-  - `gulp release-minor` updates from 0.0.1 to 0.1.0
-  - `gulp release-major` updates from 0.0.1 to 1.0.0
+  - `npm run release-patch` updates from 0.0.1 to 0.0.2
+  - `npm run release-minor` updates from 0.0.1 to 0.1.0
+  - `npm run release-major` updates from 0.0.1 to 1.0.0
 
 - All projects also come with built in demos and docs. 
   - `npm run pages` is the command to deploy a [Github Pages](https://pages.github.com/) site for your project 
