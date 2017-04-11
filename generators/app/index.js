@@ -59,8 +59,8 @@ module.exports = yeoman.Base.extend({
       message: 'Is this a behavior extension?',
       default: false
     },
-
     { /* IMPLEMENTATION: Bower || Internal */
+
       type: 'list',
       name: 'elementImplementation',
       message: 'Is this a bower element or internal element?',
@@ -95,18 +95,26 @@ module.exports = yeoman.Base.extend({
 
     { /* REPO */
       when: (props) => (props.elementImplementation === 'bower'),
-      type: 'input',
-      name: 'gitDomain',
-      message: 'Where does your repo reside?',
-      default: 'github',
-      store: true
+      type: 'list',
+      name: 'gitAccount',
+      message: 'Is this an enterprise (privately hosted account) or personal?',
+      choices: ['enterprise', 'personal'],
+      default: 'enterprise',
+      store   : true
     },
-
-    { /* ORG */
+    {
+      when: (props) => (props.elementImplementation === 'bower' && props.gitAccount ===  'enterprise'),
+      type: 'input',
+      name: 'gitRoot',
+      message: 'Where is the root domain name?',
+      default: 'gh.enterprise.server',
+      store   : true
+    },
+    {
       when: (props) => (props.elementImplementation === 'bower'),
       type: 'input',
       name: 'orgName',
-      message: 'What is your organiztion\'s repo?',
+      message: 'What is your organiztion or account name ',
       default: 'org',
       store: true
     },
@@ -180,7 +188,8 @@ module.exports = yeoman.Base.extend({
     this.props.elementGrouping = this.props.elementGrouping || 'internal';
     this.props.testable = this.props.testable || false;
     this.props.sauceLabs = this.props.sauceLabs || false;
-    this.props.gitDomain = this.props.gitDomain || 'github';
+    this.props.gitRoot = this.props.gitRoot || 'github';
+    this.props.gitAccount = this.props.gitAccount || 'internal'
   },
 
   writing: function () {
@@ -229,6 +238,7 @@ module.exports = yeoman.Base.extend({
   },
 
   _versionWrite: function(version, elementType, elementName) {
+
     // Copy the main html file.
     this.fs.copyTpl(
       this.templatePath(`src/${version}/${elementType}/_${elementType}.html`),
@@ -292,8 +302,9 @@ module.exports = yeoman.Base.extend({
       );
     }
   },
+  
+  _PolymerTwoWrite: function(version, elementType, elementName) {
 
-  _PolymerTwoWrite: function(elementType, elementName) {
     if(elementType === 'component' || elementType === 'behavior') {
       this.fs.copyTpl(
         this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),

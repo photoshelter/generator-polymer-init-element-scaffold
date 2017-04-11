@@ -1,31 +1,19 @@
-const path = require('path');
 const gulp = require('gulp');
-const ghPages  = require('gulp-gh-pages');
-const browserSync = require('browser-sync').create();
+require('require-dir')('./gulp-tasks');
 
-gulp.task('copy',() =>
-  gulp.src(`<%=elementName%>*`)
-  .pipe(gulp.dest('./bower_components/<%=elementName%>'))
-);
+/**
+ * Running the project
+**/
+gulp.task('default', gulp.series('copy', 'serve'));
 
-gulp.task('serve',(done) => {
+/**
+ * GitHub Pages Demos 
+**/
+gulp.task('pages-deployment', gulp.series('copy', 'pages'));
 
-  browserSync.init({
-    server: {
-        baseDir: "./"
-    }
-  },done);
-
-  gulp.watch("<%=elementName%>*").on("change", gulp.series('copy', browserSync.reload));
-  gulp.watch("demo/**").on("change", gulp.series(browserSync.reload));
-
-});
-
-gulp.task('pages', function() {
-  return gulp.src(["./index.html","./demo/*","./test/*", "./bower_components/**/*"],{base: '.'})
-  .pipe(ghPages());
-});
-
-gulp.task('build', gulp.series('copy'));
-gulp.task('pages-deployment', gulp.series('build', 'pages'));
-gulp.task('default', gulp.series('build', 'serve'));
+/**
+ * Tagging Releases 
+**/
+gulp.task('release-patch', gulp.series('tag-patch', 'commit-bump'));
+gulp.task('release-minor', gulp.series('tag-minor', 'commit-bump'));
+gulp.task('release-major', gulp.series('tag-major', 'commit-bump'));
