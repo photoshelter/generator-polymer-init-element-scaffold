@@ -2,8 +2,8 @@ const gulp = require('gulp');
 const browserSync = require('browser-sync').create();
 
 gulp.task('copy',() =>
-  gulp.src("scffold-tag*")
-  .pipe(gulp.dest("./bower_components/scffold-tag"))
+  gulp.src("<%= elementName %>*")
+  .pipe(gulp.dest("./bower_components/<%= elementName %>"))
 );
 
 gulp.task('serve',(done) => {
@@ -14,7 +14,7 @@ gulp.task('serve',(done) => {
     }
   },done);
 
-  gulp.watch("scffold-tag*").on('change', gulp.series('copy', browserSync.reload));
+  gulp.watch("<%= elementName %>*").on('change', gulp.series('copy', browserSync.reload));
   gulp.watch("demo/**").on('change', gulp.series(browserSync.reload));
 
 });
