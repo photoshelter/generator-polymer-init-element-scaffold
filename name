@@ -50,9 +50,9 @@
     <% if (elementVersion === '1.x') { %>
     <link rel="import" href="bower_components/iron-component-page/iron-component-page.html">
     <% } else if (elementVersion === '2.0') { %>
-    <script src="/bower_components/custom-elements/custom-elements.min.js"></script>
+    <script src="bower_components/custom-elements/custom-elements.min.js"></script>
     <% } else if (elementVersion === 'vanilla') { %>
-    <script src="/bower_components/custom-elements/dist/CustomElements.min.js"></script>
+    <script src="bower_components/custom-elements/dist/CustomElements.min.js"></script>
     <% } %>
 
 
@@ -80,7 +80,7 @@
     <% } else if ( elementVersion === '2.0' ) { %>
 
       <% if ( elementType === 'component' ) { %>
-        <!-- 
+        <!--
         Swap the component page in for the demo when the 2.0 version of the component is ready.
         <iron-component-page src="bower_components/<%=elementName%>/<%=elementName%>.html" active="<%=elementName%>"></iron-component-page>
         -->
@@ -111,9 +111,9 @@
       <% } else if ( elementType === 'behavior' ) { %>
         <div>This is the place for a vanilla behavior</div>
       <% } %>
-    
+
     <% } %>
-       
+
 
 
 
