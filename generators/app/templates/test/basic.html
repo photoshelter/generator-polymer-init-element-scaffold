@@ -14,6 +14,10 @@
 </head>
 <body>
 
+
+  <% if(elementVersion === '2.0'){ %>
+  <link rel="import" href="../demo/ <%=elementName %>-demo.html">
+  <% } %>
   <!-- You can use the document as a place to set up your fixtures. -->
   <test-fixture id="<%= elementName %>">
       <template>
@@ -34,7 +38,9 @@
 
     describe('<<%= elementName %>>', function() {
 
+      <% if (elementVersion === '1.x') { %>
       a11ySuite('<%= elementName %>');
+      <% } %>
 
       it('An Obviously passing test', function() {
           expect(true).to.be.equal(true);

@@ -2,11 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="refresh" content="0;url=demo/" />
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title><%= elementName %> Seed</title>
+    <title><%= elementName %></title>
 
-    <% if  (elementVersion !== 'vanilla') { %>
+    <% if  (elementVersion === '1.x') { %>
     <script>
       // Setup Polymer options
       window.Polymer = {
@@ -49,16 +50,10 @@
 
     <% if (elementVersion === '1.x') { %>
     <link rel="import" href="bower_components/iron-component-page/iron-component-page.html">
-    <% } else if (elementVersion === '2.0') { %>
-    <link rel="import" href="bower_components/<%= elementName %>/<%= elementName %>.html">
-    <script src="/bower_components/custom-elements/custom-elements.min.js"></script>
     <% } else if (elementVersion === 'vanilla') { %>
     <link rel="import" href="bower_components/<%= elementName %>/<%= elementName %>.html">
     <script src="/bower_components/custom-elements/dist/CustomElements.min.js"></script>
     <% } %>
-
-
-
 
     <style>
       body {
@@ -82,14 +77,13 @@
     <% } else if ( elementVersion === '2.0' ) { %>
 
       <% if ( elementType === 'component' ) { %>
-        <!-- 
-        Swap the component page in for the demo when the 2.0 version of the component is ready.
-        <iron-component-page src="bower_components/<%=elementName%>/<%=elementName%>.html" active="<%=elementName%>"></iron-component-page>
+        <!--
+          ELEMENT API DOCUMENTATION SUPPORT COMING SOON
+          Visit demo/index.html to see live examples of your element running.
+          This page will automatically redirect you there when run in the browser
+          with `polymer serve`.
         -->
-        <!-- This works as just a demo-->
-        <<%=elementName%>>
-          <p>NOT WORKING ?</p>
-        </<%=elementName%>>
+
       <% } else if ( elementType === 'style' ){ %>
           <div>This is the place for a 2.0 style</div>
       <% } else if ( elementType === 'behavior' ) { %>

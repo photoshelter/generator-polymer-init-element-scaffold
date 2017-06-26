@@ -2,16 +2,13 @@ class <%=className%> extends Polymer.Element {
 
   static get is() { return '<%= elementName %>'; }
 
-  static get config() {
-    return {
-      properties: {
-        prop1: {
-          type:String,
-          value :'Working Correctly'
-        }
-      },
-      observers: []
-    }
+  static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'world'
+          }
+        };
   }
 
   /**
