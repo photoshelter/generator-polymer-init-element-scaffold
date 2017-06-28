@@ -15,11 +15,11 @@ let <%=className%> = (ParentEl) => class extends ParentEl {
    * Inital Constructor for the class
    *
    * Always call super
-   */
+  **/
   constructor() {
     super();
   }
-  
+
   /**
    * A public function  that doesnt do anything
    *
@@ -27,7 +27,7 @@ let <%=className%> = (ParentEl) => class extends ParentEl {
    *
    * @param {object} takes a baz object
    * @return {null}
-   */
+  **/
   foo(baz) {
     return this._bar();
   }
@@ -38,7 +38,7 @@ let <%=className%> = (ParentEl) => class extends ParentEl {
    * Just demonstating how to document private methods
    *
    * @return {null}
-   */
+  **/
   _bar() {
     return true;
   }
