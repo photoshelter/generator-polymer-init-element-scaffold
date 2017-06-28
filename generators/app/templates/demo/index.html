@@ -11,6 +11,16 @@
 </head>
 <body unresolved>
 
+	<%if (elementVersion === '2.0') { %>
+	<custom-style>
+		<style is="custom-style" include="demo-pages-shared-styles">
+		</style>
+	</custom-style>
+		<%if (elementType === 'behavior') { %>
+			<link rel="import" href="<%=elementName %>-demo.html">
+		<% } %>
+	<% } %>
+
 	<% if (elementType === 'component') { %>
 
 		<h3>Example of <%= elementName %></h3>
@@ -66,7 +76,7 @@
 	<p>The behavior is a simple log, so you will need to open your console in order to see it working</p>
 	<demo-snippet class="centered-demo">
 		<template>
-			<<%=elementName%>-demo></<%=elementName%>-demo>
+			<<%=elementName%>-impl></<%=elementName%>-impl>
 		</template>
 	</demo-snippet>
 

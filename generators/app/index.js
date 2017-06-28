@@ -272,6 +272,7 @@ module.exports = yeoman.Base.extend({
   },
 
   _PolymerOneWrite: function(version,elementType, elementName) {
+   
     if(elementType === 'component') {
       this.fs.copyTpl(
         this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
@@ -318,6 +319,15 @@ module.exports = yeoman.Base.extend({
         this.props
       );
     }
+
+    if(elementType === 'behavior') {
+      this.fs.copyTpl(
+        this.templatePath(`demo/_${elementType}-demo.html`),
+        this.destinationPath(`demo/${elementName}-demo.html`),
+        this.props
+      );
+    }
+    
   },
 
   _VanillaWrite: function(version, elementType, elementName) {

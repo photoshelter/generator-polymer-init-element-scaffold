@@ -1,4 +1,5 @@
-<dom-module id="<%=elementName%>-demo">
+<% if (elementVersion === '1.x') { %>
+<dom-module id="<%=elementName%>-impl">
 		<template>
 			<style>
 				:host {
@@ -13,17 +14,27 @@
 
 		<script>
 			Polymer({
-			is:'<%=elementName%>-demo',
+			is:'<%=elementName%>-impl',
 			behaviors: [
 				<%=behaviorNameSpace%>.<%=className%>
 			],
 			attached:function() {
 				this.basicLog('IM A BEHAVIOR');
-				this._bazImplement();
+				this._baz();
 			},
-			_bazImplement: function() {
-				<%=behaviorNameSpace%>.<%=className%>Impl._baz();
-			}
 			});
 		</script>
 </dom-module>
+
+<% } else if (elementVersion === '2.0') { %>
+<script>
+	class <%=className%>Impl extends <%=className%>(Polymer.Element) {
+		static get is() { return '<%=elementName%>-impl'; }
+		constructor() {
+			super();
+			this._baz();
+		}
+	};
+	customElements.define(<%=className%>Impl.is, <%=className%>Impl);
+</script>
+<% } %>

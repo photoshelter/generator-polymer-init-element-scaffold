@@ -2,16 +2,13 @@ let <%=className%> = (ParentEl) => class extends ParentEl {
 
   static get is() { return '<%= elementName %>'; }
 
-  static get config() {
-    return {
-      properties: {
-        prop1: {
-          type:String,
-          value :'TEST'
-        }
-      },
-      observers: []
-    }
+  static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'world'
+          }
+        };
   }
 
   /**
@@ -44,6 +41,13 @@ let <%=className%> = (ParentEl) => class extends ParentEl {
    */
   _bar() {
     return true;
+  }
+
+
+  _baz() {
+    console.log(
+     'Behavior BAZ'
+    )
   }
 
   /**
