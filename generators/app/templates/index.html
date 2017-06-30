@@ -7,7 +7,7 @@
 
     <title><%= elementName %></title>
 
-    <% if  (elementVersion === '1.x') { %>
+<% if  (elementVersion === '1.x') { -%>
     <script>
       // Setup Polymer options
       window.Polymer = {
@@ -46,14 +46,14 @@
         }
       })();
     </script>
-    <% } %>
+<% } -%>
 
-    <% if (elementVersion === '1.x') { %>
+<% if (elementVersion === '1.x') { -%>
     <link rel="import" href="bower_components/iron-component-page/iron-component-page.html">
-    <% } else if (elementVersion === 'vanilla') { %>
+<% } else if (elementVersion === 'vanilla') { -%>
     <link rel="import" href="bower_components/<%= elementName %>/<%= elementName %>.html">
     <script src="/bower_components/custom-elements/dist/CustomElements.min.js"></script>
-    <% } %>
+<% } -%>
 
     <style>
       body {
@@ -65,54 +65,40 @@
 
   </head>
   <body>
-
-    <% if ( elementVersion === '1.x' ) { %>
-
-      <% if ( elementType === 'component' || elementType === 'style' ) { %>
-        <iron-component-page src="bower_components/<%=elementName%>/<%=elementName%>.html" active="<%=elementName%>"></iron-component-page>
-      <% } else { %>
-          <iron-component-page src="bower_components/<%=elementName%>/<%=elementName%>.html" active="<%=elementName%>"></iron-component-page>
-      <% } %>
-
-    <% } else if ( elementVersion === '2.0' ) { %>
-
-      <% if ( elementType === 'component' ) { %>
-        <!--
-          ELEMENT API DOCUMENTATION SUPPORT COMING SOON
-          Visit demo/index.html to see live examples of your element running.
-          This page will automatically redirect you there when run in the browser
-          with `polymer serve`.
-        -->
-
-      <% } else if ( elementType === 'style' ){ %>
-          <div>This is the place for a 2.0 style</div>
-      <% } else if ( elementType === 'behavior' ) { %>
-        <script>
-          class <%=className%>Impl extends <%=className%>(Polymer.Element) {};
-          customElements.define(<%=className%>Impl.is, <%=className%>Impl);
-        </script>
-        <<%=elementName%>></<%=elementName%>>
-
-      <% } %>
-
-    <% } else if ( elementVersion === 'vanilla' ) { %>
-
-      <% if ( elementType === 'component' ) { %>
-        <!-- This works as just a demo-->
-        <<%=elementName%>>
-          <p>NOT WORKING ?</p>
-        </<%=elementName%>>
-      <% } else if ( elementType === 'style' ) { %>
-        <div>This is the place for a vanilla style</div>
-      <% } else if ( elementType === 'behavior' ) { %>
-        <div>This is the place for a vanilla behavior</div>
-      <% } %>
-    
-    <% } %>
-       
-
-
-
-
+<% if ( elementVersion === '1.x' ) { -%>
+<% -%> <% if ( elementType === 'component' || elementType === 'style' ) { -%>
+    <iron-component-page src="bower_components/<%=elementName%>/<%=elementName%>.html" active="<%=elementName%>"></iron-component-page>
+<% -%> <% } else { -%>
+    <iron-component-page src="bower_components/<%=elementName%>/<%=elementName%>.html" active="<%=elementName%>"></iron-component-page>
+<% -%> <% } -%>
+<% } else if ( elementVersion === '2.0' ) { -%>
+<% if ( elementType === 'component' ) { -%>
+      <!--
+        ELEMENT API DOCUMENTATION SUPPORT COMING SOON
+        Visit demo/index.html to see live examples of your element running.
+        This page will automatically redirect you there when run in the browser
+        with `polymer serve`.
+      -->
+<% } else if ( elementType === 'style' ){ -%>
+    <div>This is the place for a 2.0 style</div>
+<% } else if ( elementType === 'behavior' ) { -%>
+    <script>
+      class <%=className%>Impl extends <%=className%>(Polymer.Element) {};
+      customElements.define(<%=className%>Impl.is, <%=className%>Impl);
+    </script>
+    <<%=elementName%>></<%=elementName%>>
+<% } %>
+<% } else if ( elementVersion === 'vanilla' ) { -%>
+<% if ( elementType === 'component' ) { -%>
+    <!-- This works as just a demo-->
+    <<%=elementName%>>
+      <p>NOT WORKING ?</p>
+    </<%=elementName%>>
+<% } else if ( elementType === 'style' ) { -%>
+    <div>This is the place for a vanilla style</div>
+<% } else if ( elementType === 'behavior' ) { -%>
+    <div>This is the place for a vanilla behavior</div>
+<% } -%>
+<% } -%>
   </body>
 </html>
