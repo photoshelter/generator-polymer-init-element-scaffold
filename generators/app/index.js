@@ -18,7 +18,7 @@ module.exports = yeoman.Base.extend({
     ));
 
     var prompts = [
-    
+
     { /* ELEMENT: Name */
       type: 'input',
       name: 'elementName',
@@ -42,7 +42,7 @@ module.exports = yeoman.Base.extend({
       choices: this._elementOptions,
       default: 'component'
     },
-  
+
     { /* BEHAVIOR: Name */
       when: (props) => (props.elementType === 'behavior' && props.elementVersion ===  '1.x'),
       type: 'input',
@@ -72,7 +72,7 @@ module.exports = yeoman.Base.extend({
       type: 'confirm',
       name: 'createDirectory',
       message: 'Should I create a directory for you?',
-      // defaults to true for internal elements. 
+      // defaults to true for internal elements.
       default: (props) => (props.elementImplementation === 'internal')
     },
 
@@ -136,7 +136,7 @@ module.exports = yeoman.Base.extend({
     //   message: 'Would you like to include tests ?',
     //   default: true
     // },
-    
+
     { /* SAUCE LABS */
       when: (props) => (props.elementImplementation === 'bower'/*&& props.testable*/),
       type: 'confirm',
@@ -181,7 +181,7 @@ module.exports = yeoman.Base.extend({
   },
 
   _setDefaultValues: function() {
-    // Sort of annoying but nothing can be undefined, even if it isn't "used" 
+    // Sort of annoying but nothing can be undefined, even if it isn't "used"
     this.props.authorName = this.props.authorName || 'internal';
     this.props.orgName = this.props.orgName || 'internal';
     this.props.elementDescription = this.props.elementDescription || 'internal';
@@ -197,7 +197,7 @@ module.exports = yeoman.Base.extend({
     const elementVersion = this.props.elementVersion;
     const elementType = this.props.elementType;
     const elementName = this.props.elementName;
-  
+
     if (this.props.createDirectory) {
       this._updateRoot(elementName);
     }
@@ -272,28 +272,28 @@ module.exports = yeoman.Base.extend({
   },
 
   _PolymerOneWrite: function(version,elementType, elementName) {
-   
+
     if(elementType === 'component') {
       this.fs.copyTpl(
         this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
         this.destinationPath(`${elementName}.js`),
         this.props
       );
-      
+
       this.fs.copyTpl(
         this.templatePath(`src/${version}/${elementType}/_${elementType}-styles.html`),
         this.destinationPath(`${elementName}-styles.html`),
         this.props
       );
     }
-    
+
     if(elementType === 'style') {
       this.fs.copyTpl(
         this.templatePath(`src/${version}/${elementType}/_${elementType}-classes.html`),
         this.destinationPath(`${elementName}-classes.html`),
         this.props
       );
-    } 
+    }
 
     if(elementType === 'behavior') {
       this.fs.copyTpl(
@@ -303,7 +303,7 @@ module.exports = yeoman.Base.extend({
       );
     }
   },
-  
+
   _PolymerTwoWrite: function(version, elementType, elementName) {
 
     if(elementType === 'component' || elementType === 'behavior') {
@@ -318,6 +318,13 @@ module.exports = yeoman.Base.extend({
         this.destinationPath(`${elementName}-styles.html`),
         this.props
       );
+
+      // Publish the doc file for
+      this.fs.copyTpl(
+        this.templatePath('_docs2.0.html'),
+        this.destinationPath(`docs.html`),
+        this.props
+      );
     }
 
     if(elementType === 'behavior') {
@@ -327,7 +334,7 @@ module.exports = yeoman.Base.extend({
         this.props
       );
     }
-    
+
   },
 
   _VanillaWrite: function(version, elementType, elementName) {
