@@ -1,5 +1,5 @@
 {
-  "verbose": true<% if (sauceLabs === true) { %>,
+  "verbose": true<% if (sauceLabs === true) { -%>,
   "plugins": {
     "sauce": {
       "disabled": false,
@@ -19,5 +19,6 @@
         }
       ]
     }
-  }<%}%>
+  }
+<% } -%>
 }

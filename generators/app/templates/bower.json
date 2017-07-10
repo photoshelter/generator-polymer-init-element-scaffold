@@ -10,9 +10,10 @@
     "type": "git",
     "url": "git://<%=gitRoot%>.com/<%=orgName%>/<%=elementName%>.git"
   },
-  "keywords": [<% if (elementVersion !== 'vanilla') { %>
+  "keywords": [
+<% if (elementVersion !== 'vanilla') { -%>
     "polymer",
-    <% } %>
+<% } -%>
     "web-components",
     "web-component"
   ],
@@ -29,30 +30,30 @@
     "gulpfile.js"
   ],
   "dependencies": {
-    <% if (elementVersion === '2.0') { %>
+<% if (elementVersion === '2.0') { -%>
       "polymer": "Polymer/polymer#^2.0.0"
-    <% } else if (elementVersion === '1.x') { %>
+<% } else if (elementVersion === '1.x') { -%>
      "polymer": "Polymer/polymer#^1.7.0"
-    <% } %>
+<% } -%>
   },
   "devDependencies": {
      "web-component-tester": "*",
-    <% if (elementVersion === 'vanilla') { %>
+<% if (elementVersion === 'vanilla') { -%>
       "custom-elements": "^1.0.3",
       "webcomponentsjs": "^0.7.22"
-    <% } else if (elementVersion === '1.x') { %>
+<% } else if (elementVersion === '1.x') { -%>
       "iron-component-page": "PolymerElements/iron-component-page#^1.1.7",
       "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.2.5"
-    <% } else if (elementVersion === '2.0') { %>
+<% } else if (elementVersion === '2.0') { -%>
       "iron-component-page": "^3.0.1",
       "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
       "web-component-tester": "Polymer/web-component-tester#^6.0.0",
       "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
-    <% } %>
-
-  }<% if (elementVersion === '2.0') { %>,
+<% } -%>
+  }
+<% if (elementVersion === '2.0') { -%>,
   "resolutions": {
     "polymer": "^2.0.0"
   }
-  <% } %>
+<% } -%>
 }

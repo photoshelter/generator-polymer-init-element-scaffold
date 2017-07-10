@@ -21,4 +21,4 @@ before_script:
 script:
 - xvfb-run wct <% if (sauceLabs === true) { %>
 - if [ ${TRAVIS_PULL_REQUEST} != false ]; then wct -s 'default'; fi
-<% }%>
+<% } %>
