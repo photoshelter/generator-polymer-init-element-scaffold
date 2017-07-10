@@ -13,21 +13,21 @@
   "license": "https://<%=gitRoot%>.com/<%=orgName%>/<%=elementName%>/LICENSE.txt",
   "scripts": {
 <% if (elementImplementation === 'internal') { -%>
-    "postinstall":"ls | grep -v <%=elementName%> | xargs rm -rf"
+    "postinstall": "ls | grep -v <%=elementName%> | xargs rm -rf"
 <% } else { -%>
     "clean": "rm -rf bower_components/<%=elementName%>",
-    "test" : "npm run clean && gulp build && wct",
+    "test": "npm run clean && gulp build && wct",
 <% if (elementVersion === '2.0') { -%>
-    "analyze" : "polymer analyze > analysis.json",
-    "start" : "npm run clean && npm run analyze && gulp default",
-    "pages":"npm run clean && && npm run analyze&& gulp pages-deployment",
+    "analyze": "polymer analyze > analysis.json",
+    "start": "npm run clean && npm run analyze && gulp default",
+    "pages": "npm run clean && npm run analyze && gulp pages-deployment",
 <% } else { -%>
-    "start":"npm run clean && gulp default",
-    "pages":"npm run clean && gulp pages-deployment",
+    "start": "npm run clean && gulp default",
+    "pages": "npm run clean && gulp pages-deployment",
 <% } -%>
-    "release-patch":"gulp tag-patch && gulp push-tag",
-    "release-minor":"gulp tag-minor && gulp push-tag",
-    "release-major":"gulp tag-major && gulp push-tag"
+    "release-patch": "gulp tag-patch && gulp push-tag",
+    "release-minor": "gulp tag-minor && gulp push-tag",
+    "release-major": "gulp tag-major && gulp push-tag"
 <% } -%>
   },
   "engines": {
