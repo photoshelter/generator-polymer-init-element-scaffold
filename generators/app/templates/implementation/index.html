@@ -45,10 +45,9 @@
       })();
     </script>
 
-    <% if (elementVersion === '2.0') { %>
-      <script src="../bower_components/custom-elements/custom-elements.min.js"></script>
-    <% } %>
-
+<% if (elementVersion === '2.0') { -%>
+    <script src="../bower_components/custom-elements/custom-elements.min.js"></script>
+<% } -%>
     <link rel="import" href="../bower_components/<%= elementName %>/<%= elementName %>.html">
 
     <style>

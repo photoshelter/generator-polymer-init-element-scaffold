@@ -21,11 +21,11 @@
   <!-- You can use the document as a place to set up your fixtures. -->
   <test-fixture id="<%= elementName %>">
       <template>
-        <% if (elementVersion != 'style') { %>
-          <<%= elementName %>></<%= elementName %>>
-        <% } else { %>
-            <div class="basic"></div>
-        <% } %>
+ <% if (elementVersion != 'style') { -%>
+        <<%= elementName %>></<%= elementName %>>
+<% } else { -%>
+        <div class="basic"></div>
+<% } -%>
       </template>
   </test-fixture>
 
@@ -38,9 +38,9 @@
 
     describe('<<%= elementName %>>', function() {
 
-      <% if (elementVersion === '1.x') { %>
+<% if (elementVersion === '1.x') { -%>
       a11ySuite('<%= elementName %>');
-      <% } %>
+<% } -%>
 
       it('An Obviously passing test', function() {
           expect(true).to.be.equal(true);
@@ -50,11 +50,11 @@
           expect(false).to.be.equal(true);
       });
 
-      <% if (elementVersion != 'style') { %>
+ <% if (elementVersion != 'style') { -%>
       it('A hopefully passing foo test', function() {
           expect(elem.foo()).to.be.equal(true);
       });
-      <% } %>
+<% } -%>
 
     });
 
