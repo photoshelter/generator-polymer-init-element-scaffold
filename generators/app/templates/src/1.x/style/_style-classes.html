@@ -1,10 +1,8 @@
-<% if (elementImplementation === 'bower') { %>
+<% if (elementImplementation === 'bower') { -%>
 <link rel="import" href="../polymer/polymer.html">
-<% } else { %>
+<% } else { -%>
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<% }%>
-
-
+<% } -%>
 <!--
 A set of  classes that let you specify properties directly in markup.
 You must include this file in every element that needs to use them.
@@ -21,7 +19,6 @@ The following imports are available:
  - <%=elementName%>-module
 
 -->
-
 
 <!-- <%=elementDescription%> -->
 <dom-module id="<%=elementName%>-module">
