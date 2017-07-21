@@ -31,7 +31,6 @@ Custom property                  | Description                            | Defa
 
 - add support for foo.
 
-
 To learn more about how develop this component checkout the [development docs](/development-docs.md)
 
 ----

@@ -11,66 +11,62 @@
 </head>
 <body unresolved>
 
-	<%if (elementVersion === '2.0') { %>
+<%if (elementVersion === '2.0') { %>
 	<custom-style>
 		<style is="custom-style" include="demo-pages-shared-styles">
 		</style>
 	</custom-style>
-		<%if (elementType === 'behavior') { %>
-			<link rel="import" href="<%=elementName %>-demo.html">
-		<% } %>
-	<% } %>
+<%if (elementType === 'behavior') { -%>
+	<link rel="import" href="<%=elementName %>-demo.html">
+<% } -%>
+<% } -%>
+<% if (elementType === 'component') { -%>
+	<h3>Example of <%= elementName %></h3>
+	<p>Further description of <%= elementName %> example</p>
+	<demo-snippet class="centered-demo">
+		<template>
+			<<%= elementName %>></<%= elementName %>>
+		</template>
+	</demo-snippet>
 
-	<% if (elementType === 'component') { %>
+	<h3>Second example of <%= elementName %></h3>
+	<demo-snippet class="centered-demo">
+		<template>
+			<<%= elementName %>></<%= elementName %>>
+		</template>
+	</demo-snippet>
 
-		<h3>Example of <%= elementName %></h3>
-		<p>Further description of <%= elementName %> example</p>
-		<demo-snippet class="centered-demo">
-			<template>
-				<<%= elementName %>></<%= elementName %>>
-			</template>
-		</demo-snippet>
+<% } else if (elementType === 'style') { -%>
+	<h3>Example of <%= elementName %></h3>
+	<p>Included somewhere higher up in the dependency tree.</p>
+	<p>Can be applied to any object.</p>
+	<demo-snippet class="centered-demo">
+		<template>
+			<style is="custom-style">
+				div.at-apply {
+					@apply  --<%=elementName%>-basic-mixin;
+				}
+			</style>
+			<div class="at-apply">
+				<p>HELLO WORLD</p>
+			</div>
+		</template>
+	</demo-snippet>
 
-		<h3>Second example of <%= elementName %></h3>
-		<demo-snippet class="centered-demo">
-			<template>
-				<<%= elementName %>></<%= elementName %>>
-			</template>
-		</demo-snippet>
+	<h3>Example of the class based <%= elementName %> implementation.</h3>
+	<p>Imported as a direct dependency, and then include the dom module.</p>
+	<p>The class can now be appended to any object.</p>
+	<demo-snippet class="centered-demo">
+		<link rel="import" href="../bower_components/<%=elementName%>/<%=elementName%>-classes.html">
+		<template>
+			<style is="custom-style" include="<%=elementName%>-module"></style>
+			<div class="<%=elementName%>-basic-class">
+				<p>HELLO WORLD</p>
+			</div>
+		</template>
+	</demo-snippet>
 
-	<% } else if (elementType === 'style') { %>
-
-		<h3>Example of <%= elementName %></h3>
-		<p>Included somewhere higher up in the dependency tree.</p>
-		<p>Can be applied to any object.</p>
-		<demo-snippet class="centered-demo">
-			<template>
-				<style is="custom-style">
-					div.at-apply {
-						@apply  --<%=elementName%>-basic-mixin;
-					}
-				</style>
-				<div class="at-apply">
-					<p>HELLO WORLD</p>
-				</div>
-			</template>
-		</demo-snippet>
-
-		<h3>Example of the class based <%= elementName %> implementation.</h3>
-		<p>Imported as a direct dependency, and then include the dom module.</p>
-		<p>The class can now be appended to any object.</p>
-		<demo-snippet class="centered-demo">
-			<link rel="import" href="../bower_components/<%=elementName%>/<%=elementName%>-classes.html">
-			<template>
-				<style is="custom-style" include="<%=elementName%>-module"></style>
-				<div class="<%=elementName%>-basic-class">
-					<p>HELLO WORLD</p>
-				</div>
-			</template>
-		</demo-snippet>
-
-	<% } else { %>
-
+<% } else { -%>
 	<link rel="import" href="./<%=elementName%>-demo.html">
 	<h3>Example of an element that has a behavior</h3>
 	<p>The behavior is a simple log, so you will need to open your console in order to see it working</p>
@@ -80,6 +76,6 @@
 		</template>
 	</demo-snippet>
 
-	<% } %>
+<% } -%>
 </body>
 </html>
