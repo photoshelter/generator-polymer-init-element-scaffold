@@ -1,29 +1,29 @@
 <% if (elementVersion === '1.x') { -%>
 <dom-module id="<%=elementName%>-impl">
-		<template>
-			<style>
-				:host {
-					display: inline-block;
-					width:100px;
-					height:100px;
-					background: darkred;
-				}
-			</style>
-			<div>HELLO WORLD</div>
-		</template>
+	<template>
+		<style>
+			:host {
+				display: inline-block;
+				width:100px;
+				height:100px;
+				background: darkred;
+			}
+		</style>
+		<div>HELLO WORLD</div>
+	</template>
 
-		<script>
-			Polymer({
-			is:'<%=elementName%>-impl',
-			behaviors: [
-				<%=behaviorNameSpace%>.<%=className%>
-			],
-			attached:function() {
-				this.basicLog('IM A BEHAVIOR');
-				this._baz();
-			},
-			});
-		</script>
+	<script>
+		Polymer({
+		is:'<%=elementName%>-impl',
+		behaviors: [
+			<%=behaviorNameSpace%>.<%=className%>
+		],
+		attached:function() {
+			this.basicLog('IM A BEHAVIOR');
+			this._baz();
+		},
+		});
+	</script>
 </dom-module>
 
 <% } else if (elementVersion === '2.0') { -%>

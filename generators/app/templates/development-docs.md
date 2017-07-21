@@ -15,7 +15,6 @@ During development there are 3 pages you might be interested in.
 <% if (elementVersion === '2.0') { -%>
  **note:** Make sure you are using [Chrome Canary](https://www.google.com/chrome/browser/canary.html) for development
 <% } -%>
-
 ### Demos and Releases
 
 All components should follow semver versioning.

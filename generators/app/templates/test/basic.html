@@ -14,7 +14,6 @@
 </head>
 <body>
 
-
 <% if(elementVersion === '2.0'){ -%>
   <link rel="import" href="../demo/ <%=elementName %>-demo.html">
 <% } -%>
@@ -39,23 +38,21 @@
     describe('<<%= elementName %>>', function() {
 
 <% if (elementVersion === '1.x') { -%>
-      a11ySuite('<%= elementName %>');
+        a11ySuite('<%= elementName %>');
 <% } -%>
+        it('An Obviously passing test', function() {
+            expect(true).to.be.equal(true);
+        });
 
-      it('An Obviously passing test', function() {
-          expect(true).to.be.equal(true);
-      });
-
-      it('An Obviously failing test', function() {
-          expect(false).to.be.equal(true);
-      });
+        it('An Obviously failing test', function() {
+            expect(false).to.be.equal(true);
+        });
 
  <% if (elementVersion != 'style') { -%>
-      it('A hopefully passing foo test', function() {
-          expect(elem.foo()).to.be.equal(true);
-      });
+        it('A hopefully passing foo test', function() {
+            expect(elem.foo()).to.be.equal(true);
+        });
 <% } -%>
-
     });
 
   </script>
