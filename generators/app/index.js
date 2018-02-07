@@ -143,6 +143,15 @@ module.exports = yeoman.Base.extend({
       name: 'sauceLabs',
       message: 'Would you like to use sauce labs for cross browser testing ?',
       default: true
+    },
+  
+    {
+     when: (props) => (props.sauceLabs),
+      type: 'input',
+      name: 'sauceName',
+      message: 'What is your Sauce Labs user name?',
+      // defaults to true for internal elements.
+      default: (props) => (props.elementImplementation === 'internal')
     }];
 
     return this.prompt(prompts).then(function (props) {
@@ -188,6 +197,7 @@ module.exports = yeoman.Base.extend({
     this.props.elementGrouping = this.props.elementGrouping || 'internal';
     this.props.testable = this.props.testable || false;
     this.props.sauceLabs = this.props.sauceLabs || false;
+    this.props.sauceName = this.props.sauceName || 'saucey-user';
     this.props.gitRoot = this.props.gitRoot || 'github';
     this.props.gitAccount = this.props.gitAccount || 'internal'
   },
@@ -234,6 +244,14 @@ module.exports = yeoman.Base.extend({
         this.destinationPath(`.gitignore`),
         this.props
       );
+
+      if (this.props.sauceLabs) {
+        this.fs.copyTpl(
+          this.templatePath('._scripts/_sauce.sh'),
+          this.destinationPath(`.scripts/sauce.sh`),
+          this.props
+        );  
+      }
     }
   },
 

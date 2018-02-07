@@ -43,6 +43,8 @@ Automated testing is also supported with [TravisCI](https://travis-ci.org/gettin
 <% if (sauceLabs === true) { -%>
 We also support greater cross browser support with testing from [SauceLabs](https://saucelabs.com/). These are currently built to run on every pull request.
 
+- `npm run sauce` to run tests in saucelabs. Contact the QA team for credentials if you would like to run them there.
+
 To add more VMs to `wtc.conf.json` if you would like to increase your cross browser coverage.
 
 ###### SauceLabs Setup.

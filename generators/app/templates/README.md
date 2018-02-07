@@ -1,5 +1,7 @@
 ## <%= elementName %>
 
++[![Build Status](status_image)](status_link)
+
 ### Description
 
 <%= elementDescription %>

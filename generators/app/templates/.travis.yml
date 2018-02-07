@@ -8,7 +8,11 @@ cache:
     - bower_components
 addons:
   firefox: latest<% if (sauceLabs === true) { %>
-  sauce_connect: true<%}%>
+  sauce_connect:
+    username: "<%=sauceName%>"
+  jwt: 
+    secure: <##key##>
+  <%}%>
   apt:
     sources:
     - google-chrome
@@ -17,8 +21,9 @@ addons:
 before_script:
 - npm install -g bower polylint web-component-tester
 - bower install
-- gulp build
+- gulp copy
 script:
 - xvfb-run wct <% if (sauceLabs === true) { %>
-- if [ ${TRAVIS_PULL_REQUEST} != false ]; then wct -s 'default'; fi
+ - 'if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then echo "COMMING SOON"; fi'
+ - 'if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then npm run remote-test; fi'
 <% } %>
