@@ -45,14 +45,24 @@ We also support greater cross browser support with testing from [SauceLabs](http
 
 - `npm run sauce` to run tests in saucelabs. Contact the QA team for credentials if you would like to run them there.
 
-To add more VMs to `wtc.conf.json` if you would like to increase your cross browser coverage.
+To add more VMs to `travis-scripts/sauce.sh` if you would like to increase your cross browser coverage.
 
 ###### SauceLabs Setup.
-If you already have an account then all you need to do to get SauceLabs working is:
-- Install the travis command line module (if you haven't already)
-    - gem install travis
-- `travis encrypt SAUCE_USERNAME=[your username] --add`
-- `travis encrypt SAUCE_ACCESS_KEY=[your access key] --add`
-- Commit and push .travis.yml
-- You're done!
+
+If you have Saucelabs Credentials there are several ways to add them to travis:
+You will need to install the [travis-cli tool](https://github.com/travis-ci/travis.rb) before running the following commands.
+
+[Defining Encrypted Variables in .travis.yml](https://docs.travis-ci.com/user/environment-variables/#Defining-encrypted-variables-in-.travis.yml)
+
+```bash
+$ travis encrypt SAUCE_USERNAME=[your-user-name] --add
+$ travis encrypt SAUCE_ACCESS_KEY=[your-access-key] --add
+```
+
+[Defining Variables in Repository Settings](https://docs.travis-ci.com/user/environment-variables/#Defining-Variables-in-Repository-Settings)
+
+```bash
+$ travis env set SAUCE_USERNAME your-user-name
+$ travis env set SAUCE_ACCESS_KEY your-access-key
+```
 <% } -%>

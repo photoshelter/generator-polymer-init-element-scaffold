@@ -16,7 +16,7 @@
     "postinstall": "ls | grep -v <%=elementName%> | xargs rm -rf"
 <% } else { -%>
     "clean": "rm -rf bower_components/<%=elementName%>",
-    "test": "npm run clean && gulp build && wct",
+    "test": "npm run clean && gulp copy && wct",
 <% if (elementVersion === '2.0') { -%>
     "analyze": "polymer analyze > analysis.json",
     "start": "npm run clean && npm run analyze && gulp default",

@@ -3,7 +3,6 @@ var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
 
-
 module.exports = yeoman.Base.extend({
 
   constructor: function () {
@@ -18,7 +17,6 @@ module.exports = yeoman.Base.extend({
     ));
 
     var prompts = [
-
     { /* ELEMENT: Name */
       type: 'input',
       name: 'elementName',
@@ -143,15 +141,6 @@ module.exports = yeoman.Base.extend({
       name: 'sauceLabs',
       message: 'Would you like to use sauce labs for cross browser testing ?',
       default: true
-    },
-  
-    {
-     when: (props) => (props.sauceLabs),
-      type: 'input',
-      name: 'sauceName',
-      message: 'What is your Sauce Labs user name?',
-      // defaults to true for internal elements.
-      default: (props) => (props.elementImplementation === 'internal')
     }];
 
     return this.prompt(prompts).then(function (props) {
@@ -247,10 +236,10 @@ module.exports = yeoman.Base.extend({
 
       if (this.props.sauceLabs) {
         this.fs.copyTpl(
-          this.templatePath('._scripts/_sauce.sh'),
-          this.destinationPath(`.scripts/sauce.sh`),
+          this.templatePath('travis-scripts/_sauce.sh'),
+          this.destinationPath(`travis-scripts/sauce.sh`),
           this.props
-        );  
+        );
       }
     }
   },
