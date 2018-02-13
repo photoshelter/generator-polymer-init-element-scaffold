@@ -71,6 +71,12 @@ npm install -g generator-polymer-init-element-scaffold
 - run [`npm link`](https://docs.npmjs.com/cli/link) in the project directory.
   - this will allow you to use the project as though you've installed it globally with npm.
 
+- Updating on npm
+  - `npm version #.#.#`
+  - push changes and tags
+  - `npm publish`
+
+
 #### Development Help
 
 Watch [Polycasts Ep. 53](https://www.youtube.com/watch?v=A_OEdyhgnKc&list=PLNYkxOF6rcIDdS7HWIC_BYRunV6MHs5xo&index=1) to learn the basics of how this was built.
