@@ -7,18 +7,13 @@ cache:
     - node_modules
     - bower_components
 addons:
-  firefox: latest<% if (sauceLabs === true) { %>
-  sauce_connect: true<%}%>
-  apt:
-    sources:
-    - google-chrome
-    packages:
-    - google-chrome-stable
+  firefox: latest
 before_script:
 - npm install -g bower polylint web-component-tester
 - bower install
-- gulp build
+- gulp copy
+<% if (sauceLabs === true) { %>
 script:
-- xvfb-run wct <% if (sauceLabs === true) { %>
-- if [ ${TRAVIS_PULL_REQUEST} != false ]; then wct -s 'default'; fi
+- 'if [ "${TRAVIS_PULL_REQUEST}" == "false" ]; then polymer lint; fi'
+- 'if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then npm run remote-test; fi'
 <% } %>

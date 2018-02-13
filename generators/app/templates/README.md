@@ -1,5 +1,16 @@
 ## <%= elementName %>
 
+[Get your badge](https://docs.travis-ci.com/user/status-images/)
++[![Build Status](status_image)](status_link)
+
+### GH Pages Demo
+<% if (gitAccount === 'personal') { -%>
+- [<%=elementName%>](https://<%=orgName%>.github.io/<%=elementName%>)
+<% } else { -%>
+- [<%=elementName%>](https://<%=gitRoot%>.com/pages/<%=orgName%>/<%=elementName%>)
+<% } -%>
+
+
 ### Description
 
 <%= elementDescription %>

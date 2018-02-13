@@ -3,7 +3,6 @@ var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
 
-
 module.exports = yeoman.Base.extend({
 
   constructor: function () {
@@ -18,7 +17,6 @@ module.exports = yeoman.Base.extend({
     ));
 
     var prompts = [
-
     { /* ELEMENT: Name */
       type: 'input',
       name: 'elementName',
@@ -188,6 +186,7 @@ module.exports = yeoman.Base.extend({
     this.props.elementGrouping = this.props.elementGrouping || 'internal';
     this.props.testable = this.props.testable || false;
     this.props.sauceLabs = this.props.sauceLabs || false;
+    this.props.sauceName = this.props.sauceName || 'saucey-user';
     this.props.gitRoot = this.props.gitRoot || 'github';
     this.props.gitAccount = this.props.gitAccount || 'internal'
   },
@@ -234,6 +233,14 @@ module.exports = yeoman.Base.extend({
         this.destinationPath(`.gitignore`),
         this.props
       );
+
+      if (this.props.sauceLabs) {
+        this.fs.copyTpl(
+          this.templatePath('travis-scripts/_sauce.sh'),
+          this.destinationPath(`travis-scripts/sauce.sh`),
+          this.props
+        );
+      }
     }
   },
 
