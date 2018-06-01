@@ -6,6 +6,11 @@ BUILD_NUMBER=${TRAVIS_BUILD_NUMBER:-LOCALHOST}
 JOB_NAME="${GIT_REPO_BASEDIR}-${BUILD_NUMBER}"
 TUNNEL_IDENTIFIER="${TRAVIS_JOB_NUMBER}"
 
+
+# On pull requests we want to make sure our tests pass
+# We run them on saucelabs on the latest version available to us.
+# We send along the job name & build number for tracking
+# as well as making the tests visible to our team
 if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then  
   echo 'Running in Saucelabs';
   wct --plugin sauce \
@@ -22,9 +27,10 @@ if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then
   --visibility team;
 fi
 
-# If this is not a Pull Request we will run our tests on 
-# We don't always want to run against saucelabs when we do a push
-# This allows us to test headlessly against Chrome and firefox.
+# If this is not a Pull Request we will run our
+# tests on. We don't always want to run against 
+# saucelabs when we do a push This allows us to
+# test headlessly against chrome and firefox
 # 
 if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
   echo 'Running headless.';

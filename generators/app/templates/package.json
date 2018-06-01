@@ -16,7 +16,7 @@
     "postinstall": "ls | grep -v <%=elementName%> | xargs rm -rf"
 <% } else { -%>
     "clean": "rm -rf bower_components/<%=elementName%>",
-    "test": "npm run clean && gulp copy && wct --skip-plugin sauce",
+    "test": "npm run clean && gulp copy && wct",
     "remote-test": "npm run clean && gulp copy && ./travis-scripts/travis.sh",
 <% if (elementVersion === '2.0') { -%>
     "analyze": "polymer analyze > analysis.json",
