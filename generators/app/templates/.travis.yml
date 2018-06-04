@@ -1,19 +1,26 @@
 language: node_js
-node_js: stable
+node_js:
+  - "9"
 dist: trusty
 sudo: required
+env:
+  - MOZ_HEADLESS=1
 cache:
   directories:
     - node_modules
     - bower_components
 addons:
-  firefox: latest
+  chrome: stable
+before_install:
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 before_script:
-- npm install -g bower polylint web-component-tester
-- bower install
-- gulp copy
+  - npm install
+  - npm install -g bower
+  - bower install
+  - gulp copy
+  - sh -e /etc/init.d/xvfb start
+  - sleep 3
 <% if (sauceLabs === true) { %>
 script:
-- 'if [ "${TRAVIS_PULL_REQUEST}" == "false" ]; then polymer lint; fi'
-- 'if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then npm run remote-test; fi'
+  - npm run remote-test
 <% } %>
