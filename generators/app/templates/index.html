@@ -47,8 +47,13 @@
       })();
     </script>
 <% } -%>
+<% } else if (elementVersion === '2.x') { -%>
+  <script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
 
-<% if (elementVersion === '1.x') { -%>
+<% } -%>
+
+
+<% if (elementVersion === '1.x' || elementVersion === '2.x') { -%>
     <link rel="import" href="bower_components/iron-component-page/iron-component-page.html">
 <% } else if (elementVersion === 'vanilla') { -%>
     <link rel="import" href="bower_components/<%= elementName %>/<%= elementName %>.html">
@@ -68,17 +73,9 @@
 <% if ( elementVersion === '1.x' ) { -%>
 <% -%> <% if ( elementType === 'component' || elementType === 'style' ) { -%>
     <iron-component-page src="bower_components/<%=elementName%>/<%=elementName%>.html" active="<%=elementName%>"></iron-component-page>
-<% -%> <% } else { -%>
-    <iron-component-page src="bower_components/<%=elementName%>/<%=elementName%>.html" active="<%=elementName%>"></iron-component-page>
-<% -%> <% } -%>
-<% } else if ( elementVersion === '2.0' ) { -%>
+<% } else if ( elementVersion === '2.x' ) { -%>
 <% if ( elementType === 'component' ) { -%>
-      <!--
-        ELEMENT API DOCUMENTATION SUPPORT COMING SOON
-        Visit demo/index.html to see live examples of your element running.
-        This page will automatically redirect you there when run in the browser
-        with `polymer serve`.
-      -->
+    <iron-component-page src="bower_components/<%=elementName%>/<%=elementName%>.html" active="<%=elementName%>"></iron-component-page>
 <% } else if ( elementType === 'style' ){ -%>
     <div>This is the place for a 2.0 style</div>
 <% } else if ( elementType === 'behavior' ) { -%>
