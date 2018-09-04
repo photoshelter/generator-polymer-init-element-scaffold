@@ -25,11 +25,11 @@ module.exports = yeoman.Base.extend({
       default: this.appname
     },
 
-    { /* ELEMENT Version: 1.x || 2.0 || Vanilla */
+    { /* ELEMENT Version: 1.x || 2.x || Vanilla */
       type: 'list',
       name: 'elementVersion',
       message: 'What version of element are you building?',
-      choices: ['1.x', '2.0','vanilla'],
+      choices: ['1.x', '2.x','vanilla'],
       default: '1.x'
     },
 
@@ -171,7 +171,7 @@ module.exports = yeoman.Base.extend({
   _elementOptions: function(props) {
     if(props.elementVersion === '1.x') {
       return ['component','style', 'behavior']
-    } else if(props.elementVersion === '2.0') {
+    } else if(props.elementVersion === '2.x') {
       return ['component','behavior']
     } else {
       return ['component']
@@ -267,8 +267,8 @@ module.exports = yeoman.Base.extend({
       this._PolymerOneWrite(version, elementType, elementName);
     }
 
-    // USER SELECTED: Version 2.0
-    else if (version === '2.0') {
+    // USER SELECTED: Version 2.x
+    else if (version === '2.x') {
       this._PolymerTwoWrite(version,elementType, elementName);
     }
 

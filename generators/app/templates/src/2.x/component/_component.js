@@ -43,7 +43,7 @@ class <%=className%> extends Polymer.Element {
    * properties object are tracked for attribute changes.
   **/
   attributeChangedCallback() {
-
+    super.attributeChangedCallback.apply(this, arguments);
   }
 
   /**
