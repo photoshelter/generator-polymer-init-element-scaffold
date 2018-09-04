@@ -52,7 +52,6 @@
     "url": "https://github.com/photoshelter/generator-polymer-init-element-scaffold/issues"
   },
   "scripts": {
-    "prepublish": "gulp prepublish",
     "test": "gulp"
   },
   "license": "MIT"
