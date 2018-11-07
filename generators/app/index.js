@@ -236,8 +236,8 @@ module.exports = yeoman.Base.extend({
 
       if (this.props.sauceLabs) {
         this.fs.copyTpl(
-          this.templatePath('travis-scripts/_travis.sh'),
-          this.destinationPath(`travis-scripts/travis.sh`),
+          this.templatePath('scripts/_travis.sh'),
+          this.destinationPath(`scripts/travis.sh`),
           this.props
         );
       }
