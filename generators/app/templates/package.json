@@ -37,7 +37,7 @@
 <% if (elementImplementation === 'bower') { -%>
   "devDependencies": {
     "browser-sync": "^2.15.0",
-    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp": "^4.0.0",
     "gulp-bump": "^2.7.0",
     "gulp-filter": "^5.0.0",
     "gulp-gh-pages": "^0.5.4",
