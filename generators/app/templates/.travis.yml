@@ -12,18 +12,23 @@ addons:
   chrome: stable
   firefox: latest-esr
 before_install:
-  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &<% if (artifactory === true) { -%>
-- printf "registry = ${ARTIFACTORY_NPM_REGISTRY}\n_auth=${ARTIFACTORY_NPM_TOKEN}\nemail=ci@photoshelter.com\nalways-auth=true" >> .npmrc
-- printf '{"registry":"%s","resolvers":["bower-art-resolver"]}' "${ARTIFACTORY_BOWER_REGISTRY}" >> .bowerrc<% } -%>
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+<% if (artifactory === true) { -%>
+  - printf "registry = ${ARTIFACTORY_NPM_REGISTRY}\n_auth=${ARTIFACTORY_NPM_TOKEN}\nemail=ci@photoshelter.com\nalways-auth=true" >> .npmrc
+  - printf '{"registry":"%s","resolvers":["bower-art-resolver"]}' "${ARTIFACTORY_BOWER_REGISTRY}" >> .bowerrc
+<% } -%>
 before_script:
   - npm install
-  - npm install -g bower<% if (artifactory === true) { -%>
-  - npm install -g bower-art-resolver<% } -%>
+  - npm install -g bower
+<% if (artifactory === true) { -%>
+  - npm install -g bower-art-resolver
+<% } -%>
   - bower install
   - gulp copy
   - sh -e /etc/init.d/xvfb start
   - sleep 3
 <% if (slack === true) { -%>notifications:
-  slack: account:token<% } -%>
+  slack: account:token
+<% } -%>
 script:
   - npm run remote-test
