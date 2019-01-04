@@ -141,6 +141,14 @@ module.exports = yeoman.Base.extend({
       name: 'sauceLabs',
       message: 'Would you like to use sauce labs for cross browser testing ?',
       default: true
+    },
+  
+    {/* ARTIFACTORY  */
+      when: (props) => (props.elementImplementation === 'bower'/*&& props.testable*/),
+      type: 'confirm',
+      name: 'artifactory',
+      message: 'Would you like to use artifactory for dependency management?',
+      default: true
     }];
 
     return this.prompt(prompts).then(function (props) {
