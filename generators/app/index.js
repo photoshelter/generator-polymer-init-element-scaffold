@@ -149,6 +149,14 @@ module.exports = yeoman.Base.extend({
       name: 'artifactory',
       message: 'Would you like to use artifactory for dependency management?',
       default: true
+    },
+  
+    {/* SLACK NOTIFICATIONS  */
+      when: (props) => (props.elementImplementation === 'bower'/*&& props.testable*/),
+      type: 'confirm',
+      name: 'slack',
+      message: 'Would you like to use Slack notifications?',
+      default: true
     }];
 
     return this.prompt(prompts).then(function (props) {
