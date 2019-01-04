@@ -24,6 +24,6 @@ before_script:
   - sh -e /etc/init.d/xvfb start
   - sleep 3
 <% if (slack === true) { -%>notifications:
-  slack: your-organization:your-key<% } -%>
+  slack: account:token<% } -%>
 script:
   - npm run remote-test
