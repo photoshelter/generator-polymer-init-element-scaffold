@@ -157,6 +157,23 @@ module.exports = yeoman.Base.extend({
       name: 'slack',
       message: 'Would you like to use Slack notifications?',
       default: true
+    },
+    {
+      when: (props) => (props.elementImplementation === 'bower' && props.slack),
+      type: 'input',
+      name: 'slackOrg',
+      message: 'Enter your slack account.',
+      default: 'your-account',
+      store: true
+    },
+    {
+      when: (props) => (props.elementImplementation === 'bower' && props.slack),
+      type: 'input',
+      name: 'slackToken',
+      message: 'Enter your slack token.',
+      default: 'your-token',
+      store: true
+
     }];
 
     return this.prompt(prompts).then(function (props) {
