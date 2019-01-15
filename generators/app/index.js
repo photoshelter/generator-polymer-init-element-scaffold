@@ -141,6 +141,39 @@ module.exports = yeoman.Base.extend({
       name: 'sauceLabs',
       message: 'Would you like to use sauce labs for cross browser testing ?',
       default: true
+    },
+  
+    {/* ARTIFACTORY  */
+      when: (props) => (props.elementImplementation === 'bower'/*&& props.testable*/),
+      type: 'confirm',
+      name: 'artifactory',
+      message: 'Would you like to use artifactory for dependency management?',
+      default: true
+    },
+  
+    {/* SLACK NOTIFICATIONS  */
+      when: (props) => (props.elementImplementation === 'bower'/*&& props.testable*/),
+      type: 'confirm',
+      name: 'slack',
+      message: 'Would you like to use Slack notifications?',
+      default: true
+    },
+    {
+      when: (props) => (props.elementImplementation === 'bower' && props.slack),
+      type: 'input',
+      name: 'slackOrg',
+      message: 'Enter your slack account.',
+      default: 'your-account',
+      store: true
+    },
+    {
+      when: (props) => (props.elementImplementation === 'bower' && props.slack),
+      type: 'input',
+      name: 'slackToken',
+      message: 'Enter your slack token.',
+      default: 'your-token',
+      store: true
+
     }];
 
     return this.prompt(prompts).then(function (props) {

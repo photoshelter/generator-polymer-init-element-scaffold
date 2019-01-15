@@ -47,7 +47,7 @@ We also support greater cross browser support with testing from [SauceLabs](http
 
 To add more VMs to `travis-scripts/sauce.sh` if you would like to increase your cross browser coverage.
 
-###### SauceLabs Setup.
+###### SauceLabs Setup
 
 If you have Saucelabs Credentials there are several ways to add them to travis:
 You will need to install the [travis-cli tool](https://github.com/travis-ci/travis.rb) before running the following commands.
@@ -64,5 +64,38 @@ $ travis encrypt SAUCE_ACCESS_KEY=[your-access-key] --add
 ```bash
 $ travis env set SAUCE_USERNAME your-user-name
 $ travis env set SAUCE_ACCESS_KEY your-access-key
+```
+<% } -%>
+
+<% if (artifactory === true) { -%>
+###### Artifactory Support
+
+If you use Artifactory for dependency management you will need to add environment variables.  To do this run the following travis.  You will need to install the [travis-cli tool](https://github.com/travis-ci/travis.rb) before running the following commands.
+
+[Defining Variables in Repository Settings](https://docs.travis-ci.com/user/environment-variables/#Defining-Variables-in-Repository-Settings)
+
+Setting your NPM Token
+```bash
+    travis env set ARTIFACTORY_NPM_TOKEN "$YOUR_ARTIFACTORY_NPM_TOKEN"
+```
+
+Setting your Artifactory NPM & Bower Registry URL's.  The URL will be your artifactory URL.
+http://your.artifactory/artifactory/api/npm/npm/ for NPM registry
+http://your.artifactory/artifactory/api/bower/bower for your Bower registry
+
+```bash
+    travis env set ARTIFACTORY_BOWER_REGISTRY "$YOUR_BOWER_REGISTRY_URL"
+    travis env set ARTIFACTORY_NPM_REGISTRY "$YOUR_NPM_REGISTRY_URL"
+```
+
+<% } -%>
+
+<% if (slack === true) { -%>
+###### Slack Support
+
+If you use Slack for notification and would like [travis to send status notifications](https://docs.travis-ci.com/user/notifications/#configuring-slack-notifications) to a channel edit the travis.yml file and enter your organization and slack key.
+
+```
+slack: your-organization:your-key
 ```
 <% } -%>
