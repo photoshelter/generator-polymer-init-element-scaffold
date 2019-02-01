@@ -18,7 +18,7 @@
     "clean": "rm -rf bower_components/<%=elementName%>",
     "test": "npm run clean && gulp copy && wct",
     "remote-test": "npm run clean && gulp copy && ./scripts/travis.sh",
-    "disable-rewrite": "polymer serve --module-resolution='none'",
+    "serve-host": "polymer serve --hostname 0.0.0.0",
 <% if (elementVersion === '2.0') { -%>
     "analyze": "polymer analyze > analysis.json",
     "start": "npm run clean && npm run analyze && gulp default",
