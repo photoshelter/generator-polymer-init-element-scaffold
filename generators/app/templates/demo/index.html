@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 	<title><%= elementName %> Demo Page</title>
-<%if (elementVersion === '2.0') { %>
+<%if (elementVersion === '2.x') { %>
 	<script src="../bower_components/webcomponentsjs/webcomponents-loader.js"></script>
 <% } else { -%>
 	<script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
@@ -15,7 +15,7 @@
 </head>
 <body unresolved>
 
-<%if (elementVersion === '2.0') { %>
+<%if (elementVersion === '2.x') { %>
 	<custom-style>
 		<style is="custom-style" include="demo-pages-shared-styles">
 		</style>

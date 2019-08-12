@@ -12,7 +12,7 @@ During development there are 3 pages you might be interested in.
 
 **note:** If you are finding that when reloading it is switching from demos back to docs, then in the browser add the route `/demo` to the url and then the refreshes will happen on that route.
 
-<% if (elementVersion === '2.0') { -%>
+<% if (elementVersion === '2.x') { -%>
  **note:** Make sure you are using [Chrome Canary](https://www.google.com/chrome/browser/canary.html) for development
 <% } -%>
 ### Demos and Releases

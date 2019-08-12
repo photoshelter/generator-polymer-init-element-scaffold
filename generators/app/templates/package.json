@@ -19,9 +19,9 @@
     "test": "npm run clean && gulp copy && wct",
     "remote-test": "npm run clean && gulp copy && ./scripts/travis.sh",
     "serve-host": "polymer serve --hostname 0.0.0.0",
-    "no-block-es-lint": "eslint <%=elementName%>.html; exit 0",
+    "no-block-es-lint": "eslint <%=elementName%>*; exit 0",
     "full-lint": "npm run no-block-es-lint && polymer lint",
-<% if (elementVersion === '2.0') { -%>
+<% if (elementVersion === '2.x') { -%>
     "analyze": "polymer analyze > analysis.json",
     "start": "npm run clean && npm run analyze && gulp default",
     "pages": "npm run clean && npm run analyze && gulp pages-deployment",

@@ -1,4 +1,8 @@
 {
+<% if (elementVersion === '2.x') { -%>
     "extends": ["plugin:polymer/polymer-2"],
+<% } else if (elementVersion === '1.x') { -%>
+    "extends": ["plugin:polymer/polymer-1"],
+<% } -%>
     "plugins": ["polymer"]
 }
