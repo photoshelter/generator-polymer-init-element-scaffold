@@ -35,6 +35,15 @@ All components should follow semver versioning.
     - This creates a orphan branch with no history.
     - Always run this from `master` after pulling the latest build to ensure your docs reflect the most recent version.
 
+### Linting
+- You need to install the [eslint-cli](https://www.npmjs.com/package/eslint-cli) globally before linting will work. 
+- the configuration is in the `.eslintrc.json` file. 
+- You can manually run `eslint filename` in your terminal to lint any file you want.
+- but there are also some predefined commands. 
+- there are 2 linting commands
+  - first a `no-block-es-lint` command that forces a clean exit despite there being linting errors, it is not the best plan, but it was solution found [here](https://github.com/eslint/eslint/issues/2409#issuecomment-103768546).
+  - second a `full-lint` command that runs the `no-block-es-lint` command and polymer lint in sequence. This is the command you should be running regularly. 
+
 ### Testing
 - `npm run test` is the command to run basic tests using [Web Component Tester](https://github.com/Polymer/web-component-tester) in the terminal.
 

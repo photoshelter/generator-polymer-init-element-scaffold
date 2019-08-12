@@ -19,6 +19,8 @@
     "test": "npm run clean && gulp copy && wct",
     "remote-test": "npm run clean && gulp copy && ./scripts/travis.sh",
     "serve-host": "polymer serve --hostname 0.0.0.0",
+    "no-block-es-lint": "eslint <%=elementName%>.html; exit 0",
+    "full-lint": "npm run no-block-es-lint && polymer lint",
 <% if (elementVersion === '2.0') { -%>
     "analyze": "polymer analyze > analysis.json",
     "start": "npm run clean && npm run analyze && gulp default",
@@ -38,6 +40,9 @@
 <% if (elementImplementation === 'bower') { -%>
   "devDependencies": {
     "browser-sync": "^2.15.0",
+    "eslint": "^6.1.0",
+    "eslint-plugin-html": "^6.0.0",
+    "eslint-plugin-polymer": "^0.4.0",
     "gulp": "^4.0.0",
     "gulp-bump": "^2.7.0",
     "gulp-filter": "^5.0.0",
