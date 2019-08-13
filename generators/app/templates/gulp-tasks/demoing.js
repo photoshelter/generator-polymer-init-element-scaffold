@@ -1,7 +1,14 @@
-var gulp = require('gulp');
+/* eslint-disable no-undef */
+const gulp = require('gulp');
 const ghPages  = require('gulp-gh-pages');
 
 gulp.task('pages', function() {
-  return gulp.src(["./index.html","./demo/*","./test/*", "./bower_components/**/*"],{base: '.'})
-  .pipe(ghPages());
+  const pagesSrc = [
+    './index.html',
+    './demo/*',
+    './test/*',
+    './bower_components/**/*'];
+
+  return gulp.src(pagesSrc, {base: '.'})
+      .pipe(ghPages());
 });
