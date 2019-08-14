@@ -311,9 +311,10 @@ module.exports = yeoman.Base.extend({
     }
   },
 
-  _PolymerOneWrite: function(version,elementType, elementName) {
+  _PolymerOneWrite: function(version, elementType, elementName) {
 
     if(elementType === 'component') {
+      
       this.fs.copyTpl(
         this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
         this.destinationPath(`${elementName}.js`),
@@ -347,6 +348,15 @@ module.exports = yeoman.Base.extend({
   _PolymerTwoWrite: function(version, elementType, elementName) {
 
     if(elementType === 'component' || elementType === 'behavior') {
+      // Publish the doc file for
+      this.fs.copyTpl(
+        this.templatePath('_docs2.0.html'),
+        this.destinationPath(`docs.html`),
+        this.props
+      );
+    }
+
+    if(elementType === 'behavior') {
       this.fs.copyTpl(
         this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
         this.destinationPath(`${elementName}.js`),
@@ -358,16 +368,6 @@ module.exports = yeoman.Base.extend({
         this.destinationPath(`${elementName}-styles.html`),
         this.props
       );
-
-      // Publish the doc file for
-      this.fs.copyTpl(
-        this.templatePath('_docs2.0.html'),
-        this.destinationPath(`docs.html`),
-        this.props
-      );
-    }
-
-    if(elementType === 'behavior') {
       this.fs.copyTpl(
         this.templatePath(`demo/_${elementType}-demo.html`),
         this.destinationPath(`demo/${elementName}-demo.html`),

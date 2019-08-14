@@ -25,7 +25,7 @@ let <%=className%> = (ParentEl) => class extends ParentEl {
    *
    * Just demonstating how to document methods
    *
-   * @param {object} takes a baz object
+   * @param {object} baz a baz object
    * @return {null}
    */
   foo(baz) {
@@ -37,7 +37,7 @@ let <%=className%> = (ParentEl) => class extends ParentEl {
    *
    * Just demonstating how to document private methods
    *
-   * @return {null}
+   * @return {Boolean}
    */
   _bar() {
     return true;
