@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const gulp = require('gulp');
 const browserSync = require('browser-sync').create();
 

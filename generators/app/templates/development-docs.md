@@ -12,9 +12,6 @@ During development there are 3 pages you might be interested in.
 
 **note:** If you are finding that when reloading it is switching from demos back to docs, then in the browser add the route `/demo` to the url and then the refreshes will happen on that route.
 
-<% if (elementVersion === '2.0') { -%>
- **note:** Make sure you are using [Chrome Canary](https://www.google.com/chrome/browser/canary.html) for development
-<% } -%>
 ### Demos and Releases
 
 All components should follow semver versioning.
@@ -34,6 +31,15 @@ All components should follow semver versioning.
   - **note:**
     - This creates a orphan branch with no history.
     - Always run this from `master` after pulling the latest build to ensure your docs reflect the most recent version.
+
+### Linting
+- You need to install the [eslint-cli](https://www.npmjs.com/package/eslint-cli) globally before linting will work. 
+- the configuration is in the `.eslintrc.json` file. 
+- You can manually run `eslint filename` in your terminal to lint any file you want.
+- but there are also some predefined commands. 
+- there are 2 linting commands
+  - first a `no-block-es-lint` command that forces a clean exit despite there being linting errors, it is not the best plan, but it was solution found [here](https://github.com/eslint/eslint/issues/2409#issuecomment-103768546).
+  - second a `full-lint` command that runs the `no-block-es-lint` command and polymer lint in sequence. This is the command you should be running regularly. 
 
 ### Testing
 - `npm run test` is the command to run basic tests using [Web Component Tester](https://github.com/Polymer/web-component-tester) in the terminal.

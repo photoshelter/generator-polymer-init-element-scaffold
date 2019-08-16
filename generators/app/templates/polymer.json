@@ -1,5 +1,10 @@
+
 {
     "lint": {
-        "rules": ["polymer-2-hybrid"]
+<% if (elementVersion === '2.x') { -%>
+        "rules": ["polymer-2"]
+<% } else if (elementVersion === '1.x') { -%>
+        "rules": ["polymer-1"]
+<% } -%>
     }
 }

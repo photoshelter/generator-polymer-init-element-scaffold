@@ -1,21 +1,178 @@
 <% if (elementImplementation === 'bower') { -%>
 <link rel="import" href="../polymer/polymer-element.html">
 <% } else { -%>
-  <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
 <% } -%>
 
+<% if (elementImplementation === 'bower') { -%>
+<!--
+<%= elementDescription %>
+-->
 
-<link rel="import" href="<%= elementName %>-styles.html">
+<!--
+Example: Use the <%= elementName %>
+```html
+<<%= elementName %>></<%= elementName %>>
+```
+
+### Custom properties
+
+Custom properties are there to provide access into the Shadow DOM 
+and act as guides for how to best succeed while customizing your element.
+
+Key                              | Description                            | Usage/Defaults
+---------------------------------|----------------------------------------|--------------------
+`--<%= elementName %>-width`     | Width of the element                   | 256px
+
+
+@group <%=elementGrouping%>
+@element <%=elementName%>
+@demo
+@test test/index.html
+-->
+<% } -%>
 
 <dom-module id="<%= elementName %>">
+  <script>
+    /**
+     * <%= elementDescription %>
+     * @extends Polymer.Element
+     */
+    class <%=className%> extends Polymer.Element {
+      /**
+       * Gets tag name for component.
+       * @return {string}
+       */
+      static get is() {
+        return '<%= elementName %>';
+      }
 
-  <template>
+      /**
+       * Defines data shape for component properties.
+       * @return {object}
+       */
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'world',
+          },
+        };
+      }
 
-    <style include="<%= elementName %>-styles"></style>
-    <slot></slot>
-    <h1>Hello [[prop1]]<h1>
+      /**
+       * Inital Constructor for the class
+       *  ---
+       * The custom elements v1 spec forbids reading attributes, children, or parent
+       * information from the DOM API in the constructor
+       * -- Note:
+       * Always call super
+       */
+      constructor() {
+        super();
+      }
 
-  </template>
+      /**
+       * Life cycle function that gets called when the element is
+       * first attached to the DOM
+      **/
+      connectedCallback() {
+        super.connectedCallback();
+      }
 
-  <script src="<%=elementName%>.js"></script>
+      /**
+       * Life cycle function that gets called when the element is
+       * removed from the DOM
+      **/
+      disconnectedCallback() {
+        super.disconnectedCallback();
+      }
+      /**
+       * For Polymer elements, only properties explicitly declared in the
+       * properties object are tracked for attribute changes.
+      **/
+      attributeChangedCallback(...args) {
+        super.attributeChangedCallback.apply(this, args);
+      }
+
+      /**
+       * Gets component markup, combining styleTemplate and contentTemplate.
+       * @return {string}
+       */
+      static get template() {
+        return `
+          <style>
+            ${this.styleTemplate}
+          </style>
+          ${this.contentTemplate}
+        `;
+      }
+
+      /**
+       * Gets the non-style shadowdom markup for ps-avatar.
+       * @return {string}
+       */
+      static get contentTemplate() {
+        return `
+          <iron-ajax
+            auto
+            url="[[_url]]"
+            headers='{"accept": "application/json, */*"}'
+            last-response="{{_data}}"
+            last-error="{{_error}}"
+            ></iron-ajax>
+          <img src="[[_imgSrc]]" alt="user avatar" ></img>
+        `;
+      }
+
+      /**
+       * Gets component CSS rules.
+       * @return {string}
+       */
+      static get styleTemplate() {
+        return `
+          :host {
+            display: block;
+            box-sizing: border-box;
+          }
+        `;
+      }
+
+      /**
+       * A public function  that doesnt do anything
+       *
+       * Just demonstating how to document methods
+       *
+       * @param {object}  baz baz object
+       * @return {null}
+       */
+      foo(baz) {
+        return this._bar();
+      }
+
+      /**
+       * A private that doesnt do anything
+       *
+       * Just demonstating how to document private methods
+       *
+       * @return {null}
+       */
+      _bar() {
+        return true;
+      }
+
+      /**
+       * ### Events
+       */
+
+      /**
+       * Fired when <%= elementName %> does something
+       *
+       * @event <%= elementName %>-action
+       */
+    }
+
+    customElements.define(<%=className%>.is, <%=className%>);
+
+  </script>
 </dom-module>
