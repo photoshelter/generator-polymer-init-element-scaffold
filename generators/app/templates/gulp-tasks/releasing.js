@@ -7,7 +7,9 @@ const tag = require('gulp-tag-version');
 const savefile = require('gulp-savefile');
 
 /**
- * Adds two numbers together.
+ * Hepler function pdates the release value 
+ * in the bower and package files based on semver 
+ * and the importance that you specify.
  * @param {string} importance as it relates to the semver numbers
  * @return {Object} the stream
  */
