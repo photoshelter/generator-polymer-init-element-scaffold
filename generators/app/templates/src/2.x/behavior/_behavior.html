@@ -1,20 +1,27 @@
 <% if (elementImplementation === 'bower') { -%>
-<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/polymer.html">
 <% } else { -%>
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <% } -%>
 
-<link rel="import" href="<%= elementName %>-styles.html">
+<script>
 
-<dom-module id="<%= elementName %>">
+const <%=className%> = function(superClass) {
+  return class extends superClass {
+    static get properties() {
+      return {
+        foo: {
+          type: String,
+          statePath: ''
+        }
+      }
+    }
 
-  <template>
+    _barAction () {
+      return true;
+    }
+  }
+};
 
-    <style include="<%= elementName %>-styles"></style>
-
-    <h1>Hello [[prop1]]<h1>
-
-  </template>
-
-  <script src="<%=elementName%>.js"></script>
-</dom-module>
+window.<%=className%> = Polymer.dedupingMixin(<%=className%>);
+</script>
