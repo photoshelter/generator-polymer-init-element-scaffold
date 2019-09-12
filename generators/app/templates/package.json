@@ -16,8 +16,8 @@
     "postinstall": "ls | grep -v <%=elementName%> | xargs rm -rf"
 <% } else { -%>
     "clean": "rm -rf bower_components/<%=elementName%>",
-    "test": "npm run clean && gulp copy && wct",
-    "remote-test": "npm run clean && gulp copy && ./scripts/travis.sh",
+    "test": "npm run clean && gulp copy && wct --verbose --plugin local",
+    "test:remote": "npm run clean && gulp copy && ./travis-scripts/travis.sh",
     "serve-host": "polymer serve --hostname 0.0.0.0",
     "no-block-es-lint": "eslint <%=elementName%>*; exit 0",
     "full-lint": "npm run no-block-es-lint && polymer lint",
@@ -51,7 +51,7 @@
     "gulp-savefile": "^0.1.1",
     "gulp-tag-version": "^1.3.0",
     "require-dir": "^0.3.1",
-    "web-component-tester": "^6.4.0"
+    "web-component-tester": "^6.8.0"
   },
   "wct-plugin": {
     "cli-options": {}

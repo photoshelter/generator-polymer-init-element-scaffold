@@ -357,22 +357,22 @@ module.exports = yeoman.Base.extend({
     }
 
     if(elementType === 'behavior') {
-      this.fs.copyTpl(
-        this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
-        this.destinationPath(`${elementName}.js`),
-        this.props
-      );
+      // this.fs.copyTpl(
+      //   this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
+      //   this.destinationPath(`${elementName}.js`),
+      //   this.props
+      // );
 
-      this.fs.copyTpl(
-        this.templatePath(`src/${version}/${elementType}/_${elementType}-styles.html`),
-        this.destinationPath(`${elementName}-styles.html`),
-        this.props
-      );
-      this.fs.copyTpl(
-        this.templatePath(`demo/_${elementType}-demo.html`),
-        this.destinationPath(`demo/${elementName}-demo.html`),
-        this.props
-      );
+      // this.fs.copyTpl(
+      //   this.templatePath(`src/${version}/${elementType}/_${elementType}-styles.html`),
+      //   this.destinationPath(`${elementName}-styles.html`),
+      //   this.props
+      // );
+      // this.fs.copyTpl(
+      //   this.templatePath(`demo/_${elementType}-demo.html`),
+      //   this.destinationPath(`demo/${elementName}-demo.html`),
+      //   this.props
+      // );
     }
 
   },

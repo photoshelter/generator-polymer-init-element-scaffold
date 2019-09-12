@@ -1,0 +1,49 @@
+{
+    "verbose": true,
+    "compile": "auto",
+    "moduleResolution": "none",
+    "plugins": {
+      "local": {
+        "disabled": true,
+        "browsers": ["chrome", "firefox"],
+        "browserOptions":{
+          "chrome": [
+            "no-sandbox",
+            "headless"
+          ]
+        }
+      },
+      "sauce": {
+        "disabled": true,
+        "browsers": [{
+          "browserName": "chrome",
+          "platform": "OSX 10.13",
+          "version": "latest"
+        },{
+          "browserName": "firefox",
+          "platform": "OSX 10.13",
+          "version": "latest"
+        },{
+          "browserName": "safari",
+          "platform": "OSX 10.13",
+          "version": "latest"
+        },{
+          "browserName": "chrome",
+          "platform": "Windows 10",
+          "version": "latest"
+        },{
+          "browserName": "firefox",
+          "platform": "Windows 10",
+          "version": "latest"
+        },{
+          "browserName": "microsoftedge",
+          "platform": "Windows 10",
+          "version": "latest"
+        },{
+          "browserName": "internet explorer",
+          "platform": "Windows 10",
+          "version": "latest"
+        }]
+      }
+    }
+  }
