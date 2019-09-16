@@ -13,7 +13,7 @@ module.exports = yeoman.Base.extend({
   prompting: function () {
 
     this.log(yosay(
-      'Welcome to the solid ' + chalk.red('generator-polymer-init-element-scaffold') + ' generator!'
+      'Welcome to the NEW ' + chalk.red('generator-polymer-init-element-scaffold') + ' generator!'
     ));
 
     var prompts = [
@@ -269,8 +269,8 @@ module.exports = yeoman.Base.extend({
 
       if (this.props.sauceLabs) {
         this.fs.copyTpl(
-          this.templatePath('scripts/_travis.sh'),
-          this.destinationPath(`scripts/travis.sh`),
+          this.templatePath('travis-scripts/_travis.sh'),
+          this.destinationPath(`travis-scripts/travis.sh`),
           this.props
         );
       }
@@ -302,7 +302,7 @@ module.exports = yeoman.Base.extend({
 
     // USER SELECTED: Version 2.x
     else if (version === '2.x') {
-      this._PolymerTwoWrite(version,elementType, elementName);
+      this._PolymerTwoWrite(version, elementType, elementName);
     }
 
     // USER SELECTED: Vanilla
@@ -357,11 +357,12 @@ module.exports = yeoman.Base.extend({
     }
 
     if(elementType === 'behavior') {
-      // this.fs.copyTpl(
-      //   this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
-      //   this.destinationPath(`${elementName}.js`),
-      //   this.props
-      // );
+     
+      this.fs.copyTpl(
+        this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
+        this.destinationPath(`${elementName}.js`),
+        this.props
+      );
 
       // this.fs.copyTpl(
       //   this.templatePath(`src/${version}/${elementType}/_${elementType}-styles.html`),
