@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "9"
+  - "10"
 dist: trusty
 sudo: required
 env:
@@ -14,7 +14,7 @@ addons:
 before_install:
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 <% if (artifactory === true) { -%>
-  - printf "registry = ${ARTIFACTORY_NPM_REGISTRY}\n_auth=${ARTIFACTORY_NPM_TOKEN}\nemail=ci@photoshelter.com\nalways-auth=true" >> .npmrc
+  - printf "registry = ${ARTIFACTORY_NPM_REGISTRY}\n_auth=${ARTIFACTORY_NPM_TOKEN}\nemail=:<%= artifactoryEmail %>\nalways-auth=true" >> .npmrc
   - printf '{"registry":"%s","resolvers":["bower-art-resolver"]}' "${ARTIFACTORY_BOWER_REGISTRY}" >> .bowerrc
 <% } -%>
 before_script:
@@ -31,4 +31,4 @@ before_script:
   slack: <%= slackOrg %>:<%= slackToken %>
 <% } -%>
 script:
-  - npm run remote-test
+- npm run test:remote
