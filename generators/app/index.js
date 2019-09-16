@@ -13,7 +13,7 @@ module.exports = yeoman.Base.extend({
   prompting: function () {
 
     this.log(yosay(
-      'DASH - Welcome to the' + chalk.red('generator-polymer-init-element-scaffold') + ' generator!'
+      'Welcome to the' + chalk.red('generator-polymer-init-element-scaffold') + ' generator!'
     ));
 
     var prompts = [
@@ -291,7 +291,6 @@ module.exports = yeoman.Base.extend({
   },
 
   _versionWrite: function (version, elementType, elementName) {
-
     // Copy the main html file.
     this.fs.copyTpl(
       this.templatePath(`src/${version}/${elementType}/_${elementType}.html`),
