@@ -13,168 +13,181 @@ module.exports = yeoman.Base.extend({
   prompting: function () {
 
     this.log(yosay(
-      'Welcome to the NEW ' + chalk.red('generator-polymer-init-element-scaffold') + ' generator!'
+      'DASH - Welcome to the' + chalk.red('generator-polymer-init-element-scaffold') + ' generator!'
     ));
 
     var prompts = [
-    { /* ELEMENT: Name */
-      type: 'input',
-      name: 'elementName',
-      message: 'What is the name of the new element?',
-      validate: (input) => (input.indexOf('-') === -1 ? 'Element name needs a \'-\'' : true),
-      default: this.appname
-    },
+      { /* ELEMENT: Name */
+        type: 'input',
+        name: 'elementName',
+        message: 'What is the name of the new element?',
+        validate: (input) => (input.indexOf('-') === -1 ? 'Element name needs a \'-\'' : true),
+        default: this.appname
+      },
 
-    { /* ELEMENT Version: 1.x || 2.x || Vanilla */
-      type: 'list',
-      name: 'elementVersion',
-      message: 'What version of element are you building?',
-      choices: ['1.x', '2.x','vanilla'],
-      default: '1.x'
-    },
+      { /* ELEMENT Version: 1.x || 2.x || Vanilla */
+        type: 'list',
+        name: 'elementVersion',
+        message: 'What version of element are you building?',
+        choices: ['1.x', '2.x','vanilla'],
+        default: '1.x'
+      },
 
-    { /* ELEMENT Type: component || style || behavior */
-      type: 'list',
-      name: 'elementType',
-      message: 'What type of element are you building?',
-      choices: this._elementOptions,
-      default: 'component'
-    },
+      { /* ELEMENT Type: component || style || behavior */
+        type: 'list',
+        name: 'elementType',
+        message: 'What type of element are you building?',
+        choices: this._elementOptions,
+        default: 'component'
+      },
 
-    { /* BEHAVIOR: Name */
-      when: (props) => (props.elementType === 'behavior' && props.elementVersion ===  '1.x'),
-      type: 'input',
-      name: 'behaviorNameSpace',
-      message: 'What namespace would you like for your behavior?',
-      default: 'fooBehavior',
-      store: true
-    },
+      { /* BEHAVIOR: Name */
+        when: (props) => (props.elementType === 'behavior' && props.elementVersion ===  '1.x'),
+        type: 'input',
+        name: 'behaviorNameSpace',
+        message: 'What namespace would you like for your behavior?',
+        default: 'fooBehavior',
+        store: true
+      },
 
-    { /* BEHAVIOR: Extended */
-      when: (props) => (props.elementType === 'behavior' && props.elementVersion ===  '1.x'),
-      type: 'confirm',
-      name: 'isBehaviorExtend',
-      message: 'Is this a behavior extension?',
-      default: false
-    },
-    { /* IMPLEMENTATION: Bower || Internal */
+      { /* BEHAVIOR: Extended */
+        when: (props) => (props.elementType === 'behavior' && props.elementVersion ===  '1.x'),
+        type: 'confirm',
+        name: 'isBehaviorExtend',
+        message: 'Is this a behavior extension?',
+        default: false
+      },
 
-      type: 'list',
-      name: 'elementImplementation',
-      message: 'Is this a bower element or internal element?',
-      choices: ['bower', 'internal'],
-      default: 'bower'
-    },
+      { /* IMPLEMENTATION: Bower || Internal */
 
-    { /* NEW DIRECTORY: Yes || No */
-      type: 'confirm',
-      name: 'createDirectory',
-      message: 'Should I create a directory for you?',
-      // defaults to true for internal elements.
-      default: (props) => (props.elementImplementation === 'internal')
-    },
+        type: 'list',
+        name: 'elementImplementation',
+        message: 'Is this a bower element or internal element?',
+        choices: ['bower', 'internal'],
+        default: 'bower'
+      },
 
-    { /* ELEMENT: Description */
-      when: (props) => (props.elementImplementation === 'bower'),
-      type: 'input',
-      name: 'elementDescription',
-      message: 'What does this element do?',
-      default: 'nothing yet'
-    },
+      { /* NEW DIRECTORY: Yes || No */
+        type: 'confirm',
+        name: 'createDirectory',
+        message: 'Should I create a directory for you?',
+        // defaults to true for internal elements.
+        default: (props) => (props.elementImplementation === 'internal')
+      },
 
-    { /* AUTHOR */
-      when: (props) => (props.elementImplementation === 'bower'),
-      type: 'input',
-      name: 'authorName',
-      message: 'What is your name?',
-      default: 'author',
-      store: true
-    },
+      { /* ELEMENT: Description */
+        when: (props) => (props.elementImplementation === 'bower'),
+        type: 'input',
+        name: 'elementDescription',
+        message: 'What does this element do?',
+        default: 'nothing yet'
+      },
 
-    { /* REPO */
-      when: (props) => (props.elementImplementation === 'bower'),
-      type: 'list',
-      name: 'gitAccount',
-      message: 'Is this an enterprise (privately hosted account) or personal?',
-      choices: ['enterprise', 'personal'],
-      default: 'enterprise',
-      store   : true
-    },
-    {
-      when: (props) => (props.elementImplementation === 'bower' && props.gitAccount ===  'enterprise'),
-      type: 'input',
-      name: 'gitRoot',
-      message: 'Where is the root domain name?',
-      default: 'gh.enterprise.server',
-      store   : true
-    },
-    {
-      when: (props) => (props.elementImplementation === 'bower'),
-      type: 'input',
-      name: 'orgName',
-      message: 'What is your organiztion or account name ',
-      default: 'org',
-      store: true
-    },
+      { /* AUTHOR */
+        when: (props) => (props.elementImplementation === 'bower'),
+        type: 'input',
+        name: 'authorName',
+        message: 'What is your name?',
+        default: 'author',
+        store: true
+      },
 
-    { /* GROUP */
-      when: (props) => (props.elementImplementation === 'bower'),
-      type: 'input',
-      name: 'elementGrouping',
-      message: 'What group does your element belong to?',
-      default: 'none',
-      store: true
-    },
+      { /* REPO */
+        when: (props) => (props.elementImplementation === 'bower'),
+        type: 'list',
+        name: 'gitAccount',
+        message: 'Is this an enterprise (privately hosted account) or personal?',
+        choices: ['enterprise', 'personal'],
+        default: 'enterprise',
+        store   : true
+      },
 
-    // // TODO: implement regex for tests inclusion
-    // { /* TESTS */
-    //   when: (props) => (props.elementImplementation === 'bower'),
-    //   type: 'confirm',
-    //   name: 'testable',
-    //   message: 'Would you like to include tests ?',
-    //   default: true
-    // },
+      {
+        when: (props) => (props.elementImplementation === 'bower' && props.gitAccount ===  'enterprise'),
+        type: 'input',
+        name: 'gitRoot',
+        message: 'Where is the root domain name?',
+        default: 'gh.enterprise.server',
+        store: true
+      },
 
-    { /* SAUCE LABS */
-      when: (props) => (props.elementImplementation === 'bower'/*&& props.testable*/),
-      type: 'confirm',
-      name: 'sauceLabs',
-      message: 'Would you like to use sauce labs for cross browser testing ?',
-      default: true
-    },
-  
-    {/* ARTIFACTORY  */
-      when: (props) => (props.elementImplementation === 'bower'/*&& props.testable*/),
-      type: 'confirm',
-      name: 'artifactory',
-      message: 'Would you like to use artifactory for dependency management?',
-      default: true
-    },
-  
-    {/* SLACK NOTIFICATIONS  */
-      when: (props) => (props.elementImplementation === 'bower'/*&& props.testable*/),
-      type: 'confirm',
-      name: 'slack',
-      message: 'Would you like to use Slack notifications?',
-      default: true
-    },
-    {
-      when: (props) => (props.elementImplementation === 'bower' && props.slack),
-      type: 'input',
-      name: 'slackOrg',
-      message: 'Enter your slack account.',
-      default: 'your-account',
-      store: true
-    },
-    {
-      when: (props) => (props.elementImplementation === 'bower' && props.slack),
-      type: 'input',
-      name: 'slackToken',
-      message: 'Enter your slack token.',
-      default: 'your-token',
-      store: true
+      {
+        when: (props) => (props.elementImplementation === 'bower'),
+        type: 'input',
+        name: 'orgName',
+        message: 'What is your organiztion or account name ',
+        default: 'org',
+        store: true
+      },
 
-    }];
+      { /* GROUP */
+        when: (props) => (props.elementImplementation === 'bower'),
+        type: 'input',
+        name: 'elementGrouping',
+        message: 'What group does your element belong to?',
+        default: 'none',
+        store: true
+      },
+
+      // // TODO: implement regex for tests inclusion
+      // { /* TESTS */
+      //   when: (props) => (props.elementImplementation === 'bower'),
+      //   type: 'confirm',
+      //   name: 'testable',
+      //   message: 'Would you like to include tests ?',
+      //   default: true
+      // },
+
+      { /* SAUCE LABS */
+        when: (props) => (props.elementImplementation === 'bower'/*&& props.testable*/),
+        type: 'confirm',
+        name: 'sauceLabs',
+        message: 'Would you like to use sauce labs for cross browser testing ?',
+        default: true
+      },
+
+      {/* ARTIFACTORY  */
+        when: (props) => (props.elementImplementation === 'bower'/*&& props.testable*/),
+        type: 'confirm',
+        name: 'artifactory',
+        message: 'Would you like to use artifactory for dependency management?',
+        default: true
+      },
+
+      {
+        when: (props) => (props.artifactory),
+        type: 'confirm',
+        name: 'artifactoryEmail',
+        message: 'What email would you like to use for artifactory',
+        default: 'ci@domain.com'
+      },
+
+      {/* SLACK NOTIFICATIONS  */
+        when: (props) => (props.elementImplementation === 'bower'/*&& props.testable*/),
+        type: 'confirm',
+        name: 'slack',
+        message: 'Would you like to use Slack notifications?',
+        default: true
+      },
+
+      {
+        when: (props) => (props.elementImplementation === 'bower' && props.slack),
+        type: 'input',
+        name: 'slackOrg',
+        message: 'Enter your slack account.',
+        default: 'your-account',
+        store: true
+      },
+
+      {
+        when: (props) => (props.elementImplementation === 'bower' && props.slack),
+        type: 'input',
+        name: 'slackToken',
+        message: 'Enter your slack token.',
+        default: 'your-token',
+        store: true
+      }
+    ];
 
     return this.prompt(prompts).then(function (props) {
       this.props = props;
@@ -182,36 +195,35 @@ module.exports = yeoman.Base.extend({
 
       // need to have values
       this._setDefaultValues();
-
     }.bind(this));
   },
 
-  _cappedCaseFromDashed: function(element) {
-    if(typeof element !== "undefined") {
-      return element.split('-').map( (name) => {
+  _cappedCaseFromDashed: function (element) {
+    if (typeof element !== "undefined") {
+      return element.split('-').map((name) => {
         return name.charAt(0).toUpperCase() + name.slice(1);
       }).join('');
     }
-    return element
+    return element;
   },
 
-  _dashedCaseFromSpaces: function(name) {
-    if(typeof name !== "undefined") {
+  _dashedCaseFromSpaces: function (name) {
+    if (typeof name !== "undefined") {
       return name.replace(/\s/g,'-');
     }
   },
 
-  _elementOptions: function(props) {
-    if(props.elementVersion === '1.x') {
+  _elementOptions: function (props) {
+    if (props.elementVersion === '1.x') {
       return ['component','style', 'behavior']
-    } else if(props.elementVersion === '2.x') {
+    } else if (props.elementVersion === '2.x') {
       return ['component','behavior']
     } else {
       return ['component']
     }
   },
 
-  _setDefaultValues: function() {
+  _setDefaultValues: function () {
     // Sort of annoying but nothing can be undefined, even if it isn't "used"
     this.props.authorName = this.props.authorName || 'internal';
     this.props.orgName = this.props.orgName || 'internal';
@@ -219,6 +231,8 @@ module.exports = yeoman.Base.extend({
     this.props.elementGrouping = this.props.elementGrouping || 'internal';
     this.props.testable = this.props.testable || false;
     this.props.sauceLabs = this.props.sauceLabs || false;
+    this.props.artifactory = this.props.artifactory || false;
+    this.props.slack = this.props.slack || false;
     this.props.sauceName = this.props.sauceName || 'saucey-user';
     this.props.gitRoot = this.props.gitRoot || 'github';
     this.props.gitAccount = this.props.gitAccount || 'internal'
@@ -234,15 +248,15 @@ module.exports = yeoman.Base.extend({
       this._updateRoot(elementName);
     }
 
-    this._sharedWrites(elementName);
+    this._sharedWrites();
     this._versionWrite(elementVersion, elementType, elementName);
   },
 
-   _updateRoot:function(elementName) {
+  _updateRoot: function (elementName) {
     this.destinationRoot(elementName);
   },
 
-  _sharedWrites: function(elementName) {
+  _sharedWrites: function () {
     // Global: Copy over all files.
     this.fs.copyTpl(
       `${this.templatePath()}/**/!(_)*`,
@@ -252,10 +266,9 @@ module.exports = yeoman.Base.extend({
 
     // USER SELECTS: 'bower'
     if (this.props.elementImplementation === 'bower') {
-
       // Bower: Copy over dot files.
       this.fs.copyTpl(
-       `${this.templatePath()}/.!(gitignore)*`,
+        `${this.templatePath()}/.!(gitignore)*`,
         this.destinationRoot(),
         this.props
       );
@@ -277,7 +290,7 @@ module.exports = yeoman.Base.extend({
     }
   },
 
-  _versionWrite: function(version, elementType, elementName) {
+  _versionWrite: function (version, elementType, elementName) {
 
     // Copy the main html file.
     this.fs.copyTpl(
@@ -298,23 +311,18 @@ module.exports = yeoman.Base.extend({
     // USER SELECTED: Version 1.x
     if (version === '1.x') {
       this._PolymerOneWrite(version, elementType, elementName);
-    }
-
-    // USER SELECTED: Version 2.x
-    else if (version === '2.x') {
-      this._PolymerTwoWrite(version, elementType, elementName);
-    }
-
-    // USER SELECTED: Vanilla
-    else if (version === 'vanilla') {
+    } else if (version === '2.x') {
+      // USER SELECTED: Version 2.x
+      this._PolymerTwoWrite(elementType);
+    } else if (version === 'vanilla') {
+        // USER SELECTED: Vanilla
       this._VanillaWrite(version, elementType, elementName);
     }
   },
 
-  _PolymerOneWrite: function(version, elementType, elementName) {
+  _PolymerOneWrite: function (version, elementType, elementName) {
 
     if(elementType === 'component') {
-      
       this.fs.copyTpl(
         this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
         this.destinationPath(`${elementName}.js`),
@@ -328,7 +336,7 @@ module.exports = yeoman.Base.extend({
       );
     }
 
-    if(elementType === 'style') {
+    if (elementType === 'style') {
       this.fs.copyTpl(
         this.templatePath(`src/${version}/${elementType}/_${elementType}-classes.html`),
         this.destinationPath(`${elementName}-classes.html`),
@@ -336,7 +344,7 @@ module.exports = yeoman.Base.extend({
       );
     }
 
-    if(elementType === 'behavior') {
+    if (elementType === 'behavior') {
       this.fs.copyTpl(
         this.templatePath(`demo/_${elementType}-demo.html`),
         this.destinationPath(`demo/${elementName}-demo.html`),
@@ -345,9 +353,9 @@ module.exports = yeoman.Base.extend({
     }
   },
 
-  _PolymerTwoWrite: function(version, elementType, elementName) {
+  _PolymerTwoWrite: function (elementType) {
 
-    if(elementType === 'component' || elementType === 'behavior') {
+    if (elementType === 'component' || elementType === 'behavior') {
       // Publish the doc file for
       this.fs.copyTpl(
         this.templatePath('_docs2.0.html'),
@@ -355,31 +363,10 @@ module.exports = yeoman.Base.extend({
         this.props
       );
     }
-
-    if(elementType === 'behavior') {
-     
-      this.fs.copyTpl(
-        this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
-        this.destinationPath(`${elementName}.js`),
-        this.props
-      );
-
-      // this.fs.copyTpl(
-      //   this.templatePath(`src/${version}/${elementType}/_${elementType}-styles.html`),
-      //   this.destinationPath(`${elementName}-styles.html`),
-      //   this.props
-      // );
-      // this.fs.copyTpl(
-      //   this.templatePath(`demo/_${elementType}-demo.html`),
-      //   this.destinationPath(`demo/${elementName}-demo.html`),
-      //   this.props
-      // );
-    }
-
   },
 
-  _VanillaWrite: function(version, elementType, elementName) {
-    if(elementType === 'component') {
+  _VanillaWrite: function (version, elementType, elementName) {
+    if (elementType === 'component') {
       this.fs.copyTpl(
         this.templatePath(`src/${version}/${elementType}/_${elementType}.js`),
         this.destinationPath(`${elementName}.js`),
@@ -395,7 +382,7 @@ module.exports = yeoman.Base.extend({
   },
 
   install: function () {
-    // How to handle the deps
+      // How to handle the deps
     this.installDependencies({
       bower: this.props.elementImplementation === 'bower',
       npm: true
