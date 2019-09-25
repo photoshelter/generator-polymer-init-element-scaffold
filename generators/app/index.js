@@ -156,7 +156,7 @@ module.exports = yeoman.Base.extend({
 
       {
         when: (props) => (props.artifactory),
-        type: 'confirm',
+        type: 'input',
         name: 'artifactoryEmail',
         message: 'What email would you like to use for artifactory',
         default: 'ci@domain.com'
